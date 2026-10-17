@@ -1,0 +1,3 @@
+anthropic>=0.125
+pillow>=10
+pytest>=8

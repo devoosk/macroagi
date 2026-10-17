@@ -14,6 +14,7 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
   - `app/src/ui/`: demo UI (scrubber, speed, split view).
   - `app/scripts/export-frames.ts`: Puppeteer frame export.
   - `app/public/data/`: `line.json` and the `events_*.json` files the app loads.
+- `capture/`: build step 3, VLM labelling of rendered frames (`python -m capture label|score|oracle|make-vocab`, run from the repo root; tests: `cd capture && .venv/bin/pytest`). Only `score.py`, `oracle.py` and `groundtruth.py` may read `line.json` or event logs; `tests/test_pipeline.py` enforces that labelling never does.
 - `tools/gen/`: generator for dummy line and event data. It stands in until the real SimPy output exists.
 
 ## Shared contracts
@@ -22,6 +23,10 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
 | `line.json` | Process graph (operations, hard/soft precedence edges, parts, stations with x/y/rot/kind, variants, levers). Every number has a `source`. |
 | `events_<line>.json` | One row per event: unit, variant, station, event (`start`, `end`, `blocked`, `starved`, `failed`, `rework`, plus `op_start`/`op_end` with `operation`), time in seconds. |
 | `results.json` | Per design: throughput, capex, required robot reliability, sweep curve, migration stages. |
+| `segments.json` | VLM labels from `capture/`: `{model, promptVersion, framesDir, coverage: {station: [from, to, step]}, segments, cameraSegments}`. Each segment is `{cam, station, start, end, verb, parts[], confidence}` (seconds, end exclusive). `segments` is fused per station; `cameraSegments` is per camera. |
+
+### Frame contract (render → capture)
+`npm run export` writes `capture/frames/<camId>/<frame>.png`. `camId` is the camera id with `:` replaced by `_` (`cctv_S05`, `fpv_S05`), and `<frame>` is the frame index (sim seconds × fps), zero-padded to 6 digits (`000120.png` at 1 fps). Each camera directory also gets `manifest.json`: `{cam, kind: "cctv"|"fpv", station, fps, from, to, width, height}`. Frames and manifests carry no answers: no operation ids, verbs or state.
 
 ## Hard rules
 1. **Everything is deterministic.** Render state is a pure function of `(simTime, events, seed)`. Do not use `Math.random`, `Date.now`, or `useFrame` delta/clock in render paths. Use the seeded RNG (`app/src/lib/rng.ts`) and `simTime` from the playback store. Scrubbing and frame export must reproduce identical frames.

@@ -179,3 +179,27 @@ export interface DesignResult {
 export interface Results {
   designs: DesignResult[]
 }
+
+/** One labelled span from capture/ (VLM output). Seconds; end is exclusive. */
+export interface Segment {
+  /** Camera id, or `cctv_S01+fpv_S01` for a fused station stream. */
+  cam: string
+  station: string
+  start: number
+  end: number
+  verb: VerbClass
+  parts: string[]
+  confidence: number
+}
+
+export interface SegmentLog {
+  model: string
+  promptVersion: string
+  framesDir: string
+  /** Per station: [from, to, step] seconds of footage that was labelled. */
+  coverage: Record<string, [number, number, number]>
+  /** Fused per station. */
+  segments: Segment[]
+  /** Per camera, before fusion. */
+  cameraSegments: Segment[]
+}

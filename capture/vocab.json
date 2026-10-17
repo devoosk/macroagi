@@ -1,0 +1,18 @@
+{
+  "verbs": [
+    {"id": "pick", "description": "Worker reaches into a bin, tray or rack and lifts a part out, hand closing on it."},
+    {"id": "place", "description": "Worker lowers a held part onto the unit or fixture and releases it."},
+    {"id": "insert", "description": "Worker pushes a part into a hole, slot or socket on the unit, aligning it with both hands."},
+    {"id": "screw", "description": "Worker drives a fastener with a handheld screwdriver or torque driver held against the unit."},
+    {"id": "connect", "description": "Worker joins a cable, plug, hose or connector to a mating part; includes crimping and wiring."},
+    {"id": "braze", "description": "Worker holds a gas torch with a visible flame against a pipe joint."},
+    {"id": "inspect", "description": "Worker looks closely at the unit, scans it with a handheld scanner, or watches a test rig while the unit is connected; hands mostly still."},
+    {"id": "walk", "description": "Worker walks away from the unit, e.g. to fetch something, with no part being worked on."},
+    {"id": "search", "description": "Worker looks through bins or shelves for a part, hands moving between containers without a clear pick."}
+  ],
+  "parts": [
+    {"id": "P_base", "name": "Base pan", "hint": "large flat sheet-metal tray the unit is built on"},
+    {"id": "P_screw", "name": "Screw", "hint": "small fasteners, usually only visible with a screwdriver"},
+    {"id": "P_pipe", "name": "Refrigerant pipe", "hint": "thin copper tube, bent"}
+  ]
+}
