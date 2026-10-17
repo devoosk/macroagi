@@ -1,0 +1,250 @@
+{
+  "designs": [
+    {
+      "design": "r290_current",
+      "throughput": {
+        "value": 15.5,
+        "source": "tools/gen sim seed 42, 2 h after warm-up"
+      },
+      "capex": {
+        "value": 0,
+        "source": "estimate (existing line)"
+      },
+      "requiredReliability": {
+        "value": 0.92,
+        "source": "tools/gen sweep: naive robots dropped into S03/S08 without fixtures or fallback (3x failure rate, 120 s recovery); 97% of plateau"
+      },
+      "sweep": [
+        {
+          "reliability": 0.8,
+          "throughput": {
+            "value": 10.5,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.85,
+          "throughput": {
+            "value": 12.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.88,
+          "throughput": {
+            "value": 13.7,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.9,
+          "throughput": {
+            "value": 14.2,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.92,
+          "throughput": {
+            "value": 14.5,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.94,
+          "throughput": {
+            "value": 14.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.95,
+          "throughput": {
+            "value": 14.7,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.96,
+          "throughput": {
+            "value": 14.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.97,
+          "throughput": {
+            "value": 14.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.98,
+          "throughput": {
+            "value": 14.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.99,
+          "throughput": {
+            "value": 14.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.995,
+          "throughput": {
+            "value": 14.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.999,
+          "throughput": {
+            "value": 14.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        }
+      ],
+      "stages": []
+    },
+    {
+      "design": "r290_redesign_1",
+      "throughput": {
+        "value": 33,
+        "source": "tools/gen sim seed 42, 2 h after warm-up, robot reliability 0.98"
+      },
+      "capex": {
+        "value": 405500,
+        "source": "estimate (applied levers 235500 + 2 robot cells x 85000)"
+      },
+      "requiredReliability": {
+        "value": 0.85,
+        "source": "tools/gen sweep: fixtured parts, human fallback (30 s recovery); 97% of plateau"
+      },
+      "sweep": [
+        {
+          "reliability": 0.8,
+          "throughput": {
+            "value": 30.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.85,
+          "throughput": {
+            "value": 31.1,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.88,
+          "throughput": {
+            "value": 31.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.9,
+          "throughput": {
+            "value": 31.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.92,
+          "throughput": {
+            "value": 31.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.94,
+          "throughput": {
+            "value": 31.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.95,
+          "throughput": {
+            "value": 32.1,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.96,
+          "throughput": {
+            "value": 31.8,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.97,
+          "throughput": {
+            "value": 31.9,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.98,
+          "throughput": {
+            "value": 31.6,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.99,
+          "throughput": {
+            "value": 31.7,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.995,
+          "throughput": {
+            "value": 31.5,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        },
+        {
+          "reliability": 0.999,
+          "throughput": {
+            "value": 32,
+            "source": "tools/gen sim: mean of 6 x 4 h runs, seeds 1000-1005"
+          }
+        }
+      ],
+      "stages": [
+        {
+          "id": "M1",
+          "name": "Kit and flow rack: remove walk and search",
+          "stations": [
+            "S01",
+            "S10"
+          ],
+          "gate": "Kit accuracy at least 99.5% for one week"
+        },
+        {
+          "id": "M2",
+          "name": "Parallel test bays with decoupling buffers",
+          "stations": [
+            "S05",
+            "S09"
+          ],
+          "gate": "Second leak bay and two extra run-test bays hold 30 units/h for one shift"
+        },
+        {
+          "id": "M3",
+          "name": "Robot cells at compressor mount and casing",
+          "stations": [
+            "S03",
+            "S08"
+          ],
+          "gate": "Robot cell holds 85% success for one week"
+        }
+      ]
+    }
+  ]
+}
