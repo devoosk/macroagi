@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vite/
+capture/frames/
+app/capture/frames/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/settings.local.json
