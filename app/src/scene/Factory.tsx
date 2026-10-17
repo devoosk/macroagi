@@ -33,6 +33,7 @@ export function Factory({ line, log, lightSeed = 0, cutaway = !isCapture }: { li
   const state = selectStateAt(line, log, simTime)
   const bounds = useMemo(() => floorBounds(line.stations), [line])
   const zones = useMemo(() => hazardZones(line), [line])
+  const flow = useMemo(() => line.stations.filter((s) => !s.offline), [line])
 
   return (
     <group>
@@ -42,7 +43,7 @@ export function Factory({ line, log, lightSeed = 0, cutaway = !isCapture }: { li
       {/* Conveyor and station machinery: static geometry merged per material line-wide (see scene/batch). */}
       <StaticBatch>
         <group name="mx:conveyor">
-          <ConveyorLine stations={line.stations} />
+          <ConveyorLine stations={flow} />
         </group>
         {line.stations.map((s) => (
           <group key={s.id} position={[s.x, 0, s.y]} rotation-y={s.rot}>

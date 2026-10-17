@@ -188,7 +188,8 @@ export function buildIndex(line: Line, log: EventLog, opts: BuildOptions = {}): 
 
   const order = new Map<string, number>()
   line.stations.forEach((s, i) => order.set(s.id, i))
-  const lastStationId = line.stations[line.stations.length - 1]?.id
+  // Units finish at the last station on the flow; an off-line fallback station (redesigns) is not the end.
+  const lastStationId = line.stations.filter((s) => !s.offline).at(-1)?.id
 
   // Pass 1: which bays exist per station.
   const baysSeen = new Map<string, Set<number>>()
