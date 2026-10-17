@@ -508,7 +508,7 @@
           ]
         }
       ],
-      "rank": 1
+      "rank": 2
     },
     {
       "capex": {
@@ -718,7 +718,7 @@
           ]
         }
       ],
-      "rank": 2
+      "rank": 3
     },
     {
       "capex": {
@@ -914,7 +914,227 @@
           ]
         }
       ],
-      "rank": 3
+      "rank": 4
+    },
+    {
+      "capex": {
+        "value": 137500,
+        "source": "estimate (levers 42500 + extra bays 10000 + robot integration 85000)"
+      },
+      "stages": [
+        {
+          "id": "M1",
+          "name": "Rebuild front of line",
+          "stations": [
+            "C01",
+            "C02",
+            "C03"
+          ],
+          "replaces": [
+            "S01",
+            "S02",
+            "S03",
+            "S07",
+            "S08"
+          ],
+          "gate": "New stations hold takt for one week, with the human fallback station staffed"
+        },
+        {
+          "id": "M2",
+          "name": "Rebuild middle of line",
+          "stations": [
+            "C04",
+            "C05",
+            "C06"
+          ],
+          "replaces": [
+            "S04",
+            "S05",
+            "S06"
+          ],
+          "gate": "New stations hold takt for one week, with the human fallback station staffed"
+        },
+        {
+          "id": "M3",
+          "name": "Rebuild back of line",
+          "stations": [
+            "C07",
+            "C08",
+            "C09"
+          ],
+          "replaces": [
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S11"
+          ],
+          "gate": "New stations hold takt for one week, with the human fallback station staffed"
+        }
+      ],
+      "design": "r290_current_rebuild_1",
+      "throughput": {
+        "value": 29.57,
+        "source": "simulate/ SimPy: mean of 200 x 8 h shifts, seeds 1000-1199, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+      },
+      "rentPerMonth": {
+        "value": 13000,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "cost3y": {
+        "value": 2765500,
+        "source": "human station 270000 per bay + robot rent x 36 months + integration + extra bays + lever costs, EUR over 3 years"
+      },
+      "requiredReliability": {
+        "value": 0.85,
+        "source": "simulate/ sweep: human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers); 97% of plateau"
+      },
+      "sweep": [
+        {
+          "reliability": 0.8,
+          "throughput": {
+            "value": 27.7,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            27.59,
+            27.82
+          ]
+        },
+        {
+          "reliability": 0.85,
+          "throughput": {
+            "value": 29.45,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.41,
+            29.5
+          ]
+        },
+        {
+          "reliability": 0.88,
+          "throughput": {
+            "value": 29.53,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.48,
+            29.58
+          ]
+        },
+        {
+          "reliability": 0.9,
+          "throughput": {
+            "value": 29.55,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.51,
+            29.59
+          ]
+        },
+        {
+          "reliability": 0.92,
+          "throughput": {
+            "value": 29.53,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.49,
+            29.58
+          ]
+        },
+        {
+          "reliability": 0.94,
+          "throughput": {
+            "value": 29.59,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.55,
+            29.64
+          ]
+        },
+        {
+          "reliability": 0.95,
+          "throughput": {
+            "value": 29.62,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.58,
+            29.66
+          ]
+        },
+        {
+          "reliability": 0.96,
+          "throughput": {
+            "value": 29.6,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.56,
+            29.64
+          ]
+        },
+        {
+          "reliability": 0.97,
+          "throughput": {
+            "value": 29.59,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.54,
+            29.63
+          ]
+        },
+        {
+          "reliability": 0.98,
+          "throughput": {
+            "value": 29.57,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.53,
+            29.62
+          ]
+        },
+        {
+          "reliability": 0.99,
+          "throughput": {
+            "value": 29.6,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.55,
+            29.64
+          ]
+        },
+        {
+          "reliability": 0.995,
+          "throughput": {
+            "value": 29.54,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.49,
+            29.58
+          ]
+        },
+        {
+          "reliability": 0.999,
+          "throughput": {
+            "value": 29.54,
+            "source": "simulate/ SimPy: mean of 200 x 8 h shifts, human fallback station (30 s robot reset), capability model v0 per op (humanoid, industrial_arm robots, applied levers)"
+          },
+          "ci95": [
+            29.5,
+            29.58
+          ]
+        }
+      ],
+      "rank": 1
     }
   ]
 }

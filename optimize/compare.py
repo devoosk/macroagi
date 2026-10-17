@@ -23,6 +23,7 @@ from simulate.simulate import SimOptions, simulate
 from simulate.sweep import required_reliability, sweep
 
 from .costs import FLOOR
+from . import rebuild
 from .export import add_fallback, export
 from .search import best_designs
 
@@ -85,7 +86,8 @@ def throughput(raw: dict, base, shifts: int) -> dict:
     return pt["throughput"]
 
 
-def evaluate(current: dict, design: dict, shifts: int, outdir: Path, name: str) -> dict:
+def evaluate(current: dict, design: dict, shifts: int, outdir: Path, name: str, staged: bool = True) -> dict:
+    """staged=False (rebuilds): the stages swap whole line segments, so only the final line is simulated."""
     base = from_dict(current)
     line = from_dict(design)
     robot, note = _robot_opts(line, base)
@@ -99,6 +101,8 @@ def evaluate(current: dict, design: dict, shifts: int, outdir: Path, name: str) 
     # Re-plan the order one stage at a time: next comes the remaining stage that lifts
     # throughput most (ties: the one listed first, i.e. lower risk).
     todo, done, stages = list(design["design"]["stages"]), [], []
+    if not staged:
+        stages, todo = todo, []
     while todo:
         trials = []
         for st in todo:
@@ -141,9 +145,16 @@ def main() -> None:
     p.add_argument("-o", "--out", type=Path, default=DATA)
     p.add_argument("--shifts", type=int, default=P.SWEEP_SHIFTS)
     p.add_argument("--floor", type=float, default=FLOOR["value"])
+    p.add_argument("--no-rebuild", action="store_true", help="skip the rebuild-for-robots design")
     a = p.parse_args()
     current = json.loads(a.line.read_text())
     results = []
+    if not a.no_rebuild:
+        rb = rebuild.solve(current, floor=a.floor)
+        if rb:
+            design = rebuild.export(current, rb)
+            (a.out / "line_rebuild_1.json").write_text(json.dumps(design, indent=2) + "\n")
+            results.append(evaluate(current, design, a.shifts, a.out, "rebuild_1", staged=False))
     for n, (c, sol) in enumerate(best_designs(current, a.floor), start=1):
         design = export(current, c, sol, n)
         design["id"] = f"{current['id']}_solver_{n}"
@@ -151,7 +162,7 @@ def main() -> None:
         results.append(evaluate(current, design, a.shifts, a.out, f"solver_{n}"))
     for r in rank(results):
         upsert_design(a.out / "results.json", r)
-        stages = " -> ".join(f"{s['id']} {s['throughput']['value']:g}/h" for s in r["stages"])
+        stages = " -> ".join(f"{s['id']} {s['throughput']['value']:g}/h" if 'throughput' in s else s['id'] for s in r["stages"])
         print(f"#{r['rank']} {r['design']}: {r['throughput']['value']:g} units/h, capex {r['capex']['value']}, "
               f"rent {r['rentPerMonth']['value']}/month, 3-year cost {r['cost3y']['value']}, needs {r['requiredReliability']['value']:.0%}; {stages}")
 

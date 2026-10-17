@@ -1,0 +1,2135 @@
+{
+  "id": "r290_current_rebuild_1",
+  "name": "R290 monobloc outdoor unit \u2014 current line rebuilt for robots",
+  "takt": {
+    "value": 120,
+    "source": "estimate (30 units/h target)"
+  },
+  "operations": [
+    {
+      "id": "O01",
+      "name": "Fetch fan motor from rack",
+      "verb": "walk",
+      "parts": [
+        "P_fan_motor"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 30,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10.5,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 30,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10.5,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 30.9,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10.8,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S01",
+      "mode": "eliminated"
+    },
+    {
+      "id": "O02",
+      "name": "Find correct harness variant",
+      "verb": "search",
+      "parts": [
+        "P_harness"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 25,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 25,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 25.8,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10.3,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S01",
+      "mode": "eliminated"
+    },
+    {
+      "id": "O03",
+      "name": "Pick valve kit and brazing rings",
+      "verb": "pick",
+      "parts": [
+        "P_4way_valve",
+        "P_eev",
+        "P_braze_ring"
+      ],
+      "tool": "scanner",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 22.54,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.92,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 24.5,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.12,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 27.44,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.36,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C02",
+      "mode": "robot"
+    },
+    {
+      "id": "O04",
+      "name": "Place base pan on pallet",
+      "verb": "place",
+      "parts": [
+        "P_base_pan"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 23.92,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 0.88,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 26.0,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 0.96,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 29.12,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.08,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C01",
+      "mode": "robot"
+    },
+    {
+      "id": "O05",
+      "name": "Screw anti-vibration feet",
+      "verb": "screw",
+      "parts": [
+        "P_base_pan",
+        "P_screw_m8"
+      ],
+      "tool": "torque_driver",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 32.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.9,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 35,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.2,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 39.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.7,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C03",
+      "mode": "human"
+    },
+    {
+      "id": "O06",
+      "name": "Place finned coil and plate heat exchanger",
+      "verb": "place",
+      "parts": [
+        "P_coil",
+        "P_phe"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 47.84,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.2,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 52.0,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.4,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 58.24,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.68,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C01",
+      "mode": "robot"
+    },
+    {
+      "id": "O07",
+      "name": "Place compressor on grommets",
+      "verb": "place",
+      "parts": [
+        "P_compressor"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 28.98,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.48,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 31.5,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.72,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 35.28,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 3.04,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C02",
+      "mode": "robot"
+    },
+    {
+      "id": "O08",
+      "name": "Torque compressor mounting nuts",
+      "verb": "screw",
+      "parts": [
+        "P_compressor",
+        "P_screw_m8"
+      ],
+      "tool": "torque_driver",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 20.29,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.56,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 22.05,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.68,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 24.7,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.88,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C02",
+      "mode": "robot"
+    },
+    {
+      "id": "O09",
+      "name": "Insert 4-way valve and EEV into pipe set",
+      "verb": "insert",
+      "parts": [
+        "P_4way_valve",
+        "P_eev"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 19.32,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.64,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 21.0,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.8,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 23.52,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.0,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C02",
+      "mode": "robot"
+    },
+    {
+      "id": "O10",
+      "name": "Braze suction and discharge lines",
+      "verb": "braze",
+      "parts": [
+        "P_compressor",
+        "P_braze_ring"
+      ],
+      "tool": "torch",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 50.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 7.6,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 55,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 8.3,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 61.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 9.2,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C04",
+      "mode": "human"
+    },
+    {
+      "id": "O11",
+      "name": "Braze valve, coil and PHE joints",
+      "verb": "braze",
+      "parts": [
+        "P_4way_valve",
+        "P_eev",
+        "P_coil",
+        "P_phe",
+        "P_braze_ring"
+      ],
+      "tool": "torch",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 50.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 7.6,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 55,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 8.3,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 61.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 9.2,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C04",
+      "mode": "human"
+    },
+    {
+      "id": "O12",
+      "name": "Connect vacuum and helium hoses",
+      "verb": "connect",
+      "parts": [],
+      "tool": "hose",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 25,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.8,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 25,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.8,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 25.8,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.9,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C05",
+      "mode": "human"
+    },
+    {
+      "id": "O13",
+      "name": "Evacuate and helium leak test",
+      "verb": "inspect",
+      "parts": [],
+      "tool": "hose",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 136.4,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 10.9,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 155,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 12.4,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 178.3,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 14.3,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C05",
+      "failRate": {
+        "value": 0.04,
+        "source": "estimate (typical 2-5% first-pass leak rejects on brazed R290 circuits)"
+      },
+      "mode": "human"
+    },
+    {
+      "id": "O14",
+      "name": "Charge R290 by weight and crimp-seal port",
+      "verb": "connect",
+      "parts": [
+        "P_r290"
+      ],
+      "tool": "hose",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 78.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 7.8,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 85,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 8.5,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 95.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 9.5,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C06",
+      "mode": "human"
+    },
+    {
+      "id": "O15",
+      "name": "Place inverter PCB in e-box",
+      "verb": "place",
+      "parts": [
+        "P_pcb"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 18.4,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 2.8,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 20,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 22.4,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.4,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C03",
+      "mode": "human"
+    },
+    {
+      "id": "O16",
+      "name": "Connect wiring harness to compressor and PCB",
+      "verb": "connect",
+      "parts": [
+        "P_harness",
+        "P_pcb"
+      ],
+      "tool": "crimper",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 50.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 9.1,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 55,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 9.9,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 61.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 11.1,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C03",
+      "mode": "human"
+    },
+    {
+      "id": "O17",
+      "name": "Screw PCB and earth terminals",
+      "verb": "screw",
+      "parts": [
+        "P_pcb",
+        "P_screw_m6"
+      ],
+      "tool": "screwdriver",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 23,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.5,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 25,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.8,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 28,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.2,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C07",
+      "mode": "human"
+    },
+    {
+      "id": "O18",
+      "name": "Place fan motor and fan blade",
+      "verb": "place",
+      "parts": [
+        "P_fan_motor",
+        "P_fan_blade"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 35.88,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.64,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 39.0,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.8,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 43.68,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.0,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C01",
+      "mode": "robot"
+    },
+    {
+      "id": "O19",
+      "name": "Insert side panels and grille",
+      "verb": "insert",
+      "parts": [
+        "P_side_panel",
+        "P_grille"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 32.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.8,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 35,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 5.3,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 39.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 5.9,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C07",
+      "mode": "human"
+    },
+    {
+      "id": "O20",
+      "name": "Screw side panels and top cover",
+      "verb": "screw",
+      "parts": [
+        "P_side_panel",
+        "P_top_cover",
+        "P_screw_m6"
+      ],
+      "tool": "screwdriver",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 36.8,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.4,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 40,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.8,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 44.8,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 5.4,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C07",
+      "mode": "human"
+    },
+    {
+      "id": "O21",
+      "name": "Connect mains and water test rig",
+      "verb": "connect",
+      "parts": [],
+      "tool": "hose",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 20,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 20,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 20.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 3.1,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C08",
+      "mode": "human"
+    },
+    {
+      "id": "O22",
+      "name": "Functional run test (COP, pressures, noise)",
+      "verb": "inspect",
+      "parts": [],
+      "tool": "scanner",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 209,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 12.5,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 220,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 13.2,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 233.2,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 14,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C08",
+      "failRate": {
+        "value": 0.02,
+        "source": "estimate (EOL run-test reject rate)"
+      },
+      "mode": "human"
+    },
+    {
+      "id": "O23",
+      "name": "Visual inspection and label check",
+      "verb": "inspect",
+      "parts": [
+        "P_side_panel",
+        "P_top_cover"
+      ],
+      "tool": "scanner",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 25.2,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.72,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 25.2,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.72,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 25.98,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.8,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C09",
+      "mode": "robot"
+    },
+    {
+      "id": "O24",
+      "name": "Walk to printer for rating label",
+      "verb": "walk",
+      "parts": [],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 20,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 7,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 20,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 7,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 20.6,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 7.2,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S10",
+      "mode": "eliminated"
+    },
+    {
+      "id": "O25",
+      "name": "Place carton and strap to pallet",
+      "verb": "place",
+      "parts": [
+        "P_carton"
+      ],
+      "tool": "strapper",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 38.64,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.64,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 42.0,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.88,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 47.04,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 3.24,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "C09",
+      "mode": "robot"
+    }
+  ],
+  "edges": [
+    {
+      "from": "O01",
+      "to": "O02",
+      "type": "soft",
+      "confidence": 0.5,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O02",
+      "to": "O03",
+      "type": "soft",
+      "confidence": 0.55,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O03",
+      "to": "O09",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O04",
+      "to": "O05",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O04",
+      "to": "O06",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O05",
+      "to": "O06",
+      "type": "soft",
+      "confidence": 0.6,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O06",
+      "to": "O07",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O07",
+      "to": "O08",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O08",
+      "to": "O09",
+      "type": "soft",
+      "confidence": 0.55,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O07",
+      "to": "O09",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "engineer"
+    },
+    {
+      "from": "O08",
+      "to": "O10",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O09",
+      "to": "O11",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O10",
+      "to": "O11",
+      "type": "soft",
+      "confidence": 0.5,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O10",
+      "to": "O12",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O11",
+      "to": "O12",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O12",
+      "to": "O13",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O13",
+      "to": "O14",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O15",
+      "to": "O16",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O15",
+      "to": "O17",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O16",
+      "to": "O17",
+      "type": "soft",
+      "confidence": 0.6,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O14",
+      "to": "O15",
+      "type": "soft",
+      "confidence": 0.7,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O16",
+      "to": "O19",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "engineer"
+    },
+    {
+      "from": "O18",
+      "to": "O19",
+      "type": "soft",
+      "confidence": 0.6,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O19",
+      "to": "O20",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O01",
+      "to": "O18",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O14",
+      "to": "O21",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O16",
+      "to": "O21",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O20",
+      "to": "O21",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O21",
+      "to": "O22",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O22",
+      "to": "O23",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "engineer"
+    },
+    {
+      "from": "O23",
+      "to": "O24",
+      "type": "soft",
+      "confidence": 0.5,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O22",
+      "to": "O24",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "engineer"
+    },
+    {
+      "from": "O23",
+      "to": "O25",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O24",
+      "to": "O25",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    }
+  ],
+  "parts": [
+    {
+      "id": "P_base_pan",
+      "name": "Galvanised base pan",
+      "size": [
+        1.15,
+        0.09,
+        0.45
+      ],
+      "mass": {
+        "value": 7.5,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "loose",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_compressor",
+      "name": "Inverter rotary compressor (R290)",
+      "size": [
+        0.2,
+        0.36,
+        0.2
+      ],
+      "mass": {
+        "value": 18,
+        "source": "estimate (twin-rotary 9 kW class)"
+      },
+      "rigidity": "rigid",
+      "tolerance": "medium",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_4way_valve",
+      "name": "4-way reversing valve",
+      "size": [
+        0.12,
+        0.08,
+        0.06
+      ],
+      "mass": {
+        "value": 0.6,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "tight",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_eev",
+      "name": "Electronic expansion valve",
+      "size": [
+        0.06,
+        0.1,
+        0.05
+      ],
+      "mass": {
+        "value": 0.25,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "tight",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_phe",
+      "name": "Brazed plate heat exchanger",
+      "size": [
+        0.12,
+        0.32,
+        0.1
+      ],
+      "mass": {
+        "value": 5.5,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "medium",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_coil",
+      "name": "Finned evaporator coil",
+      "size": [
+        1,
+        0.75,
+        0.06
+      ],
+      "mass": {
+        "value": 9,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "medium",
+      "presentation": "fixtured"
+    },
+    {
+      "id": "P_fan_motor",
+      "name": "EC fan motor",
+      "size": [
+        0.18,
+        0.18,
+        0.12
+      ],
+      "mass": {
+        "value": 3.2,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "medium",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_fan_blade",
+      "name": "Axial fan blade 550 mm",
+      "size": [
+        0.55,
+        0.55,
+        0.12
+      ],
+      "mass": {
+        "value": 0.9,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "loose",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_pcb",
+      "name": "Inverter PCB in e-box",
+      "size": [
+        0.3,
+        0.06,
+        0.22
+      ],
+      "mass": {
+        "value": 1.4,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "tight",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_harness",
+      "name": "Wiring harness (variant-specific)",
+      "size": [
+        0.8,
+        0.05,
+        0.05
+      ],
+      "mass": {
+        "value": 0.7,
+        "source": "estimate"
+      },
+      "rigidity": "flexible",
+      "tolerance": "medium",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_side_panel",
+      "name": "Powder-coated side panel",
+      "size": [
+        0.95,
+        0.8,
+        0.02
+      ],
+      "mass": {
+        "value": 3.8,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "medium",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_top_cover",
+      "name": "Top cover",
+      "size": [
+        1.15,
+        0.02,
+        0.45
+      ],
+      "mass": {
+        "value": 3.1,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "medium",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_grille",
+      "name": "Fan guard grille",
+      "size": [
+        0.6,
+        0.6,
+        0.04
+      ],
+      "mass": {
+        "value": 0.8,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "loose",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_screw_m6",
+      "name": "Screw M6x12 self-tapping",
+      "size": [
+        0.006,
+        0.012,
+        0.006
+      ],
+      "mass": {
+        "value": 0.004,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "medium",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_screw_m8",
+      "name": "Screw M8x20 with nut",
+      "size": [
+        0.008,
+        0.02,
+        0.008
+      ],
+      "mass": {
+        "value": 0.011,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "medium",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_braze_ring",
+      "name": "Silver brazing ring (15% Ag)",
+      "size": [
+        0.016,
+        0.002,
+        0.016
+      ],
+      "mass": {
+        "value": 0.002,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "tight",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_r290",
+      "name": "R290 refrigerant charge",
+      "size": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "mass": {
+        "value": 0.9,
+        "source": "estimate (~0.9 kg charge, under IEC 60335-2-40 limits)"
+      },
+      "rigidity": "flexible",
+      "tolerance": "tight",
+      "presentation": "fixtured"
+    },
+    {
+      "id": "P_carton",
+      "name": "Carton and corner pads",
+      "size": [
+        1.25,
+        1,
+        0.55
+      ],
+      "mass": {
+        "value": 2.5,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "loose",
+      "presentation": "tray"
+    }
+  ],
+  "stations": [
+    {
+      "id": "C01",
+      "name": "Humanoid cell: Base frame + Casing",
+      "kind": "base_frame",
+      "operations": [
+        "O04",
+        "O06",
+        "O18"
+      ],
+      "staff": "robot",
+      "x": 0.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 0,
+      "bufferAfter": 1,
+      "bays": 1,
+      "replaces": [
+        "S02",
+        "S08"
+      ],
+      "robot": "humanoid",
+      "fallback": "FB"
+    },
+    {
+      "id": "C02",
+      "name": "Industrial arm (50 kg) cell: Kitting + Compressor mount",
+      "kind": "compressor_mount",
+      "operations": [
+        "O03",
+        "O07",
+        "O08",
+        "O09"
+      ],
+      "staff": "robot",
+      "x": 5.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "bays": 1,
+      "replaces": [
+        "S01",
+        "S03"
+      ],
+      "robot": "industrial_arm",
+      "fallback": "FB"
+    },
+    {
+      "id": "C03",
+      "name": "Human station: Base frame + Electrical wiring",
+      "kind": "electrical_wiring",
+      "operations": [
+        "O05",
+        "O15",
+        "O16"
+      ],
+      "staff": "human",
+      "x": 10.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "bays": 1,
+      "replaces": [
+        "S02",
+        "S07"
+      ]
+    },
+    {
+      "id": "C04",
+      "name": "Human station: Brazing",
+      "kind": "brazing",
+      "operations": [
+        "O10",
+        "O11"
+      ],
+      "staff": "human",
+      "x": 15.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "bays": 1,
+      "replaces": [
+        "S04"
+      ]
+    },
+    {
+      "id": "C05",
+      "name": "Human station: Evacuation & leak test",
+      "kind": "evacuation_leak_test",
+      "operations": [
+        "O12",
+        "O13"
+      ],
+      "staff": "human",
+      "x": 20.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 2,
+      "bufferAfter": 2,
+      "bays": 2,
+      "replaces": [
+        "S05"
+      ]
+    },
+    {
+      "id": "C06",
+      "name": "Human station: R290 charge",
+      "kind": "refrigerant_charge",
+      "operations": [
+        "O14"
+      ],
+      "staff": "human",
+      "x": 25.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "bays": 1,
+      "replaces": [
+        "S06"
+      ]
+    },
+    {
+      "id": "C07",
+      "name": "Human station: Electrical wiring + Casing",
+      "kind": "casing",
+      "operations": [
+        "O17",
+        "O19",
+        "O20"
+      ],
+      "staff": "human",
+      "x": 30.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "bays": 1,
+      "replaces": [
+        "S07",
+        "S08"
+      ]
+    },
+    {
+      "id": "C08",
+      "name": "Human station: Run test",
+      "kind": "run_test",
+      "operations": [
+        "O21",
+        "O22"
+      ],
+      "staff": "human",
+      "x": 35.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 2,
+      "bufferAfter": 2,
+      "bays": 2,
+      "replaces": [
+        "S09"
+      ]
+    },
+    {
+      "id": "C09",
+      "name": "Industrial arm (50 kg) cell: EOL inspection + Packing",
+      "kind": "eol_inspection",
+      "operations": [
+        "O23",
+        "O25"
+      ],
+      "staff": "robot",
+      "x": 40.0,
+      "y": 0.0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 0,
+      "bays": 1,
+      "replaces": [
+        "S10",
+        "S11"
+      ],
+      "robot": "industrial_arm",
+      "fallback": "FB"
+    },
+    {
+      "id": "FB",
+      "name": "Robot fallback",
+      "kind": "base_frame",
+      "operations": [],
+      "staff": "human",
+      "x": 5.0,
+      "y": -4.0,
+      "rot": 0,
+      "bufferBefore": 2,
+      "bufferAfter": 0,
+      "bays": 1,
+      "offline": true
+    }
+  ],
+  "variants": [
+    {
+      "id": "V6",
+      "name": "6 kW",
+      "kw": 6,
+      "mix": {
+        "value": 0.45,
+        "source": "estimate (order book split)"
+      },
+      "operations": [
+        "O03",
+        "O04",
+        "O05",
+        "O06",
+        "O07",
+        "O08",
+        "O09",
+        "O10",
+        "O11",
+        "O12",
+        "O13",
+        "O14",
+        "O15",
+        "O16",
+        "O17",
+        "O18",
+        "O19",
+        "O20",
+        "O21",
+        "O22",
+        "O23",
+        "O25"
+      ]
+    },
+    {
+      "id": "V9",
+      "name": "9 kW",
+      "kw": 9,
+      "mix": {
+        "value": 0.35,
+        "source": "estimate (order book split)"
+      },
+      "operations": [
+        "O03",
+        "O04",
+        "O05",
+        "O06",
+        "O07",
+        "O08",
+        "O09",
+        "O10",
+        "O11",
+        "O12",
+        "O13",
+        "O14",
+        "O15",
+        "O16",
+        "O17",
+        "O18",
+        "O19",
+        "O20",
+        "O21",
+        "O22",
+        "O23",
+        "O25"
+      ]
+    },
+    {
+      "id": "V12",
+      "name": "12 kW",
+      "kw": 12,
+      "mix": {
+        "value": 0.2,
+        "source": "estimate (order book split)"
+      },
+      "operations": [
+        "O03",
+        "O04",
+        "O05",
+        "O06",
+        "O07",
+        "O08",
+        "O09",
+        "O10",
+        "O11",
+        "O12",
+        "O13",
+        "O14",
+        "O15",
+        "O16",
+        "O17",
+        "O18",
+        "O19",
+        "O20",
+        "O21",
+        "O22",
+        "O23",
+        "O25"
+      ]
+    }
+  ],
+  "levers": [
+    {
+      "id": "L_kit",
+      "type": "kit",
+      "cost": {
+        "value": 14000,
+        "source": "estimate"
+      },
+      "operations": [
+        "O02",
+        "O03"
+      ],
+      "featureChanges": {
+        "presentation": "kitted",
+        "search": "removed",
+        "variant_ambiguity": "none"
+      }
+    },
+    {
+      "id": "L_flowrack",
+      "type": "eliminate",
+      "cost": {
+        "value": 6500,
+        "source": "estimate"
+      },
+      "operations": [
+        "O01",
+        "O24"
+      ],
+      "featureChanges": {
+        "walk": "removed",
+        "supply": "line-side flow rack + label printer at S10"
+      }
+    },
+    {
+      "id": "L_comp_fixture",
+      "type": "fixture",
+      "cost": {
+        "value": 22000,
+        "source": "estimate"
+      },
+      "operations": [
+        "O07",
+        "O08",
+        "O09"
+      ],
+      "featureChanges": {
+        "orientation": "known",
+        "presentation": "fixtured",
+        "locating": "pallet pins"
+      }
+    },
+    {
+      "id": "L_panel_g2r",
+      "type": "goods_to_robot",
+      "cost": {
+        "value": 28000,
+        "source": "estimate"
+      },
+      "operations": [
+        "O18",
+        "O19",
+        "O20"
+      ],
+      "featureChanges": {
+        "presentation": "tray",
+        "pose": "known",
+        "reach": "within robot envelope"
+      }
+    },
+    {
+      "id": "L_test_bays",
+      "type": "decouple",
+      "cost": {
+        "value": 165000,
+        "source": "estimate (extra helium leak bay + 2 run-test bays)"
+      },
+      "operations": [
+        "O12",
+        "O13",
+        "O21",
+        "O22"
+      ],
+      "featureChanges": {
+        "bays": "leak test x2, run test x3",
+        "buffers": "decoupling buffers before tests"
+      }
+    },
+    {
+      "id": "L_regroup_valves",
+      "type": "regroup",
+      "cost": {
+        "value": 3000,
+        "source": "estimate"
+      },
+      "operations": [
+        "O09",
+        "O11"
+      ],
+      "featureChanges": {
+        "station": "move valve insert into brazing cell",
+        "handling": "one fewer re-grip"
+      }
+    }
+  ],
+  "appliedLevers": [
+    "L_kit",
+    "L_flowrack",
+    "L_comp_fixture"
+  ],
+  "design": {
+    "mode": "rebuild",
+    "stages": [
+      {
+        "id": "M1",
+        "name": "Rebuild front of line",
+        "stations": [
+          "C01",
+          "C02",
+          "C03"
+        ],
+        "replaces": [
+          "S01",
+          "S02",
+          "S03",
+          "S07",
+          "S08"
+        ],
+        "gate": "New stations hold takt for one week, with the human fallback station staffed"
+      },
+      {
+        "id": "M2",
+        "name": "Rebuild middle of line",
+        "stations": [
+          "C04",
+          "C05",
+          "C06"
+        ],
+        "replaces": [
+          "S04",
+          "S05",
+          "S06"
+        ],
+        "gate": "New stations hold takt for one week, with the human fallback station staffed"
+      },
+      {
+        "id": "M3",
+        "name": "Rebuild back of line",
+        "stations": [
+          "C07",
+          "C08",
+          "C09"
+        ],
+        "replaces": [
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11"
+        ],
+        "gate": "New stations hold takt for one week, with the human fallback station staffed"
+      }
+    ],
+    "bundle": "rebuild",
+    "humanStations": 6,
+    "robotStations": 3,
+    "people": 8,
+    "fleet": [
+      {
+        "robot": "humanoid",
+        "name": "Humanoid",
+        "count": 1,
+        "rentPerMonth": {
+          "value": 6000,
+          "source": "estimate (demo rental catalogue)"
+        }
+      },
+      {
+        "robot": "industrial_arm",
+        "name": "Industrial arm (50 kg)",
+        "count": 2,
+        "rentPerMonth": {
+          "value": 3500,
+          "source": "estimate (demo rental catalogue)"
+        }
+      }
+    ],
+    "capex": {
+      "value": 137500,
+      "source": "estimate (levers 42500 + extra bays 10000 + robot integration 85000)"
+    },
+    "rentPerMonth": {
+      "value": 13000,
+      "source": "estimate (demo rental catalogue)"
+    },
+    "objective": {
+      "value": 2765500,
+      "source": "estimate",
+      "note": "human station 270000 per bay + robot rent x 36 months + integration + extra bays + lever costs, EUR over 3 years"
+    }
+  }
+}

@@ -102,6 +102,8 @@ export interface Station {
   fallback?: string
   /** True for an off-line fallback station (not part of the serial flow). */
   offline?: boolean
+  /** Rebuild designs (optimize.rebuild): the old stations this station's work came from. */
+  replaces?: string[]
 }
 
 export interface Variant {
@@ -140,6 +142,10 @@ export interface Line {
 }
 
 export interface DesignSummary {
+  /** 'rebuild': stations C01..Cn laid out from scratch (optimize.rebuild). Absent: rebalance of today's stations. */
+  mode?: 'rebuild'
+  /** Rebuild designs: people on the line (human stations x bays). */
+  people?: number
   /** Lever bundle the solver was allowed to use (B0 none ... B4 all). */
   bundle: string
   /** Migration stages, lowest risk first; copy into results.json. */
@@ -198,6 +204,8 @@ export interface MigrationStage {
   name: string
   stations: string[]
   gate: string
+  /** Rebuild designs: old stations this stage swaps out. */
+  replaces?: string[]
   /** optimize.compare: simulated throughput of the line after stages 1..this one. */
   throughput?: Sourced
 }
