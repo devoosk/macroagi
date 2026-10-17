@@ -202,7 +202,7 @@
 .mx-launch { position: absolute; inset: 0; display: grid; place-items: center; padding: 32px; background: #fbfbfa; color: var(--mx-text); font-family: var(--mx-font);
   background-image: linear-gradient(var(--mx-line) 1px, transparent 1px), linear-gradient(90deg, var(--mx-line) 1px, transparent 1px); background-size: 32px 32px; }
 .mx-launch-inner { max-width: 420px; padding: 28px; background: #fbfbfa; border: 1px solid var(--mx-line); border-radius: 6px; }
-.mx-launch h2 { font: 600 26px/1.15 var(--mx-font); letter-spacing: -0.02em; margin: 10px 0 10px; }
+.mx-launch h2 { font: 600 26px/1.15 var(--mx-font); letter-spacing: -0.02em; margin: 10px 0 22px; }
 .mx-launch p { font: 400 13px/1.55 var(--mx-font); color: var(--mx-muted); margin: 0 0 20px; }
 .mx-launch .mx-btn-primary { height: 42px; padding: 0 22px; font-size: 14px; }
 .mx-launch-steps { list-style: none; margin: 22px 0 0; padding: 16px 0 0; border-top: 1px solid var(--mx-line); display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font: 500 12px/1 var(--mx-font); color: var(--mx-muted); }

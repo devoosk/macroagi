@@ -106,10 +106,6 @@ export function RedesignPane({ current }: { current: Line }) {
         <div className="mx-launch-inner">
           <div className="mx-eyebrow">Proposed</div>
           <h2>Redesign this line for robots</h2>
-          <p>
-            MacroAGI reads the camera footage, rebuilds the process graph, scores every operation for robots, searches station layouts with
-            CP-SAT and proves the winner in simulation.
-          </p>
           <button className="mx-btn mx-btn-primary" onClick={() => setPhase('running')}>
             Redesign
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
