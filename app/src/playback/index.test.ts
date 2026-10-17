@@ -8,7 +8,7 @@ import { selectStateAtNaive } from './naive'
 import { makeSyntheticLine, makeSyntheticLog } from './synthetic'
 import { usePlayback } from './store'
 
-const dataDir = fileURLToPath(new URL('../../public/data/', import.meta.url))
+const dataDir = fileURLToPath(new URL('./__fixtures__/', import.meta.url))
 const fixtureLine: Line = JSON.parse(readFileSync(dataDir + 'line.json', 'utf8'))
 const fixtureLog: EventLog = JSON.parse(readFileSync(dataDir + 'events_current.json', 'utf8'))
 
