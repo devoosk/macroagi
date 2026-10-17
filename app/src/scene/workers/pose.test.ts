@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { ToolKind } from '../../contracts/types'
-import { poseWorker, type Pose, type WorkerVerb } from './pose'
+import { EYE_MIN_Z, poseWorker, type Pose, type WorkerVerb } from './pose'
 import { workerLook } from './look'
 import { BONES, RIG } from './rig'
 
@@ -115,6 +115,22 @@ describe('poseWorker', () => {
       expect(l.height).toBeGreaterThanOrEqual(1.62)
       expect(l.height).toBeLessThanOrEqual(1.92)
       expect(workerLook('seed-' + i)).toEqual(l)
+    }
+  })
+})
+
+describe('eye standoff from the work', () => {
+  // The first-person camera rides the eye; leaning it into the open unit made the braze view unreadable.
+  it('keeps the eye at least EYE_STANDOFF from the unit face in every verb', () => {
+    for (const verb of VERBS) {
+      for (const tool of ['none', 'torch', 'scanner', 'hose', 'torque_driver'] as ToolKind[]) {
+        for (let i = 0; i <= 50; i++) {
+          for (const seed of ['line_current:S04', 'line_current:S07', 'line_redesign_1:S05']) {
+            const pose = poseWorker(verb, i / 50, { seed, cycle: i % 7, simTime: 2400 + i * 1.3, tool })
+            expect(pose.eye[2]).toBeGreaterThanOrEqual(EYE_MIN_Z - 2e-3)
+          }
+        }
+      }
     }
   })
 })

@@ -4,6 +4,7 @@
 
 import { Matrix4, Quaternion, Vector3, Euler } from 'three'
 import type { ToolKind, VerbClass } from '../../contracts/types'
+import { UNIT_NEAR_FACE_Z, WORKER_LOCAL_Z } from '../../lib/layout'
 import { rng } from '../../lib/rng'
 import { workerLook } from './look'
 import { BONES, RIG, palmSide, type BoneName, type Quat, type Side, type V3 } from './rig'
@@ -1205,6 +1206,51 @@ function solve(spec: Spec, s: number, breath: number): Solved {
   return { joints, hips, ik, grip, eye }
 }
 
+// ---------------------------------------------------------------- lean limit
+/**
+ * Near face of the unit on the conveyor in the worker frame (z, metres), about -0.73.
+ * The first-person camera keeps its own, larger standoff (capture/cameras.ts).
+ */
+export const WORK_FACE_Z = UNIT_NEAR_FACE_Z - WORKER_LOCAL_Z
+/**
+ * The eye never comes closer than this to WORK_FACE_Z. Leaning the head into the open unit put
+ * the head cam inside it (braze at S04 got to 0.14 m). Tighter limits cost hand reach (insert
+ * and braze targets sit inside the unit), so the rest of the standoff is done by the camera. Estimate.
+ */
+export const EYE_STANDOFF = 0.25
+export const EYE_MIN_Z = WORK_FACE_Z + EYE_STANDOFF
+/** Knee bend added per radian of lean given up, so the shoulders stay within reach of the work. */
+const DROP_PER_LEAN = 0.4
+
+/**
+ * Solve, then pull the upper body back if the eye would come closer than EYE_MIN_Z to the work
+ * face: first by straightening the lean (keeps the feet put), then by stepping the root back.
+ * Smooth in the input spec, so it adds no pops between key frames. Hand targets stay in the
+ * station frame and the knee bend keeps the shoulders close, so the hands still reach the work.
+ */
+function solveLimited(spec: Spec, s: number, breath: number): { spec: Spec; sol: Solved } {
+  let sp = spec
+  let sol = solve(sp, s, breath)
+  // d(eye z)/d(lean), m/rad: about 0.75 near these poses; refined by a secant after each step.
+  let slope = 0.75
+  for (let i = 0; i < 6; i++) {
+    const deficit = EYE_MIN_Z - sol.eye[2]
+    if (!(deficit > 2e-4)) break
+    const prev = { lean: sp.lean, eye: sol.eye[2] }
+    sp = cloneSpec(sp)
+    const nl = Math.max(0.05, sp.lean - (deficit / slope) * 1.05)
+    const dl = sp.lean - nl
+    sp.lean = nl
+    // Bend the knees by part of what the lean gave up so the shoulders stay near the work.
+    sp.drop += dl * DROP_PER_LEAN
+    // Lean exhausted: step the root back by what is left.
+    if (dl * slope < deficit * 0.5) sp.rootZ += deficit - dl * slope
+    sol = solve(sp, s, breath)
+    if (dl > 1e-4) slope = clamp((sol.eye[2] - prev.eye) / dl, 0.3, 1.5)
+  }
+  return { spec: sp, sol }
+}
+
 // ---------------------------------------------------------------- entry
 const DEFAULT_DURATION: Partial<Record<WorkerVerb, number>> = { walk: 12, search: 22 }
 
@@ -1274,16 +1320,14 @@ export function poseWorker(verb: WorkerVerb, phase: number, params: PoseParams):
   const ctx: Ctx = { p, t: simTime, seed: params.seed, cycle, tool: params.tool ?? 'none', duration, r: rng('ctx', params.seed, cycle, verb), k, rack: params.rack && params.rack.every(Number.isFinite) ? params.rack : undefined }
   const out = runVerb(verb, ctx)
   const breath = 0.018 * Math.sin((simTime * 2 * Math.PI) / (3.6 + (k % 1)) + k)
-  const spec = sanitizeSpec(out.spec)
-  const sol = solve(spec, s, breath)
+  const { spec, sol } = solveLimited(sanitizeSpec(out.spec), s, breath)
 
   // Released parts stay where the hand let go of them.
   const placed: PlacedPart[] = []
   if (out.release && out.at) {
     for (const r of out.release) {
       if (p < r.at) continue
-      const hs = sanitizeSpec(out.at(r.at))
-      const so = solve(hs, s, 0)
+      const { sol: so } = solveLimited(sanitizeSpec(out.at(r.at)), s, 0)
       const handName = out.mirrored ? (r.hand === 'R' ? 'L' : 'R') : r.hand
       placed.push({ kind: r.kind, side: handName === 'R' ? 1 : -1, matrix: so.grip[handName] })
     }

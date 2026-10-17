@@ -2,7 +2,7 @@ import { memo, useMemo, type ReactNode } from 'react'
 import type * as THREE from 'three'
 import type { StationState } from '../../../playback/store'
 import { rng } from '../../../lib/rng'
-import { M, lampMat, type LampColor } from './mats'
+import { M, lampMat, stateLamp, type LampColor } from './mats'
 import { B, C, CX, CZ, Hose, Inst, Sph, Tor, boxGeo, circleGeo, cylGeo, planeGeo, type InstItem, type V3 } from './prims'
 
 /** Station furniture shared by every station kind. All in station-local coordinates. */
@@ -68,7 +68,7 @@ export function Andon({ state, t, p, h = 0.45 }: { state: StationState; t: numbe
       <C rt={0.01} h={h} p={[0, 0.03 + h / 2, 0]} m={M.alu} seg={12} />
       {order.map((c, i) => (
         <group key={c} position={[0, 0.03 + h + 0.045 + i * 0.075, 0]}>
-          <C rt={0.034} h={0.07} m={lampMat(c, on[c])} seg={24} />
+          <C rt={0.034} h={0.07} m={stateLamp(c, on[c])} seg={24} />
           <C rt={0.036} h={0.006} p={[0, 0.036, 0]} m={M.plasticDark} seg={24} />
         </group>
       ))}
@@ -386,7 +386,7 @@ export function Cabinet({ w = 0.6, h = 1.8, d = 0.4, lamps = [], plinth = true }
       {lamps.map(([c, on], i) => (
         <group key={i} position={[-w / 4 + i * 0.06, y0 + (h - y0) * 0.82, d / 2 + 0.008]}>
           <CZ rt={0.016} h={0.016} m={M.chrome} seg={20} />
-          <CZ rt={0.012} h={0.02} p={[0, 0, 0.004]} m={lampMat(c, on)} seg={20} />
+          <CZ rt={0.012} h={0.02} p={[0, 0, 0.004]} m={stateLamp(c, on)} seg={20} />
         </group>
       ))}
       {/* e-stop */}

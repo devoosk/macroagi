@@ -105,8 +105,10 @@ function Torch({ flame, flicker, seg }: { flame: number; flicker: number; seg: n
           <Glow g={cone(1, 1, 14)} color="#3f7bff" opacity={0.7 * f} p={[0, 0.05 * (0.9 + 0.1 * flicker), 0]} s={[0.014, 0.1 * (0.9 + 0.1 * flicker), 0.014]} />
           <Glow g={cone(1, 1, 14)} color="#ff8a2a" opacity={0.35 * f} p={[0, 0.085 * flicker, 0]} s={[0.026, 0.17 * flicker, 0.026]} />
           <Glow g={sphere(10)} color="#ffb15a" opacity={0.22 * f} p={[0, 0.075, 0]} s={[0.024, 0.07, 0.024]} />
-          <pointLight color="#ffb070" intensity={3 * f} distance={2.5} decay={2} position={[0, 0.06, 0]} />
-          <pointLight color="#7aa8ff" intensity={1 * f} distance={1.4} decay={2} position={[0, 0.02, 0]} />
+          {/* Kept low: the flame sits a few cm from the coil and base pan, and at 3 / 1 the glow
+              clipped ~14 % of the first-person frame white. The cones above carry the flame. */}
+          <pointLight color="#ffb070" intensity={1.2 * f} distance={2.5} decay={2} position={[0, 0.06, 0]} />
+          <pointLight color="#7aa8ff" intensity={0.4 * f} distance={1.4} decay={2} position={[0, 0.02, 0]} />
         </group>
       )}
     </group>

@@ -78,8 +78,10 @@ export async function launchBrowser(width: number, height: number): Promise<Brow
   })
 }
 
-export function captureUrl(base: string, page: string, cam: string, width: number, height: number): string {
+/** Capture page URL. `query` (e.g. `design=redesign`) is merged in first; mode/cam/w/h always win. */
+export function captureUrl(base: string, page: string, cam: string, width: number, height: number, query = ''): string {
   const u = new URL(page, base.endsWith('/') ? base : base + '/')
+  for (const [k, v] of new URLSearchParams(query.replace(/^[?&]/, ''))) u.searchParams.set(k, v)
   u.searchParams.set('mode', 'capture')
   u.searchParams.set('cam', cam)
   u.searchParams.set('w', String(width))
