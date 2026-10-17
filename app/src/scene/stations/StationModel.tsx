@@ -4,6 +4,7 @@ import type * as THREE from 'three'
 import type { Line, Station, StationKind, ToolKind } from '../../contracts/types'
 import type { StationState } from '../../playback/store'
 import { registerAnchor } from '../../lib/anchors'
+import { Articulated, Static } from '../batch'
 import { M } from './lib/mats'
 import { B, C } from './lib/prims'
 import { Andon, Balancer, Bench, Fence, FloorTape, Gantry, LightCurtain, TorqueDriver } from './lib/common'
@@ -117,7 +118,9 @@ function RobotCell({ kind, t, working, seed }: { kind: StationKind; t: number; w
   return (
     <group>
       <group position={[0, 0, ROBOT_Z]} rotation={[0, -Math.PI / 2, 0]}>
-        <RobotArm pose={pose} tool={setup.tool} carry={setup.carry} />
+        <Articulated>
+          <RobotArm pose={pose} tool={setup.tool} carry={setup.carry} />
+        </Articulated>
       </group>
       {setup.table && (
         <group position={[1.05, 0, -0.95]}>
@@ -163,7 +166,7 @@ function OverheadTools({ tools, t, working }: { tools: ToolKind[]; t: number; wo
       </Balancer>,
     )
   }
-  return <group>{nodes}</group>
+  return <Articulated>{nodes}</Articulated>
 }
 
 /** Static furniture shared by every station: gantry, floor tape, light curtain at the outfeed. */
@@ -196,7 +199,11 @@ function Bay({ kind, props, bay }: { kind: StationKind; props: KindProps; bay: n
   )
 }
 
-/** Renders the right machine for station.kind, in station-local coordinates. */
+/**
+ * Renders the right machine for station.kind, in station-local coordinates.
+ * Everything is <Static> (merged line-wide by the enclosing <StaticBatch>) except the parts that
+ * animate, which sit in <Articulated> batches inside the machines.
+ */
 export const StationModel = memo(function StationModel({ station, state, simTime, quality, line }: StationModelProps) {
   const ref = useCallback((g: THREE.Group | null) => registerAnchor('station:' + station.id, g), [station.id])
   const robot = station.staff === 'robot'
@@ -210,22 +217,24 @@ export const StationModel = memo(function StationModel({ station, state, simTime
   const hasBench = station.kind !== 'kitting'
   return (
     <group ref={ref}>
-      {Array.from({ length: bays }, (_, b) => (
-        <Bay key={b} kind={station.kind} props={props} bay={b} />
-      ))}
-      <Furniture robot={robot} />
-      <Andon state={state} t={simTime} p={[1.75, 2.65, -0.85]} h={0.2} />
-      {hasBench && (
-        <group position={[0, 0, BENCH_Z]}>
-          <Bench top={BENCH_TOP[station.kind] ?? 'wood'}>
-            <group position={[0, 0.9, 0]}>{BENCH_EXTRAS[station.kind]}</group>
-          </Bench>
-        </group>
-      )}
-      <PartsPresentation parts={parts} seed={station.id} />
-      <BenchTools tools={tools} />
-      {!robot && <OverheadTools tools={tools} t={simTime} working={working} />}
-      {robot && ARM_KINDS.includes(station.kind) && <RobotCell kind={station.kind} t={simTime} working={working} seed={station.id} />}
+      <Static>
+        {Array.from({ length: bays }, (_, b) => (
+          <Bay key={b} kind={station.kind} props={props} bay={b} />
+        ))}
+        <Furniture robot={robot} />
+        <Andon state={state} t={simTime} p={[1.75, 2.65, -0.85]} h={0.2} />
+        {hasBench && (
+          <group position={[0, 0, BENCH_Z]}>
+            <Bench top={BENCH_TOP[station.kind] ?? 'wood'}>
+              <group position={[0, 0.9, 0]}>{BENCH_EXTRAS[station.kind]}</group>
+            </Bench>
+          </group>
+        )}
+        <PartsPresentation parts={parts} seed={station.id} />
+        <BenchTools tools={tools} />
+        {!robot && <OverheadTools tools={tools} t={simTime} working={working} />}
+        {robot && ARM_KINDS.includes(station.kind) && <RobotCell kind={station.kind} t={simTime} working={working} seed={station.id} />}
+      </Static>
     </group>
   )
 })

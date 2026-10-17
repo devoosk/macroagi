@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react'
 import type { Station } from '../../contracts/types'
+import { Static } from '../batch'
 import { M, lampMat } from './lib/mats'
 import { B, C, CX, Inst, boxGeo, cylGeo, type InstItem } from './lib/prims'
 
@@ -140,7 +141,7 @@ export function ConveyorLine({ stations }: { stations: Station[] }) {
   }, [stations])
   if (!data) return null
   return (
-    <group>
+    <Static>
       {data.segs.map((s, i) => (
         <group key={i} position={[s.cx, 0, s.cz]} rotation={[0, s.ang, 0]}>
           <RollerSection len={s.len + 0.002} />
@@ -170,7 +171,7 @@ export function ConveyorLine({ stations }: { stations: Station[] }) {
           </group>
         )
       })}
-    </group>
+    </Static>
   )
 }
 

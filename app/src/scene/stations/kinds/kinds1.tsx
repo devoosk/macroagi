@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Articulated, MergeSkip } from '../../batch'
 import { M, lampMat } from '../lib/mats'
 import { B, C, CX, CZ, Hose, Sph, Tor, frac, keyed, type V3 } from '../lib/prims'
 import { Balancer, BottleCart, BrazingTorch, Cabinet, EuroPallet, Heap, Monitor, ScannerHolster } from '../lib/common'
@@ -134,7 +135,10 @@ export function Kitting({ t, working, robot }: KindProps) {
         <>
           <group position={[0, 0, 1.95]}>
             <FlowRack />
-            <PickLights t={t} working={working} />
+            {/* pick-to-light lamps swap material: drawn on their own */}
+            <MergeSkip>
+              <PickLights t={t} working={working} />
+            </MergeSkip>
           </group>
           <group position={[1.35, 1.3, 1.35]} rotation={[0, -Math.PI / 2 - 0.4, 0]}>
             <Monitor />
@@ -215,7 +219,9 @@ export function BaseFrame({ t, working, robot }: KindProps) {
     <group>
       {!robot && (
         <group position={[0.75, 0, -0.85]}>
-          <ReactionArm t={t} working={working} />
+          <Articulated>
+            <ReactionArm t={t} working={working} />
+          </Articulated>
         </group>
       )}
       <group position={[-0.95, 0, -1.25]}>
@@ -268,7 +274,10 @@ function JibCrane({ t, working, pick, place }: { t: number; working: boolean; pi
           <B s={[0.28, 0.2, 0.2]} rad={0.02} p={[0, -0.12, 0]} m={M.ral1003} />
           <CX rt={0.07} h={0.08} p={[0.17, -0.12, 0]} m={M.ral7016} />
           <B s={[0.08, 0.1, 0.06]} p={[0, -0.07, 0.13]} m={M.ral7016} />
-          <C rt={0.006} h={chain} p={[0, -0.22 - chain / 2, 0]} m={M.steelDark} seg={6} />
+          {/* chain length changes every frame (new geometry), so it is drawn on its own */}
+          <MergeSkip>
+            <C rt={0.006} h={chain} p={[0, -0.22 - chain / 2, 0]} m={M.steelDark} seg={6} />
+          </MergeSkip>
           {/* pendant */}
           <Hose pts={[[0, -0.2, 0.1], [0.05, -0.6, 0.15], [0.05, -1.0, 0.15]]} rad={0.005} m={M.hoseBlack} tub={12} radial={5} />
           <B s={[0.06, 0.18, 0.05]} rad={0.012} p={[0.05, -1.1, 0.15]} m={M.ral1003} />
@@ -279,14 +288,19 @@ function JibCrane({ t, working, pick, place }: { t: number; working: boolean; pi
             {[0, 1, 2].map((i) => {
               const a = (i / 3) * Math.PI * 2
               const rr = carrying ? 0.09 : 0.12
-              return <B key={i} s={[0.02, 0.12, 0.03]} p={[Math.cos(a) * rr, -0.11, Math.sin(a) * rr]} r={[0, -a, 0]} m={M.steelDark} />
+              return (
+                <group key={i} position={[Math.cos(a) * rr, -0.11, Math.sin(a) * rr]}>
+                  <B s={[0.02, 0.12, 0.03]} r={[0, -a, 0]} m={M.steelDark} />
+                </group>
+              )
             })}
             <B s={[0.03, 0.1, 0.03]} p={[0, -0.0, 0.11]} m={M.plasticRed} />
-            {carrying && (
-              <group position={[0, -0.47, 0]}>
+            {/* always mounted (shown while carrying) so the crane's batch does not rebuild every lift */}
+            <group position={[0, -0.47, 0]} visible={carrying}>
+              <Articulated>
                 <Compressor r={0.085} h={0.33} withMounts={false} />
-              </group>
-            )}
+              </Articulated>
+            </group>
           </group>
         </group>
       </group>
@@ -300,7 +314,9 @@ export function CompressorMount({ t, working, robot }: KindProps) {
       {!robot && (
         <>
           <group position={[-1.35, 0, -1.05]}>
-            <JibCrane t={t} working={working} pick={[1.75, 0.65, -0.25]} place={[1.65, 1.45, 1.085]} />
+            <Articulated>
+              <JibCrane t={t} working={working} pick={[1.75, 0.65, -0.25]} place={[1.65, 1.45, 1.085]} />
+            </Articulated>
           </group>
           <group position={[0.4, 0, -1.3]}>
             <EuroPallet>
@@ -398,13 +414,15 @@ export function Brazing({ t, working, robot }: KindProps) {
         <>
           <Hose pts={[[0.81, 1.62, -1.2], [0.75, 2.1, -1.0], [0.6, 2.42, -0.4], [0.3, 2.45, 0.2], [0.15, 2.3, 0.3], [0.13, 1.6, 0.32], [0.12, 1.32, 0.3]]} rad={0.007} m={M.hoseRed} tub={64} />
           <Hose pts={[[0.83, 1.62, -1.2], [0.77, 2.1, -1.0], [0.62, 2.43, -0.4], [0.32, 2.46, 0.2], [0.17, 2.31, 0.3], [0.15, 1.6, 0.32], [0.13, 1.32, 0.3]]} rad={0.007} m={M.hoseBlue} tub={64} />
-          <Balancer x={0.13} drop={0.75}>
-            <group rotation={[0, Math.PI, 0]}>
-              <group rotation={[0.5, 0, 0]}>
-                <BrazingTorch flame={working ? flicker : 0} />
+          <Articulated>
+            <Balancer x={0.13} drop={0.75}>
+              <group rotation={[0, Math.PI, 0]}>
+                <group rotation={[0.5, 0, 0]}>
+                  <BrazingTorch flame={working ? flicker : 0} />
+                </group>
               </group>
-            </group>
-          </Balancer>
+            </Balancer>
+          </Articulated>
           {/* nitrogen purge hose to the unit */}
           <Hose pts={[[1.07, 1.62, -1.2], [1.0, 1.4, -0.6], [0.7, 1.15, -0.3], [0.5, 1.05, -0.15]]} rad={0.006} m={M.hoseYellow} tub={32} />
         </>

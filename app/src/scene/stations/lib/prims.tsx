@@ -19,9 +19,13 @@ const q = (n: number) => Math.round(n * 1e4) / 1e4
 
 export function boxGeo(w: number, h: number, d: number, r = 0) {
   const rr = Math.min(r, w / 2 - 1e-4, h / 2 - 1e-4, d / 2 - 1e-4)
-  return cached(`box:${q(w)}:${q(h)}:${q(d)}:${q(rr)}`, () =>
-    rr > 0.0005 ? new RoundedBoxGeometry(w, h, d, 2, rr) : new THREE.BoxGeometry(w, h, d),
-  )
+  return cached(`box:${q(w)}:${q(h)}:${q(d)}:${q(rr)}`, () => {
+    if (rr <= 0.0005) return new THREE.BoxGeometry(w, h, d)
+    const g = new RoundedBoxGeometry(w, h, d, 2, rr)
+    // RoundedBoxGeometry keeps no parameters; the low-poly LOD (scene/batch/lod.ts) needs them.
+    g.userData.lod = { box: [w, h, d], radius: rr }
+    return g
+  })
 }
 export function cylGeo(rt: number, rb: number, h: number, seg = 24, open = false) {
   return cached(`cyl:${q(rt)}:${q(rb)}:${q(h)}:${seg}:${open}`, () => new THREE.CylinderGeometry(rt, rb, h, seg, 1, open))

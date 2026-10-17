@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { M, cardboardMat } from '../stations/lib/mats'
 import { B, C, CX, CZ, Hose, Inst, customGeo, sphereGeo, type InstItem, type V3 } from '../stations/lib/prims'
 import { hash01 } from '../../lib/rng'
+import { Articulated, Rigid } from '../batch'
 import { CoilSlab, Compressor, EEV, FanGrille, FanPropeller, FourWayValve, Hairpins, PcbBoard, PlateHX } from './parts'
 
 /** Height of the work-pallet top above its base (the pallet base sits on the conveyor top). */
@@ -504,18 +505,24 @@ const StaticUnit = memo(function StaticUnit({ kw, stage, seed }: { kw: number; s
   )
 })
 
-/** R290 monobloc outdoor unit on its work pallet, built up to `stage`. Origin = pallet base centre; front (fan) faces +z. */
+/**
+ * R290 monobloc outdoor unit on its work pallet, built up to `stage`. Origin = pallet base centre; front (fan) faces +z.
+ * Merged as one rigid batch (a few draws per unit) that rides along with the unit; it rebuilds when the
+ * stage adds parts. The spinning fan is its own articulated batch.
+ */
 export function ProductUnit({ kw, stage, fanSpin, seed }: ProductUnitProps) {
   const L = useMemo(() => layout(kw), [kw])
   const s = Math.max(0, Math.min(10, Math.floor(stage)))
   return (
-    <group>
+    <Rigid>
       <StaticUnit kw={kw} stage={s} seed={seed} />
       {s >= 6 && s < 10 && (
         <group position={[L.xf, L.yfan, L.zfan]}>
-          <FanPropeller R={L.R} spin={fanSpin + hash01('fan', seed) * 6.28} />
+          <Articulated>
+            <FanPropeller R={L.R} spin={fanSpin + hash01('fan', seed) * 6.28} />
+          </Articulated>
         </group>
       )}
-    </group>
+    </Rigid>
   )
 }

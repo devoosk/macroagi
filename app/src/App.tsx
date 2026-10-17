@@ -7,9 +7,15 @@ import { loadEvents, loadLine } from './lib/data'
 import { captureCam, isCapture } from './lib/mode'
 import { PlaybackClock } from './playback/PlaybackClock'
 import { usePlayback, type DesignKey } from './playback/store'
-import { FactoryEffects } from './scene/environment'
+import { FactoryEffects, QUALITY_PRESETS } from './scene/environment'
 import { Factory } from './scene/Factory'
-import { CameraBar, CameraDirector, SplitView, StationStatusBar, Transport } from './ui'
+import { CameraBar, CameraDirector, RenderStats, SplitView, StationStatusBar, Transport, statsEnabled } from './ui'
+
+/**
+ * Demo renderer settings: dpr capped (1.5 on high-DPI screens) and no MSAA on the drawing buffer,
+ * since the effect composer already multisamples the scene and only blits to the canvas.
+ */
+const DEMO_GL = { dpr: QUALITY_PRESETS.demo.dpr, gl: { antialias: false, powerPreference: 'high-performance' as const } }
 
 type Loaded = Partial<Record<DesignKey, { line: Line; log: EventLog }>>
 
@@ -61,6 +67,7 @@ function DemoScene({ design, data, syncKey }: { design: DesignKey; data: { line:
       <Factory line={data.line} log={data.log} />
       <CameraDirector design={design} syncKey={syncKey} />
       <FactoryEffects quality="demo" />
+      {statsEnabled && <RenderStats label={design} />}
     </>
   )
 }
@@ -81,11 +88,11 @@ export default function App() {
       {split && canSplit ? (
         <SplitView
           headerTop={88}
-          canvasProps={{ shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
+          canvasProps={{ ...DEMO_GL, shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
           renderScene={(d) => <DemoScene design={d} data={data[d]!} syncKey="split" />}
         />
       ) : (
-        <Canvas shadows camera={{ position: [20, 14, 26], fov: 40, near: 0.1, far: 400 }} style={{ position: 'absolute', inset: 0 }}>
+        <Canvas {...DEMO_GL} shadows camera={{ position: [20, 14, 26], fov: 40, near: 0.1, far: 400 }} style={{ position: 'absolute', inset: 0 }}>
           <PlaybackClock />
           <DemoScene design="current" data={data.current} />
         </Canvas>
