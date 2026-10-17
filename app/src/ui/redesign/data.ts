@@ -13,13 +13,27 @@ export interface StudioData {
 
 const optional = <T>(path: string) => loadJson<T>(path).catch(() => undefined)
 
+/**
+ * File suffixes of the ranked designs in results.json, best first: design `<lineId>_rebuild_1`
+ * lives in `line_rebuild_1.json` / `events_rebuild_1.json`. Falls back to the solver files.
+ */
+export function rankedDesigns(results: Results | undefined, currentId: string): string[] {
+  const ranked = (results?.designs ?? [])
+    .filter((d) => d.rank !== undefined && d.design.startsWith(`${currentId}_`))
+    .sort((a, b) => a.rank! - b.rank!)
+    .map((d) => d.design.slice(currentId.length + 1))
+  return ranked.length ? ranked : ['solver_1', 'solver_2', 'solver_3']
+}
+
+export const loadResults = () => optional<Results>('/data/results.json')
+
 export async function loadStudioData(current: Line): Promise<StudioData> {
-  const [segments, capability, results, ...designs] = await Promise.all([
+  const [segments, capability, results] = await Promise.all([
     optional<SegmentLog>('/data/segments.json'),
     optional<CapabilityTable>('/data/capability.json'),
-    optional<Results>('/data/results.json'),
-    ...[1, 2, 3].map((n) => optional<Line>(`/data/line_solver_${n}.json`)),
+    loadResults(),
   ])
+  const designs = await Promise.all(rankedDesigns(results, current.id).map((n) => optional<Line>(`/data/line_${n}.json`)))
   return { current, segments, capability, results, designs: designs.filter((d): d is Line => !!d) }
 }
 

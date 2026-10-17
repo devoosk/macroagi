@@ -331,8 +331,10 @@ export function OptimiseViz({ data, p }: { data: StudioData; p: number }) {
         </div>
         <StationStrip line={data.current} />
         <div className="mx-design-stats">
+          <span><b className="mx-mono">{flowStations(data.current).length}</b> stations</span>
           <span><b className="mx-mono">0</b> robots</span>
           <span><b className="mx-mono">{cur ? cur.throughput.value.toFixed(1) : '–'}</b> units/h</span>
+          <span><b className="mx-mono">–</b> 3 yr</span>
         </div>
       </div>
       {data.designs.map((d, i) => {
@@ -344,10 +346,11 @@ export function OptimiseViz({ data, p }: { data: StudioData; p: number }) {
           <div key={d.id} className="mx-design" data-shown={shown} data-chosen={chosen}>
             <div className="mx-design-rank">
               <span className="mx-eyebrow">{chosen ? 'Chosen' : `Rank ${r?.rank ?? i + 1}`}</span>
-              <b>Design {i + 1}</b>
+              <b>{d.design?.mode === 'rebuild' ? 'Rebuild' : 'Rebalance'}</b>
             </div>
             <StationStrip line={d} highlight={shown ? 1 : 0} />
             <div className="mx-design-stats">
+              <span><b className="mx-mono">{flowStations(d).length}</b> stations</span>
               <span><b className="mx-mono">{robots}</b> robots</span>
               <span><b className="mx-mono">{r ? r.throughput.value.toFixed(1) : '–'}</b> units/h</span>
               <span><b className="mx-mono">{r?.cost3y ? euros(r.cost3y.value) : '–'}</b> 3 yr</span>
@@ -365,8 +368,10 @@ export function OptimiseViz({ data, p }: { data: StudioData; p: number }) {
 }
 
 export function optimiseCaption(data: StudioData) {
-  const bundles = new Set(data.designs.map((d) => d.design?.bundle).filter(Boolean)).size
-  return `CP-SAT assigned every operation a station and a mode under takt and precedence, across lever bundles${bundles ? ` (${bundles} of them produced the designs shown)` : ''}, and ranked the distinct designs by throughput, then 3-year cost.`
+  const rebuild = data.designs.some((d) => d.design?.mode === 'rebuild')
+  return rebuild
+    ? 'CP-SAT rebalanced today’s stations, then rebuilt the line from scratch: any station count, order and robot type that hard precedence and takt allow. Ranked by throughput, then 3-year cost.'
+    : 'CP-SAT assigned every operation a station and a mode under takt and precedence, across lever bundles, and ranked the distinct designs by throughput, then 3-year cost.'
 }
 
 /* ------------------------------------------------------------- 5. simulate */
@@ -516,6 +521,7 @@ export function BuildViz({ data, p }: { data: StudioData; p: number }) {
         <StationStrip line={d} highlight={span(p, 0.3, 0.6)} />
       </div>
       <div className="mx-build-facts" style={{ opacity: span(p, 0.45, 0.75) }}>
+        <span><b className="mx-mono">{flowStations(data.current).length} → {flowStations(d).length}</b> stations</span>
         <span><b className="mx-mono">{robots.length}</b> robot cells</span>
         <span><b className="mx-mono">{bays.reduce((n, s) => n + (s.bays ?? 1), 0)}</b> test bays</span>
         <span><b className="mx-mono">{removed}</b> waste steps removed</span>

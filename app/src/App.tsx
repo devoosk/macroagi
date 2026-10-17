@@ -11,6 +11,7 @@ import { FactoryEffects, QUALITY_PRESETS } from './scene/environment'
 import { Factory } from './scene/Factory'
 import { CameraBar, CameraDirector, RenderStats, SplitView, StationStatusBar, Transport, statsEnabled } from './ui'
 import { RedesignControls, RedesignPane, useRedesignFlow } from './ui/redesign/RedesignPane'
+import { loadResults, rankedDesigns } from './ui/redesign/data'
 
 /**
  * Demo renderer settings: dpr capped (1.5 on high-DPI screens) and no MSAA on the drawing buffer,
@@ -30,8 +31,9 @@ function useLoadedDesigns() {
     const load = async () => {
       const [line, log] = await Promise.all([loadLine('line'), loadEvents('events_current')])
       const out: Loaded = { current: { line, log } }
-      // The solver's best design (optimize.compare); the tools/gen stand-in until that exists.
-      for (const [l, e] of [['line_solver_1', 'events_solver_1'], ['line_redesign_1', 'events_redesign_1']]) {
+      // The best-ranked design in results.json (rebuild or solver); the tools/gen stand-in until that exists.
+      const best = rankedDesigns(await loadResults(), line.id)[0]
+      for (const [l, e] of [[`line_${best}`, `events_${best}`], ['line_solver_1', 'events_solver_1'], ['line_redesign_1', 'events_redesign_1']]) {
         try {
           const [rl, rlog] = await Promise.all([loadLine(l), loadEvents(e)])
           out.redesign = { line: rl, log: rlog }
@@ -115,6 +117,13 @@ export default function App() {
           <SplitView
             canvasProps={{ ...DEMO_GL, shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
             renderScene={(d) => <DemoScene design={d} data={data[d]!} syncKey="split" />}
+            right={{
+              design: 'redesign',
+              ...(data.redesign?.line.design?.mode === 'rebuild' && {
+                title: 'Rebuild',
+                subtitle: `Rebuilt for robots · ${data.redesign.line.stations.filter((s) => !s.offline).length} stations`,
+              }),
+            }}
             replace={{ redesign: redesignPhase !== 'done' ? <RedesignPane current={data.current.line} /> : undefined }}
             renderOverlay={(d) => (d === 'redesign' && redesignPhase === 'done' ? <RedesignControls /> : null)}
           />

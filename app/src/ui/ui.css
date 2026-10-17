@@ -261,7 +261,7 @@
 .mx-design[data-chosen='true'] { border-color: var(--mx-ink); box-shadow: 0 0 0 1px var(--mx-ink) inset; }
 .mx-design-rank b { display: block; font: 600 14px/1 var(--mx-font); margin-top: 6px; }
 .mx-design[data-chosen='true'] .mx-design-rank .mx-eyebrow { color: var(--mx-ink); }
-.mx-design-stats { display: flex; gap: 14px; font: 500 11px/1 var(--mx-font); color: var(--mx-muted); white-space: nowrap; }
+.mx-design-stats { display: grid; grid-template-columns: repeat(4, 58px); gap: 10px; font: 500 11px/1 var(--mx-font); color: var(--mx-muted); white-space: nowrap; }
 .mx-design-stats b { display: block; font-size: 15px; color: var(--mx-text); margin-bottom: 4px; }
 
 .mx-build { display: flex; flex-direction: column; align-items: center; gap: 14px; }
