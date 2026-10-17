@@ -14,3 +14,4 @@ capture/.cache/
 capture/out/
 .env
 .env.*
+capture/export.log
