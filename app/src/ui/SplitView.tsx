@@ -26,6 +26,8 @@ export interface SplitViewProps {
   clock?: boolean
   /** Distance of the pane headers from the top (leave room for a status bar). */
   headerTop?: number
+  /** Content shown instead of a side's canvas and header (e.g. before the redesign exists). */
+  replace?: Partial<Record<DesignKey, ReactNode>>
   style?: CSSProperties
 }
 
@@ -37,19 +39,20 @@ const DEFAULT_TITLES: Record<DesignKey, [string, string]> = {
 const side = (s: SplitSide | DesignKey): SplitSide => (typeof s === 'string' ? { design: s } : s)
 
 /** Two canvases side by side (current vs redesign), sharing the playback store's single clock. */
-export function SplitView({ renderScene, left = 'current', right = 'redesign', canvasProps, renderOverlay, clock = true, headerTop = 12, style }: SplitViewProps) {
+export function SplitView({ renderScene, left = 'current', right = 'redesign', canvasProps, renderOverlay, clock = true, headerTop = 12, replace, style }: SplitViewProps) {
   const L = side(left)
   const R = side(right)
   return (
     <div className="mx-root mx-split" style={style}>
-      <Pane s={L} renderScene={renderScene} canvasProps={canvasProps} renderOverlay={renderOverlay} clock={clock} headerTop={headerTop} />
-      <Pane s={R} compare={L.design} renderScene={renderScene} canvasProps={canvasProps} renderOverlay={renderOverlay} clock={clock} headerTop={headerTop} />
+      <Pane s={L} replace={replace?.[L.design]} renderScene={renderScene} canvasProps={canvasProps} renderOverlay={renderOverlay} clock={clock} headerTop={headerTop} />
+      <Pane s={R} replace={replace?.[R.design]} compare={L.design} renderScene={renderScene} canvasProps={canvasProps} renderOverlay={renderOverlay} clock={clock} headerTop={headerTop} />
     </div>
   )
 }
 
 function Pane({
   s,
+  replace,
   compare,
   renderScene,
   canvasProps,
@@ -58,6 +61,7 @@ function Pane({
   headerTop,
 }: {
   s: SplitSide
+  replace?: ReactNode
   compare?: DesignKey
   renderScene: SplitViewProps['renderScene']
   canvasProps?: SplitViewProps['canvasProps']
@@ -66,6 +70,7 @@ function Pane({
   headerTop: number
 }) {
   const [title, subtitle] = DEFAULT_TITLES[s.design]
+  if (replace) return <div className="mx-split-pane">{replace}</div>
   return (
     <div className="mx-split-pane">
       <Canvas shadows camera={{ position: [4, 8, 14], fov: 45 }} {...canvasProps}>

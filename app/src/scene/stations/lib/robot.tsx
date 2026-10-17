@@ -1,4 +1,5 @@
 import { memo, type ReactNode } from 'react'
+import { Articulated } from '../../batch'
 import { M } from './mats'
 import { B, C, CX, CZ, Hose, Sph, frac, smooth, type V3 } from './prims'
 
@@ -194,7 +195,12 @@ export function RobotArm({ pose, tool = 'gripper', carry }: { pose: RobotPose; t
                           <Sph rad={0.014} p={[0.2, 0, 0]} m={M.copper} />
                         </group>
                       )}
-                      {pose.carrying && carry && <group position={[0.2, 0, 0]} rotation={[0, 0, Math.PI / 2]}>{carry}</group>}
+                      {/* always mounted (shown while carrying) so the arm's batch does not rebuild every pick */}
+                      {carry && (
+                        <group position={[0.2, 0, 0]} rotation={[0, 0, Math.PI / 2]} visible={pose.carrying}>
+                          <Articulated>{carry}</Articulated>
+                        </group>
+                      )}
                     </group>
                   </group>
                 </group>

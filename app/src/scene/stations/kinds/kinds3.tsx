@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Articulated, MergeSkip } from '../../batch'
 import { M, stateLamp } from '../lib/mats'
 import { B, C, CX, CZ, Hose, frac, keyed, planeGeo } from '../lib/prims'
 import { Cabinet, EuroPallet, Monitor } from '../lib/common'
@@ -74,9 +75,12 @@ function TestLamp({ state }: { state: KindProps['state'] }) {
       <B s={[0.25, 0.02, 0.25]} p={[0, 0.01, 0]} m={M.ral7016} />
       <C rt={0.025} h={1.9} p={[0, 0.95, 0]} m={M.alu} />
       <C rt={0.07} h={0.04} p={[0, 1.92, 0]} m={M.ral9005} />
-      <C rt={0.065} h={0.12} p={[0, 2.0, 0]} m={stateLamp('green', green)} seg={24} />
+      {/* lamps swap material with the state: drawn on their own */}
+      <MergeSkip>
+        <C rt={0.065} h={0.12} p={[0, 2.0, 0]} m={stateLamp('green', green)} seg={24} />
+        <C rt={0.065} h={0.12} p={[0, 2.13, 0]} m={stateLamp('red', red)} seg={24} />
+      </MergeSkip>
       <C rt={0.068} h={0.01} p={[0, 2.065, 0]} m={M.ral9005} seg={24} />
-      <C rt={0.065} h={0.12} p={[0, 2.13, 0]} m={stateLamp('red', red)} seg={24} />
       <C rt={0.068} h={0.02} p={[0, 2.2, 0]} m={M.ral9005} seg={24} />
     </group>
   )
@@ -225,7 +229,9 @@ function Strapper({ t, working }: { t: number; working: boolean }) {
         <CZ rt={0.22} h={0.14} p={[0, 0.55, 0.2]} m={M.strap} seg={32} />
         <CZ rt={0.08} h={0.16} p={[0, 0.55, 0.2]} m={M.cardboardDark} seg={24} />
         <B s={[0.2, 0.1, 0.08]} rad={0.01} p={[0.15, 0.95, 0.15]} m={M.ral7035} />
-        <C rt={0.02} h={0.02} p={[0.15, 1.01, 0.15]} m={stateLamp('green', working)} />
+        <MergeSkip>
+          <C rt={0.02} h={0.02} p={[0.15, 1.01, 0.15]} m={stateLamp('green', working)} />
+        </MergeSkip>
       </group>
     </group>
   )
@@ -236,7 +242,9 @@ export function Packing({ t, working }: KindProps) {
     <group>
       {/* Arch off-centre (+x): centred, its operator-side post stood 8 cm in front of the packer's face. */}
       <group position={[0.5, 0, 0]}>
-        <Strapper t={t} working={working} />
+        <Articulated>
+          <Strapper t={t} working={working} />
+        </Articulated>
       </group>
       {/* outgoing pallet with packed units */}
       <group position={[-1.05, 0, -1.4]}>

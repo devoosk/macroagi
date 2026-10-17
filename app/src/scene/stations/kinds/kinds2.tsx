@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Articulated, MergeSkip } from '../../batch'
 import { M, lampMat, stateLamp } from '../lib/mats'
 import { B, C, CX, CZ, Hose, Tor, circleGeo, frac, planeGeo, smooth } from '../lib/prims'
 import { Balancer, Cabinet, GasBottle, HazardZone, KitCart, Monitor, Regulator } from '../lib/common'
@@ -9,7 +10,7 @@ import type { KindProps } from './types'
 export function Gauge({ value, r = 0.06 }: { value: number; r?: number }) {
   const th = 1.25 * Math.PI - Math.max(0, Math.min(1, value)) * 1.5 * Math.PI
   return (
-    <group>
+    <Articulated>
       <CZ rt={r + 0.008} h={0.03} p={[0, 0, -0.015]} m={M.chrome} seg={32} />
       <mesh geometry={circleGeo(r, 40)} material={M.dial} position={[0, 0, 0.001]} />
       <group position={[0, 0, 0.006]} rotation={[0, 0, th]}>
@@ -17,7 +18,7 @@ export function Gauge({ value, r = 0.06 }: { value: number; r?: number }) {
       </group>
       <CZ rt={0.007} h={0.006} p={[0, 0, 0.008]} m={M.ral9005} seg={12} />
       <mesh geometry={circleGeo(r + 0.004, 40)} material={M.glass} position={[0, 0, 0.012]} />
-    </group>
+    </Articulated>
   )
 }
 
@@ -129,7 +130,9 @@ export function LeakTest({ t, working, robot }: KindProps) {
   return (
     <group>
       <ChamberShell />
-      <ChamberDoors open={open} />
+      <Articulated>
+        <ChamberDoors open={open} />
+      </Articulated>
       <group position={[1.2, 0, -1.3]}>
         <VacuumPumpCart />
         <group position={[-0.07, 1.42, -0.165]}>
@@ -147,7 +150,9 @@ export function LeakTest({ t, working, robot }: KindProps) {
         <group position={[0, 1.02, 0.12]} rotation={[-0.5, 0, 0]}>
           <B s={[0.5, 0.06, 0.3]} rad={0.01} m={M.ral7016} />
           <mesh geometry={planeGeo(0.3, 0.18)} material={M.screen} position={[-0.05, 0.031, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-          <mesh geometry={circleGeo(0.015)} material={stateLamp('green', working)} position={[0.19, 0.031, -0.08]} rotation={[-Math.PI / 2, 0, 0]} />
+          <MergeSkip>
+            <mesh geometry={circleGeo(0.015)} material={stateLamp('green', working)} position={[0.19, 0.031, -0.08]} rotation={[-Math.PI / 2, 0, 0]} />
+          </MergeSkip>
         </group>
         <Hose pts={[[0.2, 0.8, -0.2], [0.3, 1.6, -0.1], [0.0, 2.4, 0.5], [-0.3, 2.3, 1.1]]} rad={0.012} m={M.hoseGrey} tub={30} />
       </group>
@@ -411,7 +416,10 @@ function VacuumLifter({ working, t }: { working: boolean; t: number }) {
   const y = working ? 1.55 + 0.15 * Math.sin(t * 0.7) : 1.75
   return (
     <group>
-      <C rt={0.004} h={2.47 - y - 0.25} p={[0, (2.47 + y + 0.25) / 2 - 0.12, 0]} m={M.steel} seg={6} />
+      {/* cable length changes every frame (new geometry), so it is drawn on its own */}
+      <MergeSkip>
+        <C rt={0.004} h={2.47 - y - 0.25} p={[0, (2.47 + y + 0.25) / 2 - 0.12, 0]} m={M.steel} seg={6} />
+      </MergeSkip>
       <group position={[0, y, 0]}>
         <B s={[0.08, 0.2, 0.08]} rad={0.01} p={[0, 0.1, 0]} m={M.ral1003} />
         <B s={[0.7, 0.04, 0.04]} p={[0, 0, 0]} m={M.alu} />
@@ -451,7 +459,9 @@ export function Casing({ t, working, robot }: KindProps) {
       </group>
       {!robot && (
         <group position={[-0.65, 0, 0.3]}>
-          <VacuumLifter working={working} t={t} />
+          <Articulated>
+            <VacuumLifter working={working} t={t} />
+          </Articulated>
         </group>
       )}
     </group>

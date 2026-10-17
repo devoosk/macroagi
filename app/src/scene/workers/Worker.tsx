@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import type { ToolKind } from '../../contracts/types'
 import { registerAnchor } from '../../lib/anchors'
 import { captureCam, isCapture } from '../../lib/mode'
+import { Articulated, MergeSkip } from '../batch'
 import { hash01 } from '../../lib/rng'
 import { Abdomen, Chest, Foot, Hand, Head, LowerArm, LowerLeg, NeckMesh, Pelvis, UpperArm, UpperLeg, bodyMats, M, type BodyMats } from './body'
 import { box, mat } from './geo'
@@ -81,7 +82,10 @@ function Arm({ side, pose, look, m, seg, flicker, lite, anchor }: { side: Side; 
           <LowerArm l={look} m={m} seg={seg} />
           <group position={[0, -RIG.lowerArmLen, 0]} quaternion={R ? j.handR : j.handL}>
             <Hand side={side} curls={R ? pose.fingers.R : pose.fingers.L} m={m} seg={seg} lite={lite} />
-            <Held item={R ? pose.held.R : pose.held.L} side={side} pose={pose} seg={seg} flicker={flicker} />
+            {/* tools swap in and out of the hand: keep them out of the body batch */}
+            <MergeSkip>
+              <Held item={R ? pose.held.R : pose.held.L} side={side} pose={pose} seg={seg} flicker={flicker} />
+            </MergeSkip>
             <object3D ref={gripRef} position={gripPos(side)} />
           </group>
         </group>
@@ -194,30 +198,33 @@ export function Worker({ stationId, lookSeed, verb, phase, simTime, tool, cycle,
   const ownHeadCam = isCapture && captureCam === 'fp:' + stationId
   return (
     <group>
-      <group position={[pose.root.x, 0, pose.root.z]} rotation={[0, pose.root.yaw, 0]}>
-        <group scale={pose.scale}>
-          <group position={pose.hips} quaternion={j.hips}>
-            <Pelvis l={look} m={m} seg={seg} />
-            <Leg side={1} pose={pose} look={look} m={m} seg={seg} />
-            <Leg side={-1} pose={pose} look={look} m={m} seg={seg} />
-            <group position={RIG.spine} quaternion={j.spine}>
-              <Abdomen l={look} m={m} seg={seg} />
-              <group position={RIG.chest} quaternion={j.chest}>
-                <Chest l={look} m={m} seg={seg} />
-                <group position={RIG.neck} quaternion={j.neck}>
-                  {!ownHeadCam && <NeckMesh m={m} seg={seg} />}
-                  <group position={RIG.head} quaternion={j.head}>
-                    {!ownHeadCam && <Head l={look} m={m} seg={seg} lite={quality === 'demo'} />}
-                    <object3D ref={eyeRef} position={RIG.eye} />
+      {/* Body: one skinned draw per material, bones are the rig groups (see scene/batch). */}
+      <Articulated>
+        <group position={[pose.root.x, 0, pose.root.z]} rotation={[0, pose.root.yaw, 0]}>
+          <group scale={pose.scale}>
+            <group position={pose.hips} quaternion={j.hips}>
+              <Pelvis l={look} m={m} seg={seg} />
+              <Leg side={1} pose={pose} look={look} m={m} seg={seg} />
+              <Leg side={-1} pose={pose} look={look} m={m} seg={seg} />
+              <group position={RIG.spine} quaternion={j.spine}>
+                <Abdomen l={look} m={m} seg={seg} />
+                <group position={RIG.chest} quaternion={j.chest}>
+                  <Chest l={look} m={m} seg={seg} />
+                  <group position={RIG.neck} quaternion={j.neck}>
+                    {!ownHeadCam && <NeckMesh m={m} seg={seg} />}
+                    <group position={RIG.head} quaternion={j.head}>
+                      {!ownHeadCam && <Head l={look} m={m} seg={seg} lite={quality === 'demo'} />}
+                      <object3D ref={eyeRef} position={RIG.eye} />
+                    </group>
                   </group>
+                  <Arm side={1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} anchor={`hand:${stationId}:R`} />
+                  <Arm side={-1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} anchor={`hand:${stationId}:L`} />
                 </group>
-                <Arm side={1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} anchor={`hand:${stationId}:R`} />
-                <Arm side={-1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} anchor={`hand:${stationId}:L`} />
               </group>
             </group>
           </group>
         </group>
-      </group>
+      </Articulated>
       <ToolHoses pose={pose} quality={quality} />
       <Placed pose={pose} seg={seg} />
     </group>

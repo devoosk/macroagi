@@ -7,9 +7,16 @@ import { loadEvents, loadLine } from './lib/data'
 import { captureCam, isCapture } from './lib/mode'
 import { PlaybackClock } from './playback/PlaybackClock'
 import { usePlayback, type DesignKey } from './playback/store'
-import { FactoryEffects } from './scene/environment'
+import { FactoryEffects, QUALITY_PRESETS } from './scene/environment'
 import { Factory } from './scene/Factory'
-import { CameraBar, CameraDirector, SplitView, StationStatusBar, Transport } from './ui'
+import { CameraBar, CameraDirector, RenderStats, SplitView, StationStatusBar, Transport, statsEnabled } from './ui'
+import { RedesignControls, RedesignPane, useRedesignFlow } from './ui/redesign/RedesignPane'
+
+/**
+ * Demo renderer settings: dpr capped (1.5 on high-DPI screens) and no MSAA on the drawing buffer,
+ * since the effect composer already multisamples the scene and only blits to the canvas.
+ */
+const DEMO_GL = { dpr: QUALITY_PRESETS.demo.dpr, gl: { antialias: false, powerPreference: 'high-performance' as const } }
 
 type Loaded = Partial<Record<DesignKey, { line: Line; log: EventLog }>>
 
@@ -23,11 +30,15 @@ function useLoadedDesigns() {
     const load = async () => {
       const [line, log] = await Promise.all([loadLine('line'), loadEvents('events_current')])
       const out: Loaded = { current: { line, log } }
-      try {
-        const [rl, rlog] = await Promise.all([loadLine('line_redesign_1'), loadEvents('events_redesign_1')])
-        out.redesign = { line: rl, log: rlog }
-      } catch {
-        // Redesign data is optional; split view hides without it.
+      // The solver's best design (optimize.compare); the tools/gen stand-in until that exists.
+      for (const [l, e] of [['line_solver_1', 'events_solver_1'], ['line_redesign_1', 'events_redesign_1']]) {
+        try {
+          const [rl, rlog] = await Promise.all([loadLine(l), loadEvents(e)])
+          out.redesign = { line: rl, log: rlog }
+          break
+        } catch {
+          // Redesign data is optional; split view hides without it.
+        }
       }
       const store = usePlayback.getState()
       for (const [k, d] of Object.entries(out) as [DesignKey, { line: Line; log: EventLog }][]) store.load(k, d.line, d.log)
@@ -61,6 +72,7 @@ function DemoScene({ design, data, syncKey }: { design: DesignKey; data: { line:
       <Factory line={data.line} log={data.log} />
       <CameraDirector design={design} syncKey={syncKey} />
       <FactoryEffects quality="demo" />
+      {statsEnabled && <RenderStats label={design} />}
     </>
   )
 }
@@ -68,6 +80,7 @@ function DemoScene({ design, data, syncKey }: { design: DesignKey; data: { line:
 export default function App() {
   const data = useLoadedDesigns()
   const [split, setSplit] = useState(params.get('view') !== 'single')
+  const redesignPhase = useRedesignFlow((s) => s.phase)
   if (!data?.current) return null
 
   if (isCapture) {
@@ -100,12 +113,14 @@ export default function App() {
       <main className="mx-stage">
         {split && canSplit ? (
           <SplitView
-            canvasProps={{ shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
+            canvasProps={{ ...DEMO_GL, shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
             renderScene={(d) => <DemoScene design={d} data={data[d]!} syncKey="split" />}
+            replace={{ redesign: redesignPhase !== 'done' ? <RedesignPane current={data.current.line} /> : undefined }}
+            renderOverlay={(d) => (d === 'redesign' && redesignPhase === 'done' ? <RedesignControls /> : null)}
           />
         ) : (
           <div className="mx-stage-pane">
-            <Canvas shadows camera={{ position: [20, 14, 26], fov: 40, near: 0.1, far: 400 }}>
+            <Canvas {...DEMO_GL} shadows camera={{ position: [20, 14, 26], fov: 40, near: 0.1, far: 400 }}>
               <PlaybackClock />
               <DemoScene design="current" data={data.current} />
             </Canvas>
