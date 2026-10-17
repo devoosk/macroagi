@@ -1,5 +1,7 @@
 import copy
 
+import networkx as nx
+
 from .costs import HUMAN_STATION_COST, ROBOT_CELL_COST
 from .generator import Candidates, lever_instances
 from .model import Solution
@@ -10,7 +12,12 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
     out = copy.deepcopy(line)
     out["id"] = f"{line['id']}_redesign_{rank}"
     out["name"] = f"{line['name']} redesign {rank} ({sol.bundle})"
-    order = [o["id"] for o in line["operations"]]
+    # Hard edges first, then the current listing order.
+    pos = {o["id"]: i for i, o in enumerate(line["operations"])}
+    g = nx.DiGraph()
+    g.add_nodes_from(pos)
+    g.add_edges_from((e["from"], e["to"]) for e in line["edges"] if e["type"] == "hard" and e["from"] in pos and e["to"] in pos)
+    order = list(nx.lexicographical_topological_sort(g, key=pos.get))
     gone = {o for o, s in sol.station.items() if s is None}
 
     for op in out["operations"]:
@@ -26,6 +33,11 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
         if sid in c.decoupled:
             st["bufferBefore"] = max(st["bufferBefore"], 2)
             st["bufferAfter"] = max(st["bufferAfter"], 2)
+    hard = [(e["from"], e["to"]) for e in line["edges"] if e["type"] == "hard"]
+    for st in out["stations"]:
+        seq = st["operations"]
+        for a, b in hard:
+            assert not (a in seq and b in seq and seq.index(a) > seq.index(b)), f"{st['id']}: {a} after {b}"
     for v in out["variants"]:
         v["operations"] = [o for o in v["operations"] if o not in gone]
 

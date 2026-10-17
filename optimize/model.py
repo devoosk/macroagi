@@ -55,7 +55,7 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
     for edge in line["edges"]:
         if edge["type"] == "hard" and edge["from"] in pos and edge["to"] in pos:
             a, b = edge["from"], edge["to"]
-            # Only binding when neither end is eliminated.
+            # Only binding when neither end is eliminated. Same-station order is kept by export.
             big = len(c.stations)
             m.add(pos[a] <= pos[b] + big * (gone[a] + gone[b]))
 
@@ -88,8 +88,12 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
     solver.parameters.num_workers = 1
     solver.parameters.random_seed = 0
     solver.parameters.max_time_in_seconds = 30
-    if solver.solve(m) not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+    status = solver.solve(m)
+    if status == cp_model.INFEASIBLE:
         return None
+    if status != cp_model.OPTIMAL:
+        # A merely feasible answer depends on timing, which would break determinism.
+        raise RuntimeError(f"CP-SAT did not prove optimality ({solver.status_name(status)})")
 
     station, choice = {}, {}
     for (o, s, k), v in z.items():

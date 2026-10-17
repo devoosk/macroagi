@@ -53,7 +53,10 @@ export interface Operation {
   station: string
   /** Probability the operation fails and triggers rework (test ops only). */
   failRate?: Sourced
-  /** Set in redesigns. `time` stays the human time; robot time comes from capability.json. */
+  /**
+   * Set in redesigns. `time` stays the human time; robot time comes from capability.json.
+   * Eliminated ops keep their original `station` for badges but are in no station's `operations`.
+   */
   mode?: 'human' | 'robot' | 'eliminated'
 }
 
