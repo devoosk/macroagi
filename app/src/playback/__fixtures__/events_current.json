@@ -1,0 +1,219 @@
+{
+  "line": "r290_fixture",
+  "seed": 1,
+  "duration": 184,
+  "events": [
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S01",
+      "event": "start",
+      "time": 0
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S01",
+      "event": "op_start",
+      "operation": "O1",
+      "time": 0
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S01",
+      "event": "op_end",
+      "operation": "O1",
+      "time": 20
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S01",
+      "event": "op_start",
+      "operation": "O2",
+      "time": 20
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S01",
+      "event": "op_end",
+      "operation": "O2",
+      "time": 50
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S01",
+      "event": "end",
+      "time": 50
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S02",
+      "event": "start",
+      "time": 55
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S02",
+      "event": "op_start",
+      "operation": "O3",
+      "time": 55
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S01",
+      "event": "start",
+      "time": 70
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S01",
+      "event": "op_start",
+      "operation": "O1",
+      "time": 70
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S01",
+      "event": "op_end",
+      "operation": "O1",
+      "time": 83.33333333333333
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S01",
+      "event": "op_start",
+      "operation": "O2",
+      "time": 83.33333333333333
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S02",
+      "event": "op_end",
+      "operation": "O3",
+      "time": 100
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S02",
+      "event": "end",
+      "time": 100
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S01",
+      "event": "op_end",
+      "operation": "O2",
+      "time": 103.33333333333333
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S01",
+      "event": "end",
+      "time": 103.33333333333333
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S03",
+      "event": "start",
+      "time": 105
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S03",
+      "event": "op_start",
+      "operation": "O4",
+      "time": 105
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S02",
+      "event": "start",
+      "time": 108.33333333333333
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S02",
+      "event": "op_start",
+      "operation": "O3",
+      "time": 108.33333333333333
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S02",
+      "event": "op_end",
+      "operation": "O3",
+      "time": 138.33333333333331
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S02",
+      "event": "end",
+      "time": 138.33333333333331
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S03",
+      "event": "start",
+      "time": 143.33333333333331
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S03",
+      "event": "op_start",
+      "operation": "O4",
+      "time": 143.33333333333331
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S03",
+      "event": "op_end",
+      "operation": "O4",
+      "time": 165
+    },
+    {
+      "unit": "U001",
+      "variant": "V9",
+      "station": "S03",
+      "event": "end",
+      "time": 165
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S03",
+      "event": "op_end",
+      "operation": "O4",
+      "time": 183.33333333333331
+    },
+    {
+      "unit": "U002",
+      "variant": "V6",
+      "station": "S03",
+      "event": "end",
+      "time": 183.33333333333331
+    }
+  ]
+}

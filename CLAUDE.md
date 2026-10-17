@@ -28,6 +28,18 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
 | `capability/robots.json` | Simulated MicroAGI rental catalogue (robot types, payload, precision, tools, skills, rent per month). Also copied into `capability.json` as `robots`. |
 | `results.json` | Per design: throughput, capex, required robot reliability, sweep curve, migration stages. |
 
+## Event log conventions (what the 3D render expects from `simulate/`)
+`tools/gen/simulate.ts` is the reference implementation until the SimPy simulator replaces it. SimPy output must follow the same rules:
+- **Order and time zero:** events are sorted by `time`. The log starts from an empty line at t=0, including warm-up, and `duration` covers the whole log.
+- **Operation rows:** every operation emits `op_start` and `op_end` with an `operation` field. Within a station, the order of operations joined only by soft edges is reshuffled between cycles.
+- **Station state:** a station (or bay) is in the state of its last `start`, `end`, `blocked` or `starved` row. `starved` rows have `unit` and `variant` set to `""`.
+- **Bays:** `bay` is set on every event at a station with `bays > 1`, and left out otherwise.
+- **Leak-test failure:** emits `failed` at the leak test, then `rework` at brazing with no bay, and the unit loops back to brazing.
+- **Run-test failure:** emits `failed` and `rework` at the run test, and the unit is re-tested in the same bay.
+- **Buffers:** the buffer between stations i and i+1 holds `bufferAfter(i) + bufferBefore(i+1)` units. 0 means a coupled line.
+- **Robot failures:** these currently emit no event; the operation just takes longer by the recovery time.
+- **Station placement:** stations need `x`, `y`, `rot`, `kind` and `staff`. Parallel bays stack along station-local -z, 3.1 m apart (`app/src/lib/layout.ts`).
+
 ## Hard rules
 1. **Everything is deterministic.** Render state is a pure function of `(simTime, events, seed)`. Do not use `Math.random`, `Date.now`, or `useFrame` delta/clock in render paths. Use the seeded RNG (`app/src/lib/rng.ts`) and `simTime` from the playback store. Scrubbing and frame export must reproduce identical frames.
 2. **Capture views leak no answers.** In capture mode, render no text, `<Html>`, `<Text>`, labels, state colours or HUD. The VLM sees pixels only.
