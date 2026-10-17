@@ -104,6 +104,12 @@ export function CaptureViz({ data, p }: { data: StudioData; p: number }) {
   )
 }
 
+/** `claude:claude-sonnet-5-5:medium` → `Claude Sonnet 5.5`. */
+function modelName(id: string): string {
+  const m = /claude-([a-z]+)-(\d+)-(\d+)/.exec(id)
+  return m ? `Claude ${m[1][0].toUpperCase()}${m[1].slice(1)} ${m[2]}.${m[3]}` : id
+}
+
 export function captureCaption(data: StudioData) {
   const segs = data.segments
   if (!segs) return 'No camera labels found.'
@@ -111,7 +117,7 @@ export function captureCaption(data: StudioData) {
   const cov = Object.values(segs.coverage)
   const min = cov.length ? Math.round((Math.max(...cov.map((c) => c[1])) - Math.min(...cov.map((c) => c[0]))) / 60) : 0
   const waste = segs.segments.filter((s) => WASTE_VERBS.has(s.verb)).length
-  return `${segs.segments.length} actions labelled by ${segs.model} from ${cams} cameras over ${min} min of footage. ${waste} of them are walking or searching: waste a redesign can remove.`
+  return `${segs.segments.length} actions labelled by ${modelName(segs.model)} from ${cams} cameras over ${min} min of footage. ${waste} of them are walking or searching: waste a redesign can remove.`
 }
 
 /* ------------------------------------------------------------- 2. process graph */
