@@ -80,7 +80,7 @@ export default function App() {
     <div style={{ position: 'fixed', inset: 0 }}>
       {split && canSplit ? (
         <SplitView
-          headerTop={88}
+          headerTop={116}
           canvasProps={{ shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
           renderScene={(d) => <DemoScene design={d} data={data[d]!} syncKey="split" />}
         />
