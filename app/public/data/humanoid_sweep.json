@@ -1,0 +1,1980 @@
+{
+  "line": "r290_current",
+  "robot": "humanoid",
+  "base": {
+    "rentPerMonth": 6000,
+    "timeScale": 1.3,
+    "precision": "medium"
+  },
+  "source": "estimate (demo rental catalogue, optimize CP-SAT per grid point)",
+  "points": [
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "medium",
+      "humanoids": 0,
+      "otherRobots": 4,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3213300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12800,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3139500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 19500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 6000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3139500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 19500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 6000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3139500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 19500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 6000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "medium",
+      "humanoids": 0,
+      "otherRobots": 4,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3213300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12800,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3031500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 16500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 4500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3031500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 16500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 4500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3031500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 16500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 4500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "medium",
+      "humanoids": 1,
+      "otherRobots": 3,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3160300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12300,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2923500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 13500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2923500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 13500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2923500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 13500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "medium",
+      "humanoids": 1,
+      "otherRobots": 3,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3127900,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 11400,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2858700,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 11700,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2858700,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 11700,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2858700,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 11700,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3085500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 10500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2815500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 10500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2815500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 10500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "medium",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2815500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 10500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "tight",
+      "humanoids": 0,
+      "otherRobots": 4,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3213300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12800,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3139500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 19500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 6000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 1,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2975500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 15500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 6000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 1.0,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 6000,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 1,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2975500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 15500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 6000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "tight",
+      "humanoids": 0,
+      "otherRobots": 4,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3213300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12800,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 3031500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 16500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "dual_arm",
+          "name": "Dual-arm (2 x 7 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 4000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 4500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 1,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2867500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 4500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.75,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 4500,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 1,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2867500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 4500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3109300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 11300,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "tight",
+      "humanoids": 4,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2819500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 12000,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 4,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2706500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 9000,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.5,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 3000,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2706500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 9000,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 3000,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "tight",
+      "humanoids": 2,
+      "otherRobots": 2,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 3044500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 9500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "cobot_arm",
+          "name": "Cobot arm (10 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 1800,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 2,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "tight",
+      "humanoids": 4,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2689900,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 8400,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 4,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2609300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 6300,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.35,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 2100,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2609300,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 6300,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 2100,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 1.0,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 1.3,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 1,
+      "humanStations": 7,
+      "sharedStations": [],
+      "objective": {
+        "value": 2980500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 8000,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        },
+        {
+          "robot": "industrial_arm",
+          "name": "Industrial arm (50 kg)",
+          "count": 1,
+          "rentPerMonth": {
+            "value": 3500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 0.8,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 1.04,
+      "humanoidPrecision": "tight",
+      "humanoids": 4,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2603500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 6000,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 4,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 0.6,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 0.78,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2544500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 4500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    },
+    {
+      "rentFactor": 0.25,
+      "speedFactor": 0.45,
+      "humanoidRentPerMonth": 1500,
+      "humanoidTimeScale": 0.585,
+      "humanoidPrecision": "tight",
+      "humanoids": 3,
+      "otherRobots": 0,
+      "humanStations": 6,
+      "sharedStations": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S10",
+          "S11"
+        ]
+      ],
+      "objective": {
+        "value": 2544500,
+        "source": "estimate",
+        "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+      },
+      "rentPerMonth": {
+        "value": 4500,
+        "source": "estimate (demo rental catalogue)"
+      },
+      "fleet": [
+        {
+          "robot": "humanoid",
+          "name": "Humanoid",
+          "count": 3,
+          "rentPerMonth": {
+            "value": 1500,
+            "source": "estimate (demo rental catalogue)"
+          }
+        }
+      ]
+    }
+  ],
+  "breakEven": {
+    "rentFactor": 1.0,
+    "speedFactor": 0.6,
+    "humanoidRentPerMonth": 6000,
+    "humanoidTimeScale": 0.78,
+    "humanoidPrecision": "tight"
+  }
+}

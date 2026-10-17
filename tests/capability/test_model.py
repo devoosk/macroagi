@@ -8,7 +8,7 @@ from capability import (
 )
 from capability.__main__ import build
 
-LINE = json.loads((Path(__file__).parents[2] / "app/public/data/line.json").read_text())
+LINE = json.loads((Path(__file__).parents[2] / "tests/fixtures/toy_line.json").read_text())
 
 
 def op(op_id, **changes):

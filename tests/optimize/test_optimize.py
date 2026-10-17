@@ -5,7 +5,7 @@ from pathlib import Path
 from capability import clears, estimate
 from optimize import best_designs, candidates, export, solve
 
-LINE = json.loads((Path(__file__).parents[2] / "app/public/data/line.json").read_text())
+LINE = json.loads((Path(__file__).parents[2] / "tests/fixtures/toy_line.json").read_text())
 FLOOR = 0.90
 PEAK = 1.10
 
