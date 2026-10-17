@@ -93,7 +93,7 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
         return None
     if status != cp_model.OPTIMAL:
         # A merely feasible answer depends on timing, which would break determinism.
-        raise RuntimeError(f"CP-SAT did not prove optimality ({solver.status_name(status)})")
+        raise RuntimeError(f"CP-SAT did not prove optimality for bundle {c.bundle} ({solver.status_name(status)})")
 
     station, choice = {}, {}
     for (o, s, k), v in z.items():

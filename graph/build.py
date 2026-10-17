@@ -76,7 +76,8 @@ def build(segments_doc: dict, catalogue: dict, overrides: list[dict] = ()) -> tu
 
     # Variant per visit from visible unit size, ranked onto variants by kW.
     variants = sorted(catalogue["variants"], key=lambda v: v["kw"])
-    seen_sizes = sorted({s.get("unit_size") for s in segs if s.get("unit_size")}, key=SIZES.index)
+    unknown_sizes = sorted({s["unit_size"] for s in segs if s.get("unit_size") and s["unit_size"] not in SIZES})
+    seen_sizes = sorted({s.get("unit_size") for s in segs if s.get("unit_size") in SIZES}, key=SIZES.index)
     size_to_variant = ({sz: variants[round(i * (len(variants) - 1) / max(len(seen_sizes) - 1, 1))]["id"]
                         for i, sz in enumerate(seen_sizes)} if seen_sizes else {})
     visit_variant = {vid: size_to_variant.get(v[0].get("unit_size")) for vid, v in visits.items()}
@@ -153,6 +154,7 @@ def build(segments_doc: dict, catalogue: dict, overrides: list[dict] = ()) -> tu
         for k in keys:
             vv = [vid for vid in station_visits[k[0]] if visit_variant[vid] == v["id"]]
             hit = {vid for vid, _ in kept[k] if visit_variant[vid] == v["id"]}
+            # An unseen variant keeps every op (pooled times) and is flagged in the evidence.
             if not vv or len(hit) >= 0.5 * len(vv):
                 ops.append(op_id[k])
         line_variants.append({**v, "operations": ops})
@@ -161,7 +163,9 @@ def build(segments_doc: dict, catalogue: dict, overrides: list[dict] = ()) -> tu
             "operations": operations, "edges": edges, "parts": catalogue["parts"], "stations": stations,
             "variants": line_variants, "levers": []}
     evidence = {"operations": evidence_ops, "edges": evidence_edges, "droppedClusters": dropped,
-                "lowDataEdges": sum(1 for e in evidence_edges if e["review"])}
+                "lowDataEdges": sum(1 for e in evidence_edges if e["review"]),
+                "unobservedVariants": [v["id"] for v in variants if v["id"] not in visit_variant.values()],
+                "unknownUnitSizes": unknown_sizes}
     return line, evidence
 
 

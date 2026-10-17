@@ -37,7 +37,8 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
     for st in out["stations"]:
         seq = st["operations"]
         for a, b in hard:
-            assert not (a in seq and b in seq and seq.index(a) > seq.index(b)), f"{st['id']}: {a} after {b}"
+            if a in seq and b in seq and seq.index(a) > seq.index(b):
+                raise ValueError(f"{st['id']}: {a} after {b} breaks a hard edge")
     for v in out["variants"]:
         v["operations"] = [o for o in v["operations"] if o not in gone]
 

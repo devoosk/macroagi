@@ -70,3 +70,13 @@ def test_runs_on_dummy_event_log():
     events = json.loads((ROOT / "app/public/data/events_current.json").read_text())
     line, _ = build(synth_segments(events, truth, 1, False), catalogue_from_line(truth))
     assert values(score(line, truth))["operationRecall"] == 1.0
+
+
+def test_unknown_sizes_and_unseen_variants_are_flagged():
+    seg = synth_segments(toy_events(LINE, 20, 1), LINE, 1, False)
+    for s in seg["segments"]:
+        if s["unit_size"] == "medium":
+            s["unit_size"] = "XL"
+    line, ev = build(seg, CAT)
+    assert ev["unknownUnitSizes"] == ["XL"]
+    assert ev["unobservedVariants"]
