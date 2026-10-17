@@ -128,3 +128,38 @@ def test_humanoid_copes_with_loose_bins_arms_need_a_lever():
     assert not estimate(o2, LINE, robot="cobot_arm").feasible
     assert estimate(o2, LINE, robot="humanoid").feasible
     assert estimate(o2, LINE, ["fixture"], robot="cobot_arm").feasible
+
+
+def test_precedence_holds_through_an_eliminated_op():
+    # O1 -> O9 (walk, eliminated) -> O3. S02 is full, S01 is full, only S03 has room,
+    # but O1 must not move after O3 (brazing, pinned at S02).
+    line = copy.deepcopy(LINE)
+
+    def set_time(op_id, t):
+        for v in next(o for o in line["operations"] if o["id"] == op_id)["time"].values():
+            v["mean"]["value"] = t
+
+    walk = {**copy.deepcopy(line["operations"][0]), "id": "O9", "name": "Walk", "verb": "walk", "parts": [],
+            "tool": "none", "station": "S02"}
+    line["operations"].append(walk)
+    line["stations"][1]["operations"].append("O9")
+    for v in line["variants"]:
+        v["operations"].append("O9")
+    o1 = next(o for o in line["operations"] if o["id"] == "O1")
+    o1["station"] = "S02"
+    line["stations"][0]["operations"].remove("O1")
+    line["stations"][1]["operations"].insert(0, "O1")
+    set_time("O1", 50), set_time("O2", 70), set_time("O4", 20)
+    line["stations"][2]["kind"] = "casing"  # let ops move into S03
+    next(o for o in line["operations"] if o["id"] == "O4")["tool"] = "scanner"
+    hard = lambda a, b: {"from": a, "to": b, "type": "hard", "confidence": 1, "evidence": "bom"}
+    line["edges"] = [hard("O1", "O9"), hard("O9", "O3")]
+
+    def o1_after_o3(designs):
+        return [s for c, s in designs if c.stations.index(s.station["O1"]) > c.stations.index(s.station["O3"])]
+
+    designs = best_designs(line, FLOOR, fleet=["cobot_arm"])
+    assert all(s.choice["O9"].mode == "eliminated" for _, s in designs)
+    assert not o1_after_o3(designs)
+    line["edges"] = []  # without the chain, moving O1 after O3 is the only way to fit takt
+    assert o1_after_o3(best_designs(line, FLOOR, fleet=["cobot_arm"]))

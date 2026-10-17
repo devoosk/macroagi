@@ -62,3 +62,7 @@ Bay split on a dummy line with low takt; hard precedence holds; no mixed station
 3. Single floor 0.90 for all designs, tested on p05.
 4. Stations can move ops ±1 station; no new stations except test bays.
 5. Takt check uses mean times; variance is left to SimPy.
+
+## Known gap: migration stages
+
+The plan says to build stages by re-solving with one segment changed at a time. `export.stages` instead splits the final design into three groups (remove waste, test bays, robot cells), as `tools/gen` does. A per-stage re-solve can't simply require each stage to fit takt, because the current R290 line itself is over takt at both test stations (the line runs slower than takt today). Doing it properly means simulating each intermediate line for throughput, which belongs with item 7 once the simulator reads the solver's files.

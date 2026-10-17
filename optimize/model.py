@@ -5,6 +5,7 @@ neighbouring stations. Minimise people, robot rent and integration, and lever co
 
 from dataclasses import dataclass
 
+import networkx as nx
 from ortools.sat.python import cp_model
 
 from capability import ROBOTS
@@ -61,12 +62,13 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
 
     pos = {o: sum(idx[s] * v for (oo, s, _), v in z.items() if oo == o) for o in ops}
     gone = {o: sum(v for (oo, _), v in e.items() if oo == o) for o in ops}
-    for edge in line["edges"]:
-        if edge["type"] == "hard" and edge["from"] in pos and edge["to"] in pos:
-            a, b = edge["from"], edge["to"]
-            # Only binding when neither end is eliminated. Same-station order is kept by export.
-            big = len(c.stations)
-            m.add(pos[a] <= pos[b] + big * (gone[a] + gone[b]))
+    # Transitive closure, so a->b->c still binds a->c when b is eliminated.
+    hard = nx.transitive_closure(nx.DiGraph(
+        [(e["from"], e["to"]) for e in line["edges"] if e["type"] == "hard" and e["from"] in pos and e["to"] in pos]))
+    big = len(c.stations)
+    for a, b in sorted(hard.edges):
+        # Only binding when neither end is eliminated. Same-station order is kept by export.
+        m.add(pos[a] <= pos[b] + big * (gone[a] + gone[b]))
 
     # Mixed-model takt: the mix-weighted load fits takt and no variant exceeds takt x peak tolerance.
     takt = round(line["takt"]["value"] * TIME_SCALE)
