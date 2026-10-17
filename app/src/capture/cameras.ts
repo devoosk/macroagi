@@ -11,6 +11,7 @@
  */
 import { Euler, MathUtils, Matrix4, Object3D, Quaternion, Vector3 } from 'three'
 import type { Line, Station } from '../contracts/types'
+import { bayLocalZ } from '../lib/layout'
 import { hashSigned, hashString, smoothstep, valueNoise, hashInt01 } from './noise'
 
 export type CaptureCamType = 'cctv' | 'fp'
@@ -39,8 +40,8 @@ export interface CaptureCamDef {
 export const VARIATION_WINDOW = 120
 /** Seconds over which jitter blends between windows (a slow "remount" drift, not a pop). */
 const BLEND = 6
-/** Assumed spacing of parallel bays along station-local x (metres). */
-export const BAY_SPACING = 2.4
+/** Parallel bays stack along station-local -z; see lib/layout.ts. */
+export { BAY_DZ as BAY_SPACING } from '../lib/layout'
 
 const POS_JITTER = 0.1 // ±10 cm
 const ANG_JITTER = MathUtils.degToRad(1.5) // ±1.5°
@@ -57,10 +58,6 @@ function cctvSide(stationId: string, bay?: number): 1 | -1 {
   return hashInt01(hashString(`cctv-side:${stationId}:${bay ?? ''}`), 0) < 0.5 ? -1 : 1
 }
 
-function bayX(st: Station, bay: number): number {
-  const n = st.bays ?? 1
-  return (bay - (n - 1) / 2) * BAY_SPACING
-}
 
 export function captureCameras(line: Line): CaptureCamDef[] {
   const out: CaptureCamDef[] = []
@@ -88,7 +85,7 @@ export function captureCameras(line: Line): CaptureCamDef[] {
     })
     if (bays > 1) {
       for (let b = 0; b < bays; b++) {
-        const bx = bayX(st, b)
+        const bz = bayLocalZ(b)
         const s = cctvSide(st.id, b)
         out.push({
           id: `cctv:${st.id}#${b}`,
@@ -96,8 +93,8 @@ export function captureCameras(line: Line): CaptureCamDef[] {
           stationId: st.id,
           bay: b,
           hfov: CCTV_HFOV,
-          localPosition: [bx + s * 1.5, 3.7, 2.5],
-          localTarget: [bx, 0.75, 0.15],
+          localPosition: [s * 1.5, 3.7, bz + 2.5],
+          localTarget: [0, 0.75, bz + 0.15],
         })
       }
     }

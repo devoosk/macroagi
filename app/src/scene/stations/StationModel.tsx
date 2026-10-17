@@ -1,3 +1,4 @@
+import { BAY_DZ } from '../../lib/layout'
 import { memo, useCallback, useMemo, type ReactNode } from 'react'
 import type * as THREE from 'three'
 import type { Line, Station, StationKind, ToolKind } from '../../contracts/types'
@@ -65,7 +66,6 @@ const BENCH_EXTRAS: Partial<Record<StationKind, ReactNode>> = {
 /** Kinds where a robot arm does the handling when staff = robot. Test stations are automated without an arm. */
 const ARM_KINDS: StationKind[] = ['kitting', 'base_frame', 'compressor_mount', 'brazing', 'refrigerant_charge', 'electrical_wiring', 'casing', 'packing']
 
-const BAY_DZ = 3.1
 const ROBOT_Z = -0.95
 
 /** Station-local (x, y, z) → robot-local (robot base at (0, 0, ROBOT_Z), facing +z). */

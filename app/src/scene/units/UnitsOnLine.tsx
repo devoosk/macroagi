@@ -1,3 +1,4 @@
+import { stationWorld } from '../../lib/layout'
 import { useMemo } from 'react'
 import type { Station, StationKind, Variant } from '../../contracts/types'
 import { smooth } from '../stations/lib/prims'
@@ -34,8 +35,12 @@ export interface UnitOnLine {
   unit: string
   variant: string
   station: string
-  /** 0 = at station; (0,1) = progress travelling from the previous station toward this one. */
+  /** 0 = at station; (0,1) = progress travelling from `fromStation` toward this one. */
   travel: number
+  /** Station the unit is travelling from (rework loops can go backwards). Defaults to the previous station. */
+  fromStation?: string
+  bay?: number
+  fromBay?: number
 }
 
 export function UnitsOnLine({ stations, units, variants, simTime }: { stations: Station[]; units: UnitOnLine[]; variants: Variant[]; simTime: number }) {
@@ -47,11 +52,14 @@ export function UnitsOnLine({ stations, units, variants, simTime }: { stations: 
         const i = idx.get(u.station)
         if (i === undefined) return null
         const cur = stations[i]
-        const prev = stations[Math.max(0, i - 1)]
-        const moving = u.travel > 0 && u.travel < 1 && i > 0
+        const fromIdx = u.fromStation !== undefined ? idx.get(u.fromStation) : i - 1
+        const prev = stations[fromIdx ?? Math.max(0, i - 1)] ?? cur
+        const moving = u.travel > 0 && u.travel < 1 && prev !== cur
         const e = moving ? smooth(u.travel) : 1
-        const x = prev.x + (cur.x - prev.x) * e
-        const z = prev.y + (cur.y - prev.y) * e
+        const [tx, , tz] = stationWorld(cur, u.bay ?? 0)
+        const [fx, , fz] = stationWorld(prev, u.fromBay ?? 0)
+        const x = fx + (tx - fx) * e
+        const z = fz + (tz - fz) * e
         const rot = prev.rot + (cur.rot - prev.rot) * e
         const kw = kwOf.get(u.variant) ?? 9
         const stage = stageAt(cur.kind)
