@@ -198,6 +198,8 @@ export interface MigrationStage {
   name: string
   stations: string[]
   gate: string
+  /** optimize.compare: simulated throughput of the line after stages 1..this one. */
+  throughput?: Sourced
 }
 
 export interface DesignResult {
@@ -207,6 +209,12 @@ export interface DesignResult {
   requiredReliability: Sourced
   sweep: SweepPoint[]
   stages: MigrationStage[]
+  /** optimize.compare: robots are rented, so rent sits next to capex. */
+  rentPerMonth?: Sourced
+  /** optimize.compare: people + robot rent + integration + levers over 3 years, EUR. */
+  cost3y?: Sourced
+  /** optimize.compare: 1 = best (throughput, then 3-year cost, then required reliability). */
+  rank?: number
 }
 
 export interface Results {
