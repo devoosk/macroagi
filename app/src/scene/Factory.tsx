@@ -8,6 +8,8 @@ import { FactoryEnvironment } from './environment'
 import type { Rect } from './environment'
 import { ConveyorLine, StationModel } from './stations'
 import { UnitsOnLine } from './units'
+import { Worker } from './workers'
+import { bayLocalZ } from '../lib/layout'
 
 const quality = isCapture ? 'capture' : 'demo'
 
@@ -38,6 +40,29 @@ export function Factory({ line, log, lightSeed = 0, cutaway = !isCapture }: { li
       {line.stations.map((s) => (
         <group key={s.id} position={[s.x, 0, s.y]} rotation-y={s.rot}>
           <StationModel station={s} state={state.stations[s.id] ?? 'idle'} simTime={simTime} quality={quality} line={line} />
+          {s.staff === 'human' &&
+            Array.from({ length: Math.max(1, s.bays ?? 1) }, (_, b) => {
+              // Bay 0's worker keeps the plain station id so `head:<id>` / `fp:<id>` line up.
+              const key = (s.bays ?? 1) > 1 ? `${s.id}#${b}` : s.id
+              const id = b === 0 ? s.id : key
+              const w = state.workers[key] ?? state.workers[s.id]
+              const dur = w?.opEnd !== undefined && w.opStart !== undefined && Number.isFinite(w.opEnd) ? w.opEnd - w.opStart : undefined
+              return (
+                <group key={id} position={[0, 0, bayLocalZ(b) + 0.95]}>
+                  <Worker
+                    stationId={id}
+                    lookSeed={`${line.id}:${id}`}
+                    verb={w?.verb ?? 'idle'}
+                    phase={w?.phase ?? 0}
+                    simTime={simTime}
+                    tool={w?.tool ?? 'none'}
+                    cycle={w?.cycle ?? 0}
+                    quality={quality}
+                    duration={dur}
+                  />
+                </group>
+              )
+            })}
         </group>
       ))}
       <UnitsOnLine stations={line.stations} units={state.units} variants={line.variants} simTime={simTime} />
