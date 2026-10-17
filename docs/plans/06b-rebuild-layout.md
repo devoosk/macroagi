@@ -1,6 +1,6 @@
 # Item 6b: "Rebuild for robots" mode — plan
 
-Status: draft for review by Oskari. Nothing is built yet.
+Status: steps 1-3 built (2026-10-17). Oskari's direction: rebuild legacy factories at the organisational level with Atlas robots, the middle ground between one-robot-per-worker retrofits and a new factory; move fast. Defaults taken: up to 1.5x today's station count, fixed equipment kept, 3D models handed to the visuals thread. Built differently from the proposal: a slot's bays and staffing are one choice (human or robot type x 1-3 bays), each extra bay costs one decouple lever; mobile robots do not share stations in this mode; migration stages swap line segments front to back and only the final line is simulated.
 
 ## Where the optimiser is today
 
