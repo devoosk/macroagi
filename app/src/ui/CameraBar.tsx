@@ -25,7 +25,7 @@ export function CameraBar({ style, keyboard = true }: { style?: CSSProperties; k
   if (isCapture) return null
   const d = useDirector.getState()
   return (
-    <div className="mx-root mx-panel mx-cambar" style={{ top: 112, ...style }}>
+    <div className="mx-root mx-panel mx-cambar" style={{ top: 16, ...style }}>
       <span className="mx-eyebrow" style={{ padding: '0 6px' }}>Camera</span>
       <button className="mx-btn" data-active={mode === 'overview'} onClick={d.overview} title="Overview (Esc)">
         Overview

@@ -67,7 +67,7 @@ function DemoScene({ design, data, syncKey }: { design: DesignKey; data: { line:
 
 export default function App() {
   const data = useLoadedDesigns()
-  const [split, setSplit] = useState(params.get('view') === 'split')
+  const [split, setSplit] = useState(params.get('view') !== 'single')
   if (!data?.current) return null
 
   if (isCapture) {
@@ -77,30 +77,45 @@ export default function App() {
 
   const canSplit = !!data.redesign
   return (
-    <div style={{ position: 'fixed', inset: 0 }}>
-      {split && canSplit ? (
-        <SplitView
-          headerTop={116}
-          canvasProps={{ shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
-          renderScene={(d) => <DemoScene design={d} data={data[d]!} syncKey="split" />}
-        />
-      ) : (
-        <Canvas shadows camera={{ position: [20, 14, 26], fov: 40, near: 0.1, far: 400 }} style={{ position: 'absolute', inset: 0 }}>
-          <PlaybackClock />
-          <DemoScene design="current" data={data.current} />
-        </Canvas>
-      )}
-      <StationStatusBar title={data.current.line.name} />
-      {!split && <CameraBar />}
-      <Transport />
-      {canSplit && (
-        <button
-          onClick={() => setSplit((v) => !v)}
-          style={{ position: 'absolute', right: 16, bottom: 96, padding: '8px 14px', background: '#1d232b', color: '#e6edf3', border: '1px solid #3a4452', borderRadius: 6, cursor: 'pointer', font: '600 13px system-ui' }}
-        >
-          {split ? 'Single view' : 'Current vs redesign'}
-        </button>
-      )}
+    <div className="mx-root mx-app">
+      <header className="mx-panel mx-topbar">
+        <div className="mx-brand">
+          <span className="mx-brand-name">MacroAGI</span>
+          <span className="mx-eyebrow">{data.current.line.name}</span>
+        </div>
+        <div className="mx-topbar-right">
+          <CameraBar />
+          {canSplit && (
+            <div className="mx-seg" role="group" aria-label="View">
+              <button className="mx-btn" style={{ fontFamily: 'var(--mx-font)' }} data-active={split} onClick={() => setSplit(true)}>
+                Current vs redesign
+              </button>
+              <button className="mx-btn" style={{ fontFamily: 'var(--mx-font)' }} data-active={!split} onClick={() => setSplit(false)}>
+                Current only
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
+      <main className="mx-stage">
+        {split && canSplit ? (
+          <SplitView
+            canvasProps={{ shadows: true, camera: { fov: 40, near: 0.1, far: 400 } }}
+            renderScene={(d) => <DemoScene design={d} data={data[d]!} syncKey="split" />}
+          />
+        ) : (
+          <div className="mx-stage-pane">
+            <Canvas shadows camera={{ position: [20, 14, 26], fov: 40, near: 0.1, far: 400 }}>
+              <PlaybackClock />
+              <DemoScene design="current" data={data.current} />
+            </Canvas>
+          </div>
+        )}
+      </main>
+      <footer className="mx-panel mx-dock">
+        <StationStatusBar className="mx-docked" title="Current line" />
+        <Transport className="mx-docked" />
+      </footer>
     </div>
   )
 }

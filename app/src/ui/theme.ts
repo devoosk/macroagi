@@ -17,7 +17,8 @@ export const STATE_LABELS: Record<StationState, string> = {
   idle: 'Idle',
 }
 
-export const ACCENT = '#4cc2ff'
+/** MicroAGI ink; the brand is monochrome, so the accent is the ink colour. */
+export const ACCENT = '#1a1a1a'
 export const REWORK = '#ff9f0a'
 
 /** Seconds → hh:mm:ss (sim time). */

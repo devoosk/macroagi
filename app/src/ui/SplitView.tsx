@@ -37,13 +37,12 @@ const DEFAULT_TITLES: Record<DesignKey, [string, string]> = {
 const side = (s: SplitSide | DesignKey): SplitSide => (typeof s === 'string' ? { design: s } : s)
 
 /** Two canvases side by side (current vs redesign), sharing the playback store's single clock. */
-export function SplitView({ renderScene, left = 'current', right = 'redesign', canvasProps, renderOverlay, clock = true, headerTop = 16, style }: SplitViewProps) {
+export function SplitView({ renderScene, left = 'current', right = 'redesign', canvasProps, renderOverlay, clock = true, headerTop = 12, style }: SplitViewProps) {
   const L = side(left)
   const R = side(right)
   return (
     <div className="mx-root mx-split" style={style}>
       <Pane s={L} renderScene={renderScene} canvasProps={canvasProps} renderOverlay={renderOverlay} clock={clock} headerTop={headerTop} />
-      <div className="mx-split-divider" />
       <Pane s={R} compare={L.design} renderScene={renderScene} canvasProps={canvasProps} renderOverlay={renderOverlay} clock={clock} headerTop={headerTop} />
     </div>
   )
@@ -80,7 +79,7 @@ function Pane({
 }
 
 /** Title + live throughput counter (units completed so far in that design's log). */
-export function PaneHeader({ design, compare, title, subtitle, top = 16 }: { design: DesignKey; compare?: DesignKey; title: string; subtitle?: string; top?: number }) {
+export function PaneHeader({ design, compare, title, subtitle, top = 12 }: { design: DesignKey; compare?: DesignKey; title: string; subtitle?: string; top?: number }) {
   const t = usePlayback((st) => st.simTime)
   const d = useDesign(design)
   const c = useDesign(compare ?? design)

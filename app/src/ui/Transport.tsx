@@ -104,7 +104,7 @@ function Scrubber({ index, duration, pct }: { index?: PlaybackIndex; duration: n
     if (!index || !density || duration <= 0) return
     const x = (t: number) => (t / duration) * W
     for (const [a, b] of index.failureBands) {
-      g.fillStyle = 'rgba(255,69,58,0.22)'
+      g.fillStyle = 'rgba(255,69,58,0.18)'
       g.fillRect(x(a), 0, Math.max(2, x(b) - x(a)), H)
       g.fillStyle = STATE_COLORS.failed
       g.fillRect(x(a), H - 3, Math.max(2, x(b) - x(a)), 3)
@@ -113,8 +113,8 @@ function Scrubber({ index, duration, pct }: { index?: PlaybackIndex; duration: n
     for (const v of density) max = Math.max(max, v)
     const bw = W / density.length
     const grad = g.createLinearGradient(0, 4, 0, H)
-    grad.addColorStop(0, 'rgba(160,190,220,0.55)')
-    grad.addColorStop(1, 'rgba(160,190,220,0.10)')
+    grad.addColorStop(0, 'rgba(26,26,26,0.42)')
+    grad.addColorStop(1, 'rgba(26,26,26,0.08)')
     g.fillStyle = grad
     for (let i = 0; i < density.length; i++) {
       const h = Math.sqrt(density[i] / max) * (H - 8)
