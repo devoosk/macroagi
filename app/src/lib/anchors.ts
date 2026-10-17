@@ -3,7 +3,8 @@ import type { Object3D } from 'three'
 /**
  * Shared registry of scene anchors so modules can find each other's objects
  * without importing each other. Keys: `head:<stationId>` (worker head bone, used by
- * the first-person capture camera), `station:<stationId>` (station root group).
+ * the first-person capture camera), `hand:<stationId>:R|L` (worker grip points, used to frame
+ * the hands in first person), `station:<stationId>` (station root group).
  */
 const anchors = new Map<string, Object3D>()
 

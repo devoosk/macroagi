@@ -64,6 +64,7 @@ def cmd_label(a) -> None:
         workers=a.workers,
         gap_tol=a.gap_tol,
         min_dur=a.min_dur,
+        min_conf=a.min_conf,
     )
     write_segment_log(a.out, log)
     print("\n".join(summary(log)))
@@ -114,8 +115,9 @@ def main(argv=None) -> None:
     s.add_argument("--window", type=int, default=8)
     s.add_argument("--overlap", type=int, default=2)
     s.add_argument("--workers", type=int, default=4)
-    s.add_argument("--gap-tol", type=float, default=1.0, help="fill idle gaps up to this many seconds inside one action")
-    s.add_argument("--min-dur", type=float, default=1.0, help="drop segments shorter than this")
+    s.add_argument("--gap-tol", type=float, default=2.0, help="fill idle gaps up to this many seconds inside one action")
+    s.add_argument("--min-dur", type=float, default=2.0, help="drop segments shorter than this")
+    s.add_argument("--min-conf", type=float, default=0.4, help="treat VLM answers below this confidence as idle")
     s.add_argument("--cache-dir", type=Path, default=REPO / "capture" / ".cache")
     s.add_argument("--no-cache", action="store_true")
     s.set_defaults(fn=cmd_label)

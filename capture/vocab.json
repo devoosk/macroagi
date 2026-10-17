@@ -2,7 +2,7 @@
   "verbs": [
     {
       "id": "pick",
-      "description": "Worker reaches into a bin, tray or rack and lifts a part out, hand closing on it."
+      "description": "Worker takes parts from a rack, shelf or bin and puts them into a kit tray or onto the unit, hand closing on each part; may scan parts with a handheld scanner while picking. The parts move."
     },
     {
       "id": "place",
@@ -26,15 +26,15 @@
     },
     {
       "id": "inspect",
-      "description": "Worker looks closely at the unit, scans it with a handheld scanner, or watches a test rig while the unit is connected; hands mostly still."
+      "description": "Worker checks the assembled unit in front of them: looks closely at it, points a handheld scanner at its label, or watches a test rig connected to it. Hands mostly still; no parts move."
     },
     {
       "id": "walk",
-      "description": "Worker walks away from the unit, e.g. to fetch something, with no part being worked on."
+      "description": "Worker walks across the floor away from the unit, empty-handed or carrying a part or box. In the first-person view the floor and aisle markings fill the frame. In the station camera, the worker walking out of view counts as walk."
     },
     {
       "id": "search",
-      "description": "Worker looks through bins or shelves for a part, hands moving between containers without a clear pick."
+      "description": "Worker looks through bins or shelves for the right part, hands moving between containers without a clear pick."
     }
   ],
   "parts": [
@@ -71,7 +71,7 @@
     {
       "id": "P_fan_motor",
       "name": "EC fan motor",
-      "hint": "compact round black motor with a mounting bracket"
+      "hint": "compact round black motor with a mounting bracket; often carried in its small cardboard box"
     },
     {
       "id": "P_fan_blade",
@@ -126,7 +126,55 @@
     {
       "id": "P_carton",
       "name": "Carton and corner pads",
-      "hint": "large brown cardboard box and foam corner pads around the finished unit"
+      "hint": "large brown cardboard box that encloses the whole finished unit, with foam corner pads, at the packing station"
+    }
+  ],
+  "tools": [
+    {
+      "id": "none",
+      "description": "bare hands"
+    },
+    {
+      "id": "screwdriver",
+      "description": "handheld electric screwdriver, pistol grip"
+    },
+    {
+      "id": "torque_driver",
+      "description": "larger torque driver or nutrunner, often on a hanging balancer cable"
+    },
+    {
+      "id": "torch",
+      "description": "brazing torch with a visible flame and gas hoses"
+    },
+    {
+      "id": "crimper",
+      "description": "hand crimping pliers for wire terminals"
+    },
+    {
+      "id": "scanner",
+      "description": "handheld barcode scanner or test probe"
+    },
+    {
+      "id": "hose",
+      "description": "service hose or test line connected to the unit"
+    },
+    {
+      "id": "strapper",
+      "description": "strapping tool or tape for packing"
+    }
+  ],
+  "unitSizes": [
+    {
+      "id": "small",
+      "description": "unit about 1.0 m wide and 0.75 m tall"
+    },
+    {
+      "id": "medium",
+      "description": "unit about 1.1 m wide and 0.85 m tall"
+    },
+    {
+      "id": "large",
+      "description": "unit about 1.25 m wide and 0.95 m tall"
     }
   ]
 }

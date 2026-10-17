@@ -19,13 +19,15 @@ from PIL import Image
 
 @dataclass(frozen=True)
 class Camera:
-    id: str
+    id: str  # app form: cctv:S05, fp:S05, cctv:S05#1
     kind: str  # "cctv" | "fpv"
     station: str
     fps: float
     dir: Path
     # (t, file name) from the manifest; empty means scan the directory.
     listed: Tuple[Tuple[float, str], ...] = ()
+    # Bay index for a per-bay camera at a multi-bay station.
+    bay: Optional[int] = None
 
     @property
     def step(self) -> float:
@@ -69,8 +71,7 @@ def cam_dir_name(cam_id: str) -> str:
 def discover(frames_dir: Path, cams: Optional[Sequence[str]] = None) -> List[Camera]:
     """All cameras under frames_dir that have a manifest, optionally filtered by id.
 
-    Ids are directory names (`cctv_S05`, `fp_S05`, `cctv_S05#1`); `cams` may use either
-    that form or the app's `cctv:S05` form.
+    `cams` may use the app's id form (`cctv:S05`) or the directory form (`cctv_S05`).
     """
     wanted = None if cams is None else {cam_dir_name(c) for c in cams}
     out = []
@@ -79,18 +80,23 @@ def discover(frames_dir: Path, cams: Optional[Sequence[str]] = None) -> List[Cam
         kind = m.get("type", m.get("kind"))
         if kind not in KINDS:
             raise ValueError(f"{manifest}: unknown camera type {kind!r}")
+        cam_id = m.get("camera", m.get("cam", manifest.parent.name))
+        bay = m.get("bay")
+        if bay is None and "#" in cam_id:
+            bay = int(cam_id.rsplit("#", 1)[1])
         cam = Camera(
-            id=cam_dir_name(m.get("camera", m.get("cam", manifest.parent.name))),
+            id=cam_id,
             kind=KINDS[kind],
             station=m["station"],
             fps=float(m.get("fps", 1)),
             dir=manifest.parent,
             listed=tuple((float(f["t"]), f["file"]) for f in m.get("frames", [])),
+            bay=bay,
         )
-        if wanted is None or cam.id in wanted:
+        if wanted is None or cam_dir_name(cam.id) in wanted:
             out.append(cam)
     if wanted is not None:
-        missing = wanted - {c.id for c in out}
+        missing = wanted - {cam_dir_name(c.id) for c in out}
         if missing:
             raise FileNotFoundError(f"no manifest for cameras: {sorted(missing)} in {frames_dir}")
     return out

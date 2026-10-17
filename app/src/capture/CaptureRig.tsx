@@ -79,7 +79,8 @@ function RigInner({ line, def, ids, look }: { line: Line; def: NonNullable<Retur
     if (!c) return
     const t = usePlayback.getState().simTime
     const anchor = def.anchor ? getAnchor(def.anchor) : undefined
-    const pose = cameraPoseAt(line, def, t, anchor)
+    const hands = def.hands?.map((k) => getAnchor(k)) ?? []
+    const pose = cameraPoseAt(line, def, t, anchor, hands)
     c.position.copy(pose.position)
     c.quaternion.copy(pose.quaternion)
     const f = vfovFromHfov(pose.hfov, c.aspect)

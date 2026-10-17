@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Iterable
 
@@ -71,8 +72,9 @@ def footage(tmp_path, gts, duration):
     return root
 
 
-def truth_answer(gts):
-    """A fake VLM that answers perfectly from ground truth. Test-only."""
+def truth_answer(gts, arrivals_from=EVENTS):
+    """A fake VLM that answers perfectly from ground truth, unit arrivals included. Test-only."""
+    starts = [(e["station"], float(e["time"])) for e in json.loads(Path(arrivals_from).read_text())["events"] if e["event"] == "start"]
 
     def fn(window: Window):
         out = []
@@ -81,7 +83,11 @@ def truth_answer(gts):
                 continue
             ts = [f.t for f in window.frames if g.start <= f.t < g.end]
             if ts:
-                out.append({"start_t": ts[0], "end_t": ts[-1], "verb": g.label[0], "parts": list(g.label[1]), "confidence": 0.9})
-        return out
+                out.append({"start_t": ts[0], "end_t": ts[-1], "verb": g.label[0], "parts": list(g.label[1]),
+                            "tool": g.tool, "unit_size": g.unit_size, "confidence": 0.9})
+        # A unit arriving at time a is first visible on the next frame at or after a.
+        frame_ts = {f.t for f in window.frames}
+        arrivals = sorted({math.ceil(a) for st, a in starts if st == window.cam.station} & frame_ts)
+        return {"segments": out, "arrivals": arrivals}
 
     return fn

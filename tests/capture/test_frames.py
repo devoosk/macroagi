@@ -9,8 +9,9 @@ def test_discover_and_list(tmp_path):
     write_camera(tmp_path, "cctv_S01", "cctv", "S01", range(10))
     write_camera(tmp_path, "fp_S01", "fpv", "S01", range(10))
     cams = discover(tmp_path)
-    assert [c.id for c in cams] == ["cctv_S01", "fp_S01"]
-    assert [c.id for c in discover(tmp_path, ["fp_S01"])] == ["fp_S01"]
+    assert [c.id for c in cams] == ["cctv:S01", "fp:S01"]
+    assert [c.id for c in discover(tmp_path, ["fp_S01"])] == ["fp:S01"]
+    assert [c.id for c in discover(tmp_path, ["fp:S01"])] == ["fp:S01"]
     frames = list_frames(cams[0], t_from=2, t_to=5)
     assert [f.t for f in frames] == [2, 3, 4]
 
@@ -35,7 +36,7 @@ def test_exporter_ids_and_types(tmp_path):
     write_camera(tmp_path, "fp_S02", "fpv", "S02", range(2))
     write_camera(tmp_path, "cctv_S05#1", "cctv", "S05", range(2))
     cams = discover(tmp_path, ["cctv:S05#1", "fp_S02"])
-    assert [(c.id, c.kind, c.station) for c in cams] == [("cctv_S05#1", "cctv", "S05"), ("fp_S02", "fpv", "S02")]
+    assert [(c.id, c.kind, c.station, c.bay) for c in cams] == [("cctv:S05#1", "cctv", "S05", 1), ("fp:S02", "fpv", "S02", None)]
 
 
 @pytest.mark.parametrize("n,size,overlap", [(20, 8, 2), (8, 8, 2), (5, 8, 2), (100, 8, 0), (31, 6, 3)])

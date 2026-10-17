@@ -6,9 +6,9 @@ A segment covers every slot with start <= t < end.
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 IDLE = "idle"
 
@@ -33,13 +33,22 @@ class Segment:
     verb: str
     parts: Tuple[str, ...]
     confidence: float
+    # Optional extras read by graph/: bay index, visit id (one unit at one station),
+    # visible unit size (small/medium/large) and the tool in hand.
+    bay: Optional[int] = None
+    visit: str = ""
+    unit_size: str = ""
+    tool: str = ""
 
     @property
     def label(self) -> Label:
         return (self.verb, self.parts)
 
+    def with_(self, **changes) -> "Segment":
+        return replace(self, **changes)
+
     def to_json(self) -> dict:
-        return {
+        d = {
             "cam": self.cam,
             "station": self.station,
             "start": round(self.start, 3),
@@ -48,6 +57,12 @@ class Segment:
             "parts": list(self.parts),
             "confidence": round(self.confidence, 3),
         }
+        if self.bay is not None:
+            d["bay"] = self.bay
+        for k in ("visit", "unit_size", "tool"):
+            if getattr(self, k):
+                d[k] = getattr(self, k)
+        return d
 
     @staticmethod
     def from_json(d: dict) -> "Segment":
@@ -59,6 +74,10 @@ class Segment:
             verb=d["verb"],
             parts=tuple(sorted(d.get("parts", []))),
             confidence=float(d.get("confidence", 1.0)),
+            bay=d.get("bay"),
+            visit=d.get("visit", ""),
+            unit_size=d.get("unit_size", ""),
+            tool=d.get("tool", ""),
         )
 
 

@@ -13,3 +13,4 @@ capture/ground_truth/
 capture/.cache/
 capture/out/
 .env
+.env.*

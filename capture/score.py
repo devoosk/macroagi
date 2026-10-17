@@ -6,11 +6,15 @@ Metrics, per station and overall:
 - parts P/R/F1: micro-averaged over active slots where something was predicted
 - segment P/R/F1: one-to-one matching at IoU >= threshold with the same verb
 - operation recovery: share of operations with at least one instance matched on verb and parts
+- unit size / tool accuracy: over matched segments that report one
 - verb confusion matrix (rows = truth, columns = prediction), in slots
+
+Streams with a `bay` are scored against that bay's ground truth only.
 """
 from __future__ import annotations
 
 from collections import defaultdict
+from dataclasses import replace
 from typing import Dict, List, Sequence, Tuple
 
 from .groundtruth import GtInterval
@@ -59,12 +63,14 @@ class Tally:
         self.parts_tp = self.parts_fp = self.parts_fn = 0
         self.n_pred = self.n_gt = self.seg_tp = 0
         self.boundary_err: List[float] = []
+        self.size_n = self.size_ok = self.tool_n = self.tool_ok = 0
         self.ops_seen: set = set()
         self.ops_found: set = set()
         self.confusion: Dict[str, Dict[str, int]] = defaultdict(lambda: defaultdict(int))
 
     def add(self, other: "Tally") -> None:
-        for k in ("slots", "verb_ok", "active", "active_ok", "parts_tp", "parts_fp", "parts_fn", "n_pred", "n_gt", "seg_tp"):
+        for k in ("slots", "verb_ok", "active", "active_ok", "parts_tp", "parts_fp", "parts_fn", "n_pred", "n_gt", "seg_tp",
+                  "size_n", "size_ok", "tool_n", "tool_ok"):
             setattr(self, k, getattr(self, k) + getattr(other, k))
         self.boundary_err += other.boundary_err
         self.ops_seen |= other.ops_seen
@@ -84,6 +90,8 @@ class Tally:
             "activeVerbAccuracy": self.active_ok / self.active if self.active else 0.0,
             "parts": parts,
             "segments": {**prf(self.seg_tp, self.n_pred, self.n_gt), "predicted": self.n_pred, "truth": self.n_gt},
+            "unitSizeAccuracy": self.size_ok / self.size_n if self.size_n else None,
+            "toolAccuracy": self.tool_ok / self.tool_n if self.tool_n else None,
             "meanBoundaryError": sum(self.boundary_err) / len(self.boundary_err) if self.boundary_err else None,
             "operationRecovery": len(self.ops_found) / len(self.ops_seen) if self.ops_seen else 0.0,
             "operationsSeen": sorted(self.ops_seen),
@@ -95,7 +103,7 @@ def score_stream(preds: List[Segment], gts: List[GtInterval], start: float, end:
     """Score one prediction stream against the truth for one station over [start, end)."""
     tally = Tally()
     gts = [
-        GtInterval(g.station, max(g.start, start), min(g.end, end), g.operation, g.unit, g.label)
+        replace(g, start=max(g.start, start), end=min(g.end, end))
         for g in gts
         if g.end > start and g.start < end
     ]
@@ -122,7 +130,14 @@ def score_stream(preds: List[Segment], gts: List[GtInterval], start: float, end:
     matched = match(preds, gts, threshold, need_parts=False)
     tally.n_pred, tally.n_gt, tally.seg_tp = len(preds), len(gts), len(matched)
     for i, j, _ in matched:
-        tally.boundary_err += [abs(preds[i].start - gts[j].start), abs(preds[i].end - gts[j].end)]
+        p, g = preds[i], gts[j]
+        tally.boundary_err += [abs(p.start - g.start), abs(p.end - g.end)]
+        if p.unit_size and g.unit_size:
+            tally.size_n += 1
+            tally.size_ok += p.unit_size == g.unit_size
+        if p.tool and g.tool:
+            tally.tool_n += 1
+            tally.tool_ok += p.tool == g.tool
 
     tally.ops_seen = {g.operation for g in gts}
     tally.ops_found = {gts[j].operation for _, j, _ in match(preds, gts, threshold, need_parts=True)}
@@ -147,7 +162,9 @@ def score(log: dict, gts: List[GtInterval], which: str = "segments", threshold: 
     per_stream = {}
     for (station, cam), segs in sorted(streams.items()):
         start, end, step = log["coverage"][station]
-        t = score_stream(sorted(segs, key=lambda s: s.start), by_station.get(station, []), start, end, step, threshold)
+        bay = next((s.bay for s in segs if s.bay is not None), None)
+        truth = [g for g in by_station.get(station, []) if bay is None or g.bay == bay]
+        t = score_stream(sorted(segs, key=lambda s: s.start), truth, start, end, step, threshold)
         per_stream[f"{station}/{cam}"] = t.report()
         total.add(t)
 
@@ -161,10 +178,14 @@ def format_table(result: dict) -> str:
         parts = f"{r['parts']['f1']:>6.1%}" if r["parts"] else f"{'n/a':>6}"
         return (
             f"{name:<28} {r['slotVerbAccuracy']:>6.1%} {r['activeVerbAccuracy']:>6.1%} {parts} "
-            f"{r['segments']['precision']:>6.1%} {r['segments']['recall']:>6.1%} {r['operationRecovery']:>6.1%}"
+            f"{r['segments']['precision']:>6.1%} {r['segments']['recall']:>6.1%} {r['operationRecovery']:>6.1%} "
+            f"{pct(r['unitSizeAccuracy'])} {pct(r['toolAccuracy'])}"
         )
 
-    lines = [f"{'stream':<28} {'slot':>6} {'active':>6} {'partsF1':>6} {'segP':>6} {'segR':>6} {'ops':>6}"]
+    def pct(v) -> str:
+        return f"{v:>6.1%}" if v is not None else f"{'n/a':>6}"
+
+    lines = [f"{'stream':<28} {'slot':>6} {'active':>6} {'partsF1':>6} {'segP':>6} {'segR':>6} {'ops':>6} {'size':>6} {'tool':>6}"]
     lines += [row(k, v) for k, v in result["streams"].items()]
     lines.append(row("OVERALL", result["overall"]))
     return "\n".join(lines)

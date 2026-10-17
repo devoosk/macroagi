@@ -5,7 +5,7 @@
  * Compares lossless PNG pixels (byte-identical and per-pixel diff).
  *
  *   npx tsx scripts/check-determinism.ts --cam cctv:S02,fp:S02 --t 3,11.5,17 --url http://localhost:5185 --page /preview-capture.html
- *   (or --serve to spawn vite)
+ *   (or --serve to spawn vite; --query design=redesign for the redesign line)
  * Exit code 1 on any mismatch.
  */
 import type { Browser, Page } from 'puppeteer'
@@ -17,6 +17,7 @@ const times = str(args, 't', '3,11.5,17').split(',').map(Number)
 const width = num(args, 'width', 960)
 const height = num(args, 'height', 540)
 const pagePath = str(args, 'page', '/')
+const query = str(args, 'query', '')
 
 async function freshPage(browser: Browser): Promise<Page> {
   const ctx = await browser.createBrowserContext()
@@ -69,7 +70,7 @@ async function main() {
   let failures = 0
   try {
     for (const cam of cams) {
-      const url = captureUrl(base, pagePath, cam, width, height)
+      const url = captureUrl(base, pagePath, cam, width, height, query)
       const pa = await freshPage(browser)
       const pb = await freshPage(browser)
       await openCapture(pa, url)

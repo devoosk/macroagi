@@ -24,6 +24,13 @@ class LabelError(RuntimeError):
     pass
 
 
+def split_answer(answer) -> tuple:
+    """A labeller answer is {"segments": [...], "arrivals": [...]} or, from simple labellers, just the segment list."""
+    if isinstance(answer, dict):
+        return answer.get("segments", []), answer.get("arrivals", [])
+    return answer, []
+
+
 class Labeller(Protocol):
     name: str
 
@@ -32,7 +39,7 @@ class Labeller(Protocol):
 
 def sanitize(raw: List[dict], window: Window, vocab: Vocab) -> List[RawSegment]:
     """Drop or clamp anything outside the vocabulary or the window."""
-    verbs, parts = set(vocab.verb_ids), set(vocab.part_ids)
+    verbs, parts, tools, sizes = set(vocab.verb_ids), set(vocab.part_ids), set(vocab.tool_ids), set(vocab.size_ids)
     t_first, t_last = window.frames[0].t, window.frames[-1].t
     out = []
     for s in raw:
@@ -48,6 +55,8 @@ def sanitize(raw: List[dict], window: Window, vocab: Vocab) -> List[RawSegment]:
                 "end_t": end,
                 "verb": s["verb"],
                 "parts": sorted({p for p in s.get("parts", []) if p in parts}),
+                "tool": s.get("tool") if s.get("tool") in tools else "",
+                "unit_size": s.get("unit_size") if s.get("unit_size") in sizes else "",
                 "confidence": min(max(float(s.get("confidence", 0.5)), 0.0), 1.0),
             }
         )
@@ -93,7 +102,7 @@ class ClaudeLabeller:
             "extra_body": {"fallbacks": "default"},
         }
 
-    def label(self, window: Window) -> List[RawSegment]:
+    def label(self, window: Window) -> dict:
         response = self.client.messages.create(**self.request(window))
         if response.stop_reason == "refusal":
             raise LabelError(f"{window.cam.id} window {window.index}: refused ({response.stop_details})")
@@ -102,7 +111,10 @@ class ClaudeLabeller:
         text = next((b.text for b in response.content if b.type == "text"), None)
         if text is None:
             raise LabelError(f"{window.cam.id} window {window.index}: no text block")
-        return sanitize(json.loads(text)["segments"], window, self.vocab)
+        body = json.loads(text)
+        t_first, t_last = window.frames[0].t, window.frames[-1].t
+        arrivals = sorted({float(t) for t in body.get("unit_arrivals", []) if t_first <= float(t) <= t_last})
+        return {"segments": sanitize(body["segments"], window, self.vocab), "arrivals": arrivals}
 
 
 class CachedLabeller:

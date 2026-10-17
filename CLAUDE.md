@@ -14,7 +14,7 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
   - `app/src/ui/`: demo UI (scrubber, speed, split view).
   - `app/scripts/export-frames.ts`: Puppeteer frame export.
   - `app/public/data/`: `line.json` and the `events_*.json` files the app loads.
-- `capture/`: build step 3, VLM labelling of rendered frames (`python -m capture label|score|oracle|make-vocab`, run from the repo root; tests: `cd capture && .venv/bin/pytest`). Only `score.py`, `oracle.py` and `groundtruth.py` may read `line.json` or event logs; `tests/test_pipeline.py` enforces that labelling never does.
+- `capture/`: build step 3, VLM labelling of rendered frames (`uv run python -m capture label|score|oracle|make-vocab`; the API key comes from `.env`). Only `score.py`, `oracle.py` and `groundtruth.py` may read `line.json` or event logs; `tests/capture/test_pipeline.py` enforces that labelling never does.
 - `tools/gen/`: generator for dummy line and event data. It stands in until the real SimPy output exists.
 
 ## Shared contracts
@@ -22,17 +22,37 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
 | --- | --- |
 | `line.json` | Process graph (operations, hard/soft precedence edges, parts, stations with x/y/rot/kind, variants, levers). Every number has a `source`. |
 | `events_<line>.json` | One row per event: unit, variant, station, event (`start`, `end`, `blocked`, `starved`, `failed`, `rework`, plus `op_start`/`op_end` with `operation`), time in seconds. |
+| `capability.json` | Robot success range (Beta, p05/p95) and robot time per operation, baseline and per single lever, plus the prior table and lever costs. Written by `uv run python -m capability app/public/data/line.json`. |
+| `line_redesign_<n>.json` | Up to three redesigns (1 = cheapest) in the `line.json` schema, plus `operations[].mode` and a `design` summary. Written by `uv run python -m optimize app/public/data/line.json` (`--scenarios` also writes `line_scenario_{arms_only,humanoids_only,mixed}.json`). Stations carry the rented `robot` type and `sharedWith` for a mobile robot serving two stations; `design` has `fleet`, `capex` and `rentPerMonth`. |
+| `segments.json` → `line_v2.json` | Item 5 rebuilds the line from VLM segments alone (`uv run python -m graph segments.json --catalogue line.json -o line_v2.json`; only parts, variants and the station registry are read from the catalogue). Also writes `graph_evidence.json` for the edge review screen. `python -m graph.score` scores it against the hidden truth; `python -m graph.synth` fakes segments from an event log; `python -m capture label` writes the real ones. |
+| `humanoid_sweep.json` | What-if grid over humanoid rent, speed and precision: robots in the best mixed-fleet design at each point, and the break-even. Written by `uv run python -m optimize.whatif line.json`. |
+| `capability/robots.json` | Simulated MicroAGI rental catalogue (robot types, payload, precision, tools, skills, rent per month). Also copied into `capability.json` as `robots`. |
 | `results.json` | Per design: throughput, capex, required robot reliability, sweep curve, migration stages. |
-| `segments.json` | VLM labels from `capture/`: `{model, promptVersion, framesDir, coverage: {station: [from, to, step]}, segments, cameraSegments}`. Each segment is `{cam, station, start, end, verb, parts[], confidence}` (seconds, end exclusive). `segments` is fused per station; `cameraSegments` is per camera. |
+| `segments.json` | VLM labels from `capture/`: `{source, fps, model, promptVersion, framesDir, coverage: {station: [from, to, step]}, segments, cameraSegments}`. Each segment is `{cam, station, start, end, verb, parts[], confidence}` plus optional `bay`, `visit`, `unit_size` (small/medium/large) and `tool` (seconds, end exclusive). `segments` has one stream per station (CCTV and first-person fused) or per bay; visits split at unit arrivals seen on camera. `cameraSegments` is per camera. |
 
 ### Frame contract (render → capture)
 `npm run export` writes `capture/frames/<camDir>/<t>.jpg`. `camDir` is the camera id with `:` replaced by `_` (`cctv_S05`, `fp_S05`, `cctv_S05#1` for bay 1). `<t>` is the sim time: whole seconds padded to 6 digits, plus `-mmm` for fractional times (`000120.jpg`, `000120-500.jpg`). Each camera directory also gets `manifest.json`: `{camera, type: "cctv"|"fp", station, fps, from, to, width, height, frames: [{t, file}]}`. Frames and manifests carry no answers: no operation ids, verbs or state. `capture/` reads this format; ground truth (`--gt`) goes to `capture/ground_truth/` and is never read by labelling.
+
+## Event log conventions (what the 3D render expects from `simulate/`)
+`tools/gen/simulate.ts` is the reference implementation until the SimPy simulator replaces it. SimPy output must follow the same rules:
+- **Order and time zero:** events are sorted by `time`. The log starts from an empty line at t=0, including warm-up, and `duration` covers the whole log.
+- **Operation rows:** every operation emits `op_start` and `op_end` with an `operation` field. Within a station, the order of operations joined only by soft edges is reshuffled between cycles.
+- **Station state:** a station (or bay) is in the state of its last `start`, `end`, `blocked` or `starved` row. `starved` rows have `unit` and `variant` set to `""`.
+- **Bays:** `bay` is set on every event at a station with `bays > 1`, and left out otherwise.
+- **Leak-test failure:** emits `failed` at the leak test, then `rework` at brazing with no bay, and the unit loops back to brazing.
+- **Run-test failure:** emits `failed` and `rework` at the run test, and the unit is re-tested in the same bay.
+- **Buffers:** the buffer between stations i and i+1 holds `bufferAfter(i) + bufferBefore(i+1)` units. 0 means a coupled line.
+- **Robot failures:** these currently emit no event; the operation just takes longer by the recovery time.
+- **Station placement:** stations need `x`, `y`, `rot`, `kind` and `staff`. Parallel bays stack along station-local -z, 3.1 m apart (`app/src/lib/layout.ts`).
 
 ## Hard rules
 1. **Everything is deterministic.** Render state is a pure function of `(simTime, events, seed)`. Do not use `Math.random`, `Date.now`, or `useFrame` delta/clock in render paths. Use the seeded RNG (`app/src/lib/rng.ts`) and `simTime` from the playback store. Scrubbing and frame export must reproduce identical frames.
 2. **Capture views leak no answers.** In capture mode, render no text, `<Html>`, `<Text>`, labels, state colours or HUD. The VLM sees pixels only.
 3. **Every number carries a `source`.** Use a citation or the literal `"estimate"`.
 4. **Detail budget.** Build geometry procedurally (no external model downloads) and use PBR materials. Instance anything repeated more than 20 times. Target 60 fps in demo mode; capture mode may run slower.
+
+## Python (run at repo root)
+- One `pyproject.toml` with uv: `uv sync`, `uv run pytest`, `uv run python -m <module>`.
 
 ## Commands (run in `app/`)
 - `npm run dev`: start the dev server. `?mode=capture&cam=<id>` gives a single camera with no overlays.

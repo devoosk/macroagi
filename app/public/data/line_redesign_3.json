@@ -1,0 +1,405 @@
+{
+  "id": "r290_fixture_redesign_3",
+  "name": "R290 monobloc (fixture) redesign 3 (B0)",
+  "takt": {
+    "value": 90,
+    "source": "estimate"
+  },
+  "operations": [
+    {
+      "id": "O1",
+      "name": "Place base pan",
+      "verb": "place",
+      "parts": [
+        "P_base"
+      ],
+      "tool": "none",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 17.33,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 0.8,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 26.0,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 0.8,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 34.67,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 0.8,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S01",
+      "mode": "robot"
+    },
+    {
+      "id": "O2",
+      "name": "Screw base feet",
+      "verb": "screw",
+      "parts": [
+        "P_screw"
+      ],
+      "tool": "torque_driver",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 23.4,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.2,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 35.1,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.2,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 46.8,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 1.2,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S01",
+      "mode": "robot"
+    },
+    {
+      "id": "O3",
+      "name": "Braze suction line",
+      "verb": "braze",
+      "parts": [
+        "P_pipe"
+      ],
+      "tool": "torch",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 30,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.5,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 45,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.5,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 60,
+            "source": "estimate"
+          },
+          "sd": {
+            "value": 4.5,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S02",
+      "mode": "human"
+    },
+    {
+      "id": "O4",
+      "name": "Leak test",
+      "verb": "inspect",
+      "parts": [],
+      "tool": "hose",
+      "time": {
+        "V6": {
+          "mean": {
+            "value": 35.2,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.4,
+            "source": "estimate"
+          }
+        },
+        "V9": {
+          "mean": {
+            "value": 52.8,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.4,
+            "source": "estimate"
+          }
+        },
+        "V12": {
+          "mean": {
+            "value": 70.4,
+            "source": "capability: human mean x robot time factor"
+          },
+          "sd": {
+            "value": 2.4,
+            "source": "estimate"
+          }
+        }
+      },
+      "station": "S03",
+      "failRate": {
+        "value": 0.05,
+        "source": "estimate"
+      },
+      "mode": "robot"
+    }
+  ],
+  "edges": [
+    {
+      "from": "O1",
+      "to": "O2",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "bom"
+    },
+    {
+      "from": "O2",
+      "to": "O3",
+      "type": "soft",
+      "confidence": 0.6,
+      "evidence": "estimate"
+    },
+    {
+      "from": "O3",
+      "to": "O4",
+      "type": "hard",
+      "confidence": 1,
+      "evidence": "engineer"
+    }
+  ],
+  "parts": [
+    {
+      "id": "P_base",
+      "name": "Base pan",
+      "size": [
+        1.1,
+        0.08,
+        0.45
+      ],
+      "mass": {
+        "value": 6,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "loose",
+      "presentation": "tray"
+    },
+    {
+      "id": "P_screw",
+      "name": "M8 screw",
+      "size": [
+        0.01,
+        0.03,
+        0.01
+      ],
+      "mass": {
+        "value": 0.01,
+        "source": "estimate"
+      },
+      "rigidity": "rigid",
+      "tolerance": "medium",
+      "presentation": "loose_bin"
+    },
+    {
+      "id": "P_pipe",
+      "name": "Suction pipe",
+      "size": [
+        0.4,
+        0.02,
+        0.02
+      ],
+      "mass": {
+        "value": 0.3,
+        "source": "estimate"
+      },
+      "rigidity": "semi",
+      "tolerance": "tight",
+      "presentation": "kitted"
+    }
+  ],
+  "stations": [
+    {
+      "id": "S01",
+      "name": "Base frame",
+      "kind": "base_frame",
+      "operations": [
+        "O1",
+        "O2"
+      ],
+      "staff": "robot",
+      "x": 0,
+      "y": 0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "robot": "humanoid",
+      "bays": 1
+    },
+    {
+      "id": "S02",
+      "name": "Brazing",
+      "kind": "brazing",
+      "operations": [
+        "O3"
+      ],
+      "staff": "human",
+      "x": 4,
+      "y": 0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 1,
+      "bays": 1
+    },
+    {
+      "id": "S03",
+      "name": "Leak test",
+      "kind": "evacuation_leak_test",
+      "operations": [
+        "O4"
+      ],
+      "staff": "robot",
+      "x": 8,
+      "y": 0,
+      "rot": 0,
+      "bufferBefore": 1,
+      "bufferAfter": 0,
+      "robot": "dual_arm",
+      "bays": 1
+    }
+  ],
+  "variants": [
+    {
+      "id": "V6",
+      "name": "6 kW",
+      "kw": 6,
+      "mix": {
+        "value": 0.4,
+        "source": "estimate"
+      },
+      "operations": [
+        "O1",
+        "O2",
+        "O3",
+        "O4"
+      ]
+    },
+    {
+      "id": "V9",
+      "name": "9 kW",
+      "kw": 9,
+      "mix": {
+        "value": 0.4,
+        "source": "estimate"
+      },
+      "operations": [
+        "O1",
+        "O2",
+        "O3",
+        "O4"
+      ]
+    },
+    {
+      "id": "V12",
+      "name": "12 kW",
+      "kw": 12,
+      "mix": {
+        "value": 0.2,
+        "source": "estimate"
+      },
+      "operations": [
+        "O1",
+        "O2",
+        "O3",
+        "O4"
+      ]
+    }
+  ],
+  "levers": [],
+  "appliedLevers": [],
+  "design": {
+    "stages": [
+      {
+        "id": "M1",
+        "name": "Robot cells",
+        "stations": [
+          "S01",
+          "S03"
+        ],
+        "gate": "Each robot cell holds the required reliability from the sweep for one week, with human fallback"
+      }
+    ],
+    "bundle": "B0",
+    "humanStations": 1,
+    "robotStations": 2,
+    "fleet": [
+      {
+        "robot": "dual_arm",
+        "name": "Dual-arm (2 x 7 kg)",
+        "count": 1,
+        "rentPerMonth": {
+          "value": 4000,
+          "source": "estimate (demo rental catalogue)"
+        }
+      },
+      {
+        "robot": "humanoid",
+        "name": "Humanoid",
+        "count": 1,
+        "rentPerMonth": {
+          "value": 6000,
+          "source": "estimate (demo rental catalogue)"
+        }
+      }
+    ],
+    "capex": {
+      "value": 25000,
+      "source": "estimate (levers 0 + robot integration 25000)"
+    },
+    "rentPerMonth": {
+      "value": 10000,
+      "source": "estimate (demo rental catalogue)"
+    },
+    "objective": {
+      "value": 655000,
+      "source": "estimate",
+      "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
+    }
+  }
+}
