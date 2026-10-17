@@ -1,7 +1,8 @@
 """python -m capability <line.json> [-o capability.json]
 
-Writes the prior table and, per operation, the baseline estimate plus one row
-per applicable single lever type, for the app to show.
+Writes the prior table, the robot rental catalogue and, per operation and robot
+type (null = generic robot), the baseline estimate plus one row per applicable
+single lever type, for the app to show.
 """
 
 import argparse
@@ -11,6 +12,7 @@ from pathlib import Path
 
 from .levers import LEVER_COSTS
 from .model import PRIORS, Estimate, applicable_levers, estimate
+from .priors import ROBOTS
 
 
 def _row(e: Estimate) -> dict:
@@ -30,6 +32,8 @@ def _row(e: Estimate) -> dict:
         "eliminated": e.eliminated,
         "features": f,
         "reasons": e.reasons,
+        "robot": e.robot,
+        "feasible": e.feasible,
         "source": e.source,
     }
 
@@ -42,11 +46,12 @@ def build(line: dict) -> dict:
     ]
     rows = []
     for op in line["operations"]:
-        rows.append(_row(estimate(op, line)))
-        for lever in applicable_levers(op, line):
-            rows.append(_row(estimate(op, line, [lever])))
+        for robot in [None, *ROBOTS]:
+            rows.append(_row(estimate(op, line, robot=robot)))
+            for lever in applicable_levers(op, line):
+                rows.append(_row(estimate(op, line, [lever], robot)))
     return {"line": line["id"], "version": PRIORS["version"], "priors": priors,
-            "leverCosts": LEVER_COSTS, "operations": rows}
+            "leverCosts": LEVER_COSTS, "robots": list(ROBOTS.values()), "operations": rows}
 
 
 def main() -> None:

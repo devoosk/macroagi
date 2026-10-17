@@ -5,7 +5,7 @@ import math
 from dataclasses import dataclass, field
 from itertools import combinations
 
-from capability import LEVER_COSTS, applicable_levers, clears, estimate, lever_feature_changes
+from capability import LEVER_COSTS, ROBOTS, applicable_levers, clears, estimate, lever_feature_changes
 
 from .costs import CANDIDATE_QUANTILE, PEAK_TOLERANCE
 
@@ -44,6 +44,7 @@ class Option:
     mode: str  # human | robot | eliminated
     levers: tuple[str, ...]  # lever instance ids
     time: dict[str, float]  # seconds per variant
+    robot: str | None = None  # robot type (robots.json) for robot options
 
 
 @dataclass
@@ -54,6 +55,7 @@ class Candidates:
     decouple: dict[str, str]  # split station -> decouple lever id
     allowed: dict[str, list[str]]  # op -> stations it may go to
     levers: dict[str, LeverInst]
+    fleet: tuple[str, ...]  # robot types available to rent
     options: dict[str, list[Option]] = field(default_factory=dict)
     moves: dict[str, str] = field(default_factory=dict)  # op -> regroup lever id paid when it moves
 
@@ -101,7 +103,7 @@ def _cost(insts) -> float:
     return sum(i.cost for i in {i.id: i for i in insts}.values())
 
 
-def op_options(op: dict, line: dict, catalogue, bundle: str, floor: float) -> list[Option]:
+def op_options(op: dict, line: dict, catalogue, bundle: str, floor: float, fleet) -> list[Option]:
     human = {v: t["mean"]["value"] for v, t in op["time"].items()}
     options = [Option("human", (), human)]
     waste = estimate(op, line).waste
@@ -109,20 +111,25 @@ def op_options(op: dict, line: dict, catalogue, bundle: str, floor: float) -> li
     usable = [catalogue[t, op["id"]] for t in applicable_levers(op, line)
               if (t, op["id"]) in catalogue and t in types]
     sets = [()] + [c for k in (1, 2) for c in combinations(usable, k)]
-    clearing = [s for s in sets if clears(estimate(op, line, [i.type for i in s]), floor, CANDIDATE_QUANTILE["value"])]
-    removing = [s for s in clearing if estimate(op, line, [i.type for i in s]).eliminated]
+    q = CANDIDATE_QUANTILE["value"]
+    removing = [s for s in sets if estimate(op, line, [i.type for i in s]).eliminated]
     if removing:
         s = min(removing, key=lambda s: (_cost(s), [i.id for i in s]))
         # Waste is always removed once a lever for it is available, never kept or automated.
         return [Option("eliminated", tuple(i.id for i in s), {v: 0.0 for v in human})]
-    robot = [s for s in clearing if s not in removing]
-    if robot and not waste:
-        s = min(robot, key=lambda s: (_cost(s), [i.id for i in s]))
-        options.append(Option("robot", tuple(i.id for i in s), estimate(op, line, [i.type for i in s]).robot_time))
+    if waste:
+        return options
+    for robot in fleet:  # cheapest lever set that lets this robot type clear the floor
+        ok = [s for s in sets if clears(estimate(op, line, [i.type for i in s], robot), floor, q)]
+        if ok:
+            s = min(ok, key=lambda s: (_cost(s), [i.id for i in s]))
+            e = estimate(op, line, [i.type for i in s], robot)
+            options.append(Option("robot", tuple(i.id for i in s), e.robot_time, robot))
     return options
 
 
-def candidates(line: dict, bundle: str, floor: float) -> Candidates:
+def candidates(line: dict, bundle: str, floor: float, fleet=None) -> Candidates:
+    fleet = tuple(fleet or ROBOTS)
     types = BUNDLES[bundle]
     stations = ordered_stations(line)
     index = {s["id"]: i for i, s in enumerate(stations)}
@@ -157,9 +164,9 @@ def candidates(line: dict, bundle: str, floor: float) -> Candidates:
             allowed[op["id"]] = [s for s in near if kind[s] not in TEST_KINDS]
 
     levers = {i.id: i for i in catalogue.values()}
-    c = Candidates(bundle, [s["id"] for s in stations], bays, decouple, allowed, levers)
+    c = Candidates(bundle, [s["id"] for s in stations], bays, decouple, allowed, levers, fleet)
     c.moves = {o: catalogue["regroup", o].id for o in allowed if ("regroup", o) in catalogue and len(allowed[o]) > 1}
-    c.options = {op["id"]: op_options(op, line, catalogue, bundle, floor) for op in line["operations"]}
+    c.options = {op["id"]: op_options(op, line, catalogue, bundle, floor, fleet) for op in line["operations"]}
     return c
 
 

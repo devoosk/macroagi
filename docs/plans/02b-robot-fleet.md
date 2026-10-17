@@ -1,6 +1,6 @@
 # Item 2b: Robot fleet in the capability model — plan
 
-Status: draft for review by Oskari. Nothing is built yet.
+Status: built (v0). Oskari's answers: simulate a catalogue for the demo; rent sits next to capex; any robot combination (one type per station, a mobile robot may serve two neighbouring stations); availability unlimited, so the fleet limit is not built. Fleet diff and calibration are not built yet.
 
 ## Why
 

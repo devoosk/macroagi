@@ -94,6 +94,10 @@ export interface Station {
   bufferAfter: number
   /** Parallel bays (e.g. split test station). Defaults to 1. */
   bays?: number
+  /** Redesigns: rented robot type (RobotType.id) when staff is 'robot'. */
+  robot?: string
+  /** Redesigns: neighbouring station served by the same mobile robot. */
+  sharedWith?: string
 }
 
 export interface Variant {
@@ -138,8 +142,11 @@ export interface DesignSummary {
   stages: MigrationStage[]
   humanStations: number
   robotStations: number
-  /** Robot cells plus lever costs, EUR. */
+  /** Lever costs plus one-off robot integration, EUR. */
   capex: Sourced
+  /** Robots are rented, so their cost sits next to capex. */
+  rentPerMonth: Sourced
+  fleet: { robot: string; name: string; count: number; rentPerMonth: Sourced }[]
   /** Solver objective: station costs over 3 years plus lever costs, EUR. */
   objective: Sourced & { note: string }
 }
@@ -244,7 +251,29 @@ export interface CapabilityEstimate {
   eliminated: boolean
   features: CapabilityFeatures
   reasons: string[]
+  /** Robot type (RobotType.id); null = generic robot. */
+  robot: string | null
+  /** False when this robot type can't do the operation at all (payload, precision, tool). */
+  feasible: boolean
   source: string
+}
+
+/** A rentable robot type (capability/robots.json, simulated catalogue for the demo). */
+export interface RobotType {
+  id: string
+  name: string
+  class: 'arm' | 'scara' | 'dual_arm' | 'humanoid'
+  payloadKg: number
+  precision: Part['tolerance']
+  mobile: boolean
+  tools: ToolKind[]
+  minPresentation: Presentation
+  presentationLift: number
+  concentration: number
+  timeScale: number
+  failMult: Partial<Record<VerbClass, number>>
+  rentPerMonth: number
+  integration: number
 }
 
 export interface CapabilityTable {
@@ -252,6 +281,7 @@ export interface CapabilityTable {
   version: string
   priors: CapabilityPrior[]
   leverCosts: Record<LeverType, Sourced>
-  /** Per operation: the baseline (levers: []) plus one row per applicable single lever. */
+  robots: RobotType[]
+  /** Per operation and robot type: the baseline (levers: []) plus one row per applicable single lever. */
   operations: CapabilityEstimate[]
 }

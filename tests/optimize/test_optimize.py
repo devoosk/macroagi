@@ -39,7 +39,7 @@ def check_design(line, d):
                 if ops[o]["mode"] == "robot":
                     levers = [lv["type"] for lv in d["levers"] if o in lv["operations"]
                               and lv["id"] in d["appliedLevers"] and lv["type"] != "decouple"]
-                    assert clears(estimate(ops[o], line, levers), FLOOR, 0.5)
+                    assert clears(estimate(ops[o], line, levers, st["robot"]), FLOOR, 0.5)
                     assert st["staff"] == "robot"
                 load += ops[o]["time"][v["id"]]["mean"]["value"]
             assert load <= line["takt"]["value"] * PEAK * st["bays"] + 0.1
@@ -97,3 +97,34 @@ def test_infeasible_takt_gives_no_design():
 
 def test_deterministic():
     assert json.dumps(designs(LINE)) == json.dumps(designs(LINE))
+
+
+def test_mobile_robot_serves_two_stations():
+    line = with_takt(200)
+    for o in line["operations"]:
+        if o["id"] in ("O1", "O2", "O3"):
+            o.update(verb="place", parts=["P_base"], tool="none")
+    c, sol = best_designs(line, FLOOR, n=1, fleet=["humanoid"])[0]
+    d = export(line, c, sol, 1)
+    check_design(line, d)
+    assert sol.shared
+    shared = [s for s in d["stations"] if s.get("sharedWith")]
+    assert len(shared) == 2 and all(s["robot"] == "humanoid" for s in shared)
+    assert d["design"]["fleet"][0]["count"] == len(sol.robot_stations) - len(sol.shared)
+
+
+def test_robot_limits_rule_out_types():
+    o = next(o for o in LINE["operations"] if o["id"] == "O3")  # torch brazing
+    assert not estimate(o, LINE, robot="cobot_arm").feasible
+    assert any("no torch tool" in r for r in estimate(o, LINE, robot="cobot_arm").reasons)
+    heavy = {**LINE, "parts": [{**p, "mass": {"value": 30, "source": "estimate"}} for p in LINE["parts"]]}
+    o1 = next(o for o in heavy["operations"] if o["id"] == "O1")
+    assert not estimate(o1, heavy, robot="humanoid").feasible
+    assert estimate(o1, heavy, robot="industrial_arm").feasible
+
+
+def test_humanoid_copes_with_loose_bins_arms_need_a_lever():
+    o2 = next(o for o in LINE["operations"] if o["id"] == "O2")  # screws from a loose bin
+    assert not estimate(o2, LINE, robot="cobot_arm").feasible
+    assert estimate(o2, LINE, robot="humanoid").feasible
+    assert estimate(o2, LINE, ["fixture"], robot="cobot_arm").feasible

@@ -1,6 +1,6 @@
 {
   "id": "r290_fixture_redesign_3",
-  "name": "R290 monobloc (fixture) redesign 3 (B4)",
+  "name": "R290 monobloc (fixture) redesign 3 (B0)",
   "takt": {
     "value": 90,
     "source": "estimate"
@@ -17,7 +17,7 @@
       "time": {
         "V6": {
           "mean": {
-            "value": 13.33,
+            "value": 17.33,
             "source": "capability: human mean x robot time factor"
           },
           "sd": {
@@ -27,7 +27,7 @@
         },
         "V9": {
           "mean": {
-            "value": 20.0,
+            "value": 26.0,
             "source": "capability: human mean x robot time factor"
           },
           "sd": {
@@ -37,7 +37,7 @@
         },
         "V12": {
           "mean": {
-            "value": 26.67,
+            "value": 34.67,
             "source": "capability: human mean x robot time factor"
           },
           "sd": {
@@ -60,7 +60,7 @@
       "time": {
         "V6": {
           "mean": {
-            "value": 18.0,
+            "value": 23.4,
             "source": "capability: human mean x robot time factor"
           },
           "sd": {
@@ -70,7 +70,7 @@
         },
         "V9": {
           "mean": {
-            "value": 27.0,
+            "value": 35.1,
             "source": "capability: human mean x robot time factor"
           },
           "sd": {
@@ -80,7 +80,7 @@
         },
         "V12": {
           "mean": {
-            "value": 36.0,
+            "value": 46.8,
             "source": "capability: human mean x robot time factor"
           },
           "sd": {
@@ -144,31 +144,31 @@
       "time": {
         "V6": {
           "mean": {
-            "value": 40,
-            "source": "estimate"
+            "value": 35.2,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 6,
+            "value": 2.4,
             "source": "estimate"
           }
         },
         "V9": {
           "mean": {
-            "value": 60,
-            "source": "estimate"
+            "value": 52.8,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 6,
+            "value": 2.4,
             "source": "estimate"
           }
         },
         "V12": {
           "mean": {
-            "value": 80,
-            "source": "estimate"
+            "value": 70.4,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 6,
+            "value": 2.4,
             "source": "estimate"
           }
         }
@@ -178,7 +178,7 @@
         "value": 0.05,
         "source": "estimate"
       },
-      "mode": "human"
+      "mode": "robot"
     }
   ],
   "edges": [
@@ -269,6 +269,7 @@
       "rot": 0,
       "bufferBefore": 1,
       "bufferAfter": 1,
+      "robot": "humanoid",
       "bays": 1
     },
     {
@@ -293,12 +294,13 @@
       "operations": [
         "O4"
       ],
-      "staff": "human",
+      "staff": "robot",
       "x": 8,
       "y": 0,
       "rot": 0,
       "bufferBefore": 1,
       "bufferAfter": 0,
+      "robot": "dual_arm",
       "bays": 1
     }
   ],
@@ -349,47 +351,55 @@
       ]
     }
   ],
-  "levers": [
-    {
-      "id": "L_kit_O2",
-      "type": "kit",
-      "cost": {
-        "value": 3000,
-        "source": "estimate"
-      },
-      "operations": [
-        "O2"
-      ],
-      "featureChanges": {
-        "presentation": "kitted"
-      }
-    }
-  ],
-  "appliedLevers": [
-    "L_kit_O2"
-  ],
+  "levers": [],
+  "appliedLevers": [],
   "design": {
     "stages": [
       {
         "id": "M1",
         "name": "Robot cells",
         "stations": [
-          "S01"
+          "S01",
+          "S03"
         ],
         "gate": "Each robot cell holds the required reliability from the sweep for one week, with human fallback"
       }
     ],
-    "bundle": "B4",
-    "humanStations": 2,
-    "robotStations": 1,
+    "bundle": "B0",
+    "humanStations": 1,
+    "robotStations": 2,
+    "fleet": [
+      {
+        "robot": "dual_arm",
+        "name": "Dual-arm (2 x 7 kg)",
+        "count": 1,
+        "rentPerMonth": {
+          "value": 4000,
+          "source": "estimate (demo rental catalogue)"
+        }
+      },
+      {
+        "robot": "humanoid",
+        "name": "Humanoid",
+        "count": 1,
+        "rentPerMonth": {
+          "value": 6000,
+          "source": "estimate (demo rental catalogue)"
+        }
+      }
+    ],
     "capex": {
-      "value": 88000,
-      "source": "estimate"
+      "value": 25000,
+      "source": "estimate (levers 0 + robot integration 25000)"
+    },
+    "rentPerMonth": {
+      "value": 10000,
+      "source": "estimate (demo rental catalogue)"
     },
     "objective": {
-      "value": 628000,
+      "value": 655000,
       "source": "estimate",
-      "note": "human station 270000 + robot cell 85000 per bay, plus lever costs, EUR over 3 years"
+      "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
     }
   }
 }

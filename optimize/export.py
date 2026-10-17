@@ -2,7 +2,9 @@ import copy
 
 import networkx as nx
 
-from .costs import HUMAN_STATION_COST, ROBOT_CELL_COST
+from capability import ROBOTS
+
+from .costs import HORIZON_MONTHS, HUMAN_STATION_COST
 from .generator import Candidates, used_levers
 from .model import Solution
 
@@ -36,6 +38,11 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
         sid = st["id"]
         st["operations"] = [o for o in order if sol.station.get(o) == sid]
         st["staff"] = "robot" if sid in sol.robot_stations else "human" if sid in sol.human_stations else "empty"
+        if sid in sol.robot:
+            st["robot"] = sol.robot[sid]
+            mate = next((b if a == sid else a for a, b in sol.shared if sid in (a, b)), None)
+            if mate:
+                st["sharedWith"] = mate
         st["bays"] = c.bays[sid]
         if sid in c.decouple:
             st["bufferBefore"] = max(st["bufferBefore"], 2)
@@ -54,19 +61,36 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
     known = {lv["id"] for lv in line.get("levers", [])}
     out["levers"] = list(line.get("levers", [])) + [lv for lv in levers if lv["id"] not in known]
     out["appliedLevers"] = [lv["id"] for lv in levers]
-    capex = sum(lv["cost"]["value"] for lv in levers) + sum(
-        ROBOT_CELL_COST["value"] * c.bays[s] for s in sol.robot_stations)
+    fleet = robot_fleet(c, sol)
+    lever_capex = sum(lv["cost"]["value"] for lv in levers)
+    integration = sum(n * ROBOTS[t]["integration"] for t, n in fleet.items())
+    rent = sum(n * ROBOTS[t]["rentPerMonth"] for t, n in fleet.items())
     out["design"] = {
         "stages": stages(line, c, sol),
         "bundle": sol.bundle,
         "humanStations": len(sol.human_stations),
         "robotStations": len(sol.robot_stations),
-        "capex": {"value": capex, "source": "estimate"},
+        "fleet": [{"robot": t, "name": ROBOTS[t]["name"], "count": n,
+                   "rentPerMonth": {"value": ROBOTS[t]["rentPerMonth"], "source": "estimate (demo rental catalogue)"}}
+                  for t, n in fleet.items()],
+        "capex": {"value": lever_capex + integration,
+                  "source": f"estimate (levers {lever_capex} + robot integration {integration})"},
+        "rentPerMonth": {"value": rent, "source": "estimate (demo rental catalogue)"},
         "objective": {"value": sol.objective, "source": "estimate",
-                      "note": f"human station {HUMAN_STATION_COST['value']} + robot cell "
-                              f"{ROBOT_CELL_COST['value']} per bay, plus lever costs, EUR over 3 years"},
+                      "note": f"human station {HUMAN_STATION_COST['value']} per bay + robot rent x {HORIZON_MONTHS} "
+                              "months + integration + lever costs, EUR over 3 years"},
     }
     return out
+
+
+def robot_fleet(c: Candidates, sol: Solution) -> dict[str, int]:
+    """Robots to rent per type: one per bay, a shared mobile robot counted once."""
+    n: dict[str, int] = {}
+    for s, t in sol.robot.items():
+        n[t] = n.get(t, 0) + c.bays[s]
+    for a, _ in sol.shared:
+        n[sol.robot[a]] -= 1
+    return dict(sorted(n.items()))
 
 
 def stages(line: dict, c: Candidates, sol: Solution) -> list[dict]:

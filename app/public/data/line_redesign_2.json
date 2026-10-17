@@ -1,6 +1,6 @@
 {
   "id": "r290_fixture_redesign_2",
-  "name": "R290 monobloc (fixture) redesign 2 (B0)",
+  "name": "R290 monobloc (fixture) redesign 2 (B4)",
   "takt": {
     "value": 90,
     "source": "estimate"
@@ -17,37 +17,37 @@
       "time": {
         "V6": {
           "mean": {
-            "value": 13.333333333333332,
-            "source": "estimate"
+            "value": 13.33,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 2,
+            "value": 0.8,
             "source": "estimate"
           }
         },
         "V9": {
           "mean": {
-            "value": 20,
-            "source": "estimate"
+            "value": 20.0,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 2,
+            "value": 0.8,
             "source": "estimate"
           }
         },
         "V12": {
           "mean": {
-            "value": 26.666666666666664,
-            "source": "estimate"
+            "value": 26.67,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 2,
+            "value": 0.8,
             "source": "estimate"
           }
         }
       },
       "station": "S01",
-      "mode": "human"
+      "mode": "robot"
     },
     {
       "id": "O2",
@@ -60,37 +60,37 @@
       "time": {
         "V6": {
           "mean": {
-            "value": 20,
-            "source": "estimate"
+            "value": 18.0,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 3,
+            "value": 1.2,
             "source": "estimate"
           }
         },
         "V9": {
           "mean": {
-            "value": 30,
-            "source": "estimate"
+            "value": 27.0,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 3,
+            "value": 1.2,
             "source": "estimate"
           }
         },
         "V12": {
           "mean": {
-            "value": 40,
-            "source": "estimate"
+            "value": 36.0,
+            "source": "capability: human mean x robot time factor"
           },
           "sd": {
-            "value": 3,
+            "value": 1.2,
             "source": "estimate"
           }
         }
       },
       "station": "S01",
-      "mode": "human"
+      "mode": "robot"
     },
     {
       "id": "O3",
@@ -144,31 +144,31 @@
       "time": {
         "V6": {
           "mean": {
-            "value": 32.0,
-            "source": "capability: human mean x robot time factor"
+            "value": 40,
+            "source": "estimate"
           },
           "sd": {
-            "value": 2.4,
+            "value": 6,
             "source": "estimate"
           }
         },
         "V9": {
           "mean": {
-            "value": 48.0,
-            "source": "capability: human mean x robot time factor"
+            "value": 60,
+            "source": "estimate"
           },
           "sd": {
-            "value": 2.4,
+            "value": 6,
             "source": "estimate"
           }
         },
         "V12": {
           "mean": {
-            "value": 64.0,
-            "source": "capability: human mean x robot time factor"
+            "value": 80,
+            "source": "estimate"
           },
           "sd": {
-            "value": 2.4,
+            "value": 6,
             "source": "estimate"
           }
         }
@@ -178,7 +178,7 @@
         "value": 0.05,
         "source": "estimate"
       },
-      "mode": "robot"
+      "mode": "human"
     }
   ],
   "edges": [
@@ -263,12 +263,13 @@
         "O1",
         "O2"
       ],
-      "staff": "human",
+      "staff": "robot",
       "x": 0,
       "y": 0,
       "rot": 0,
       "bufferBefore": 1,
       "bufferAfter": 1,
+      "robot": "cobot_arm",
       "bays": 1
     },
     {
@@ -293,7 +294,7 @@
       "operations": [
         "O4"
       ],
-      "staff": "robot",
+      "staff": "human",
       "x": 8,
       "y": 0,
       "rot": 0,
@@ -349,30 +350,62 @@
       ]
     }
   ],
-  "levers": [],
-  "appliedLevers": [],
+  "levers": [
+    {
+      "id": "L_kit_O2",
+      "type": "kit",
+      "cost": {
+        "value": 3000,
+        "source": "estimate"
+      },
+      "operations": [
+        "O2"
+      ],
+      "featureChanges": {
+        "presentation": "kitted"
+      }
+    }
+  ],
+  "appliedLevers": [
+    "L_kit_O2"
+  ],
   "design": {
     "stages": [
       {
         "id": "M1",
         "name": "Robot cells",
         "stations": [
-          "S03"
+          "S01"
         ],
         "gate": "Each robot cell holds the required reliability from the sweep for one week, with human fallback"
       }
     ],
-    "bundle": "B0",
+    "bundle": "B4",
     "humanStations": 2,
     "robotStations": 1,
+    "fleet": [
+      {
+        "robot": "cobot_arm",
+        "name": "Cobot arm (10 kg)",
+        "count": 1,
+        "rentPerMonth": {
+          "value": 1800,
+          "source": "estimate (demo rental catalogue)"
+        }
+      }
+    ],
     "capex": {
-      "value": 85000,
-      "source": "estimate"
+      "value": 18000,
+      "source": "estimate (levers 3000 + robot integration 15000)"
+    },
+    "rentPerMonth": {
+      "value": 1800,
+      "source": "estimate (demo rental catalogue)"
     },
     "objective": {
-      "value": 625000,
+      "value": 622800,
       "source": "estimate",
-      "note": "human station 270000 + robot cell 85000 per bay, plus lever costs, EUR over 3 years"
+      "note": "human station 270000 per bay + robot rent x 36 months + integration + lever costs, EUR over 3 years"
     }
   }
 }

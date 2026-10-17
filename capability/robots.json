@@ -1,0 +1,47 @@
+{
+  "version": "demo-v0",
+  "source": "estimate",
+  "notes": "Simulated MicroAGI rental catalogue for the hackathon demo (Atlas drives any of these). Customers rent, so cost is per month. failMult multiplies the failure probability per verb (missing verb = 1); presentationLift treats parts as that many presentation steps better (a humanoid copes with a loose bin like an arm with a tray); concentration scales the Beta concentration (newer robot classes are less certain). Availability is unlimited for the demo.",
+  "robots": [
+    {
+      "id": "cobot_arm", "name": "Cobot arm (10 kg)", "class": "arm",
+      "payloadKg": 10, "precision": "medium", "mobile": false,
+      "tools": ["none", "screwdriver", "torque_driver", "scanner", "crimper"],
+      "minPresentation": "tray", "presentationLift": 0, "concentration": 1.0, "timeScale": 1.0,
+      "failMult": { "screw": 0.8, "connect": 1.3 },
+      "rentPerMonth": 1800, "integration": 15000
+    },
+    {
+      "id": "industrial_arm", "name": "Industrial arm (50 kg)", "class": "arm",
+      "payloadKg": 50, "precision": "tight", "mobile": false,
+      "tools": ["none", "torque_driver", "torch", "hose", "strapper", "scanner"],
+      "minPresentation": "tray", "presentationLift": 0, "concentration": 1.0, "timeScale": 0.7,
+      "failMult": { "braze": 0.8, "connect": 1.2 },
+      "rentPerMonth": 3500, "integration": 40000
+    },
+    {
+      "id": "scara", "name": "SCARA (5 kg)", "class": "scara",
+      "payloadKg": 5, "precision": "tight", "mobile": false,
+      "tools": ["none", "screwdriver", "torque_driver"],
+      "minPresentation": "kitted", "presentationLift": 0, "concentration": 1.1, "timeScale": 0.6,
+      "failMult": { "insert": 0.6, "screw": 0.6, "place": 0.8 },
+      "rentPerMonth": 1500, "integration": 12000
+    },
+    {
+      "id": "dual_arm", "name": "Dual-arm (2 x 7 kg)", "class": "dual_arm",
+      "payloadKg": 14, "precision": "tight", "mobile": false,
+      "tools": ["none", "screwdriver", "torque_driver", "crimper", "scanner", "hose"],
+      "minPresentation": "tray", "presentationLift": 0, "concentration": 0.8, "timeScale": 1.1,
+      "failMult": { "connect": 0.6, "insert": 0.8 },
+      "rentPerMonth": 4000, "integration": 20000
+    },
+    {
+      "id": "humanoid", "name": "Humanoid", "class": "humanoid",
+      "payloadKg": 20, "precision": "medium", "mobile": true,
+      "tools": ["none", "screwdriver", "torque_driver", "scanner", "crimper", "hose", "strapper"],
+      "minPresentation": "loose_bin", "presentationLift": 1, "concentration": 0.6, "timeScale": 1.3,
+      "failMult": { "connect": 1.2 },
+      "rentPerMonth": 6000, "integration": 5000
+    }
+  ]
+}
