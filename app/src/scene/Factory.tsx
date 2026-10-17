@@ -9,7 +9,7 @@ import type { Rect } from './environment'
 import { ConveyorLine, StationModel } from './stations'
 import { UnitsOnLine } from './units'
 import { Worker } from './workers'
-import { bayLocalZ } from '../lib/layout'
+import { bayLocalZ, WORKER_LOCAL_Z } from '../lib/layout'
 
 const quality = isCapture ? 'capture' : 'demo'
 
@@ -48,7 +48,7 @@ export function Factory({ line, log, lightSeed = 0, cutaway = !isCapture }: { li
               const w = state.workers[key] ?? state.workers[s.id]
               const dur = w?.opEnd !== undefined && w.opStart !== undefined && Number.isFinite(w.opEnd) ? w.opEnd - w.opStart : undefined
               return (
-                <group key={id} position={[0, 0, bayLocalZ(b) + 0.95]}>
+                <group key={id} position={[0, 0, bayLocalZ(b) + WORKER_LOCAL_Z]}>
                   <Worker
                     stationId={id}
                     lookSeed={`${line.id}:${id}`}

@@ -10,6 +10,8 @@
  *   --fps <n>             frames per sim second (default 1)
  *   --url <base>          dev server (default http://localhost:5173); ignored with --serve
  *   --page <path>         html page (default /), e.g. /preview-capture.html
+ *   --query <qs>          extra page query, e.g. design=redesign (films line_redesign_1 / events_redesign_1;
+ *                         camera ids and --gt then default to those files too)
  *   --serve               spawn vite on a free port for the run
  *   --out <dir>           frames root (default ../capture/frames, relative to app/)
  *   --width/--height      frame size (default 960x540)
@@ -39,10 +41,12 @@ const height = num(args, 'height', 540)
 const concurrency = Math.max(1, num(args, 'concurrency', 2))
 const quality = num(args, 'quality', 0.9)
 const pagePath = str(args, 'page', '/')
+const query = str(args, 'query', '')
+const redesign = new URLSearchParams(query.replace(/^[?&]/, '')).get('design') === 'redesign'
 const outRoot = path.resolve(APP_DIR, str(args, 'out', '../capture/frames'))
 const gtRoot = path.resolve(APP_DIR, str(args, 'gt-out', '../capture/ground_truth'))
-const linePath = path.resolve(APP_DIR, str(args, 'line', 'public/data/line.json'))
-const eventsPath = path.resolve(APP_DIR, str(args, 'events', 'public/data/events_current.json'))
+const linePath = path.resolve(APP_DIR, str(args, 'line', redesign ? 'public/data/line_redesign_1.json' : 'public/data/line.json'))
+const eventsPath = path.resolve(APP_DIR, str(args, 'events', redesign ? 'public/data/events_redesign_1.json' : 'public/data/events_current.json'))
 
 function haveFfmpeg(): boolean {
   try {
@@ -120,7 +124,12 @@ async function main() {
   async function runCamera(page: Page, cam: string) {
     const dir = path.join(outRoot, camDir(cam))
     fs.mkdirSync(dir, { recursive: true })
-    const info = await openCapture(page, captureUrl(base, pagePath, cam, width, height))
+    const url = captureUrl(base, pagePath, cam, width, height, query)
+    // One retry: a page that loads while vite is (re)optimising deps can miss its ready flag.
+    const info = await openCapture(page, url).catch((e) => {
+      console.warn(`\n${cam}: page not ready (${e instanceof Error ? e.message : e}); retrying once`)
+      return openCapture(page, url)
+    })
     if (info.camera !== cam) throw new Error(`page opened camera ${info.camera}, expected ${cam}`)
     const frames: { t: number; file: string }[] = []
     for (const t of times) {
@@ -160,10 +169,17 @@ async function main() {
   try {
     await Promise.all(
       Array.from({ length: Math.min(concurrency, cams.length) }, async () => {
-        const page = await browser.newPage()
-        await page.setViewport({ width, height, deviceScaleFactor: 1 })
-        for (let cam = queue.shift(); cam; cam = queue.shift()) await runCamera(page, cam)
-        await page.close()
+        // A fresh tab per camera: re-navigating one tab ~15 times exhausted WebGL resources and
+        // the next page never became ready (60 s timeout on a full --cam all run).
+        for (let cam = queue.shift(); cam; cam = queue.shift()) {
+          const page = await browser.newPage()
+          await page.setViewport({ width, height, deviceScaleFactor: 1 })
+          try {
+            await runCamera(page, cam)
+          } finally {
+            await page.close()
+          }
+        }
       }),
     )
   } finally {

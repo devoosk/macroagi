@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import type { ToolKind } from '../../contracts/types'
 import { registerAnchor } from '../../lib/anchors'
+import { captureCam, isCapture } from '../../lib/mode'
 import { hash01 } from '../../lib/rng'
 import { Abdomen, Chest, Foot, Hand, Head, LowerArm, LowerLeg, NeckMesh, Pelvis, UpperArm, UpperLeg, bodyMats, M, type BodyMats } from './body'
 import { box, mat } from './geo'
@@ -63,9 +64,15 @@ function Held({ item, side, pose, seg, flicker }: { item: HeldItem; side: Side; 
   )
 }
 
-function Arm({ side, pose, look, m, seg, flicker, lite }: { side: Side; pose: Pose; look: WorkerLook; m: BodyMats; seg: number; flicker: number; lite: boolean }) {
+function Arm({ side, pose, look, m, seg, flicker, lite, anchor }: { side: Side; pose: Pose; look: WorkerLook; m: BodyMats; seg: number; flicker: number; lite: boolean; anchor: string }) {
   const j = pose.joints
   const R = side === 1
+  // Grip point anchor (`hand:<id>:R|L`): the first-person camera frames the hands with it.
+  const gripRef = useRef<THREE.Object3D>(null)
+  useEffect(() => {
+    registerAnchor(anchor, gripRef.current)
+    return () => registerAnchor(anchor, null)
+  }, [anchor])
   return (
     <group position={[side * RIG.shoulder[0], RIG.shoulder[1], RIG.shoulder[2]]} quaternion={R ? j.shoulderR : j.shoulderL}>
       <group position={[side * RIG.upperArm[0], 0, 0]} quaternion={R ? j.upperArmR : j.upperArmL}>
@@ -75,6 +82,7 @@ function Arm({ side, pose, look, m, seg, flicker, lite }: { side: Side; pose: Po
           <group position={[0, -RIG.lowerArmLen, 0]} quaternion={R ? j.handR : j.handL}>
             <Hand side={side} curls={R ? pose.fingers.R : pose.fingers.L} m={m} seg={seg} lite={lite} />
             <Held item={R ? pose.held.R : pose.held.L} side={side} pose={pose} seg={seg} flicker={flicker} />
+            <object3D ref={gripRef} position={gripPos(side)} />
           </group>
         </group>
       </group>
@@ -164,7 +172,10 @@ function Placed({ pose, seg }: { pose: Pose; seg: number }) {
 
 /**
  * Procedural rigged worker in station-local space (stands at the origin facing -z).
- * Registers the eye point as anchor `head:<stationId>` for the first-person camera.
+ * Registers the eye point as anchor `head:<stationId>` and the grip points as `hand:<stationId>:R|L`
+ * for the first-person camera.
+ * On that camera's own capture page the head and neck are not drawn (a head cam never sees its
+ * wearer's head, glasses or cap brim), so the camera can sit at or behind the eye without clipping.
  */
 export function Worker({ stationId, lookSeed, verb, phase, simTime, tool, cycle, quality, duration }: WorkerProps) {
   const look = useMemo(() => workerLook(lookSeed), [lookSeed])
@@ -180,6 +191,7 @@ export function Worker({ stationId, lookSeed, verb, phase, simTime, tool, cycle,
   const k = useMemo(() => hash01('flicker', lookSeed) * 100, [lookSeed])
   const flicker = 0.82 + 0.1 * Math.sin(simTime * 31 + k) + 0.08 * Math.sin(simTime * 57 + k * 3)
   const j = pose.joints
+  const ownHeadCam = isCapture && captureCam === 'fp:' + stationId
   return (
     <group>
       <group position={[pose.root.x, 0, pose.root.z]} rotation={[0, pose.root.yaw, 0]}>
@@ -193,14 +205,14 @@ export function Worker({ stationId, lookSeed, verb, phase, simTime, tool, cycle,
               <group position={RIG.chest} quaternion={j.chest}>
                 <Chest l={look} m={m} seg={seg} />
                 <group position={RIG.neck} quaternion={j.neck}>
-                  <NeckMesh m={m} seg={seg} />
+                  {!ownHeadCam && <NeckMesh m={m} seg={seg} />}
                   <group position={RIG.head} quaternion={j.head}>
-                    <Head l={look} m={m} seg={seg} lite={quality === 'demo'} />
+                    {!ownHeadCam && <Head l={look} m={m} seg={seg} lite={quality === 'demo'} />}
                     <object3D ref={eyeRef} position={RIG.eye} />
                   </group>
                 </group>
-                <Arm side={1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} />
-                <Arm side={-1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} />
+                <Arm side={1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} anchor={`hand:${stationId}:R`} />
+                <Arm side={-1} pose={pose} look={look} m={m} seg={seg} flicker={flicker} lite={quality === 'demo'} anchor={`hand:${stationId}:L`} />
               </group>
             </group>
           </group>

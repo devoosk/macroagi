@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { rng } from '../../../lib/rng'
+import { isCapture } from '../../../lib/mode'
 
 /**
  * Shared PBR materials and deterministic procedural textures (module scope, created once).
@@ -311,6 +312,14 @@ const lampColors = {
 export type LampColor = keyof typeof lampColors
 
 const lampOnCache = new Map<string, THREE.MeshStandardMaterial>()
+/**
+ * Lamp driven by station state (andon, beacons, "running" pilot lights). Always dark in capture
+ * mode: a lit state lamp is a state colour, which capture views must not show (CLAUDE.md rule 2).
+ */
+export function stateLamp(c: LampColor, on: boolean) {
+  return lampMat(c, on && !isCapture)
+}
+
 export function lampMat(c: LampColor, on: boolean) {
   const key = c + on
   let m = lampOnCache.get(key)

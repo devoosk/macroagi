@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { M, lampMat } from '../lib/mats'
+import { M, lampMat, stateLamp } from '../lib/mats'
 import { B, C, CX, CZ, Hose, Tor, circleGeo, frac, planeGeo, smooth } from '../lib/prims'
 import { Balancer, Cabinet, GasBottle, HazardZone, KitCart, Monitor, Regulator } from '../lib/common'
 import { CasingPanel, FanGrille, HarnessCoil, PcbBoard } from '../../units/parts'
@@ -118,8 +118,11 @@ const VacuumPumpCart = memo(function VacuumPumpCart() {
   )
 })
 
-export function LeakTest({ t, working }: KindProps) {
-  const open = working ? 0 : 1
+export function LeakTest({ t, working, robot }: KindProps) {
+  // Doors close only on an automated cycle. With an operator, the connect and sniffer inspect
+  // ops happen while the station is `working`: closed doors put the hands through the glass and
+  // pressed the head cam against it.
+  const open = working && robot ? 0 : 1
   // pump-down curve: needle falls fast then levels off each cycle
   const u = frac(t / 45)
   const vac = working ? 0.08 + 0.85 * Math.exp(-u * 6) : 0.95
@@ -144,7 +147,7 @@ export function LeakTest({ t, working }: KindProps) {
         <group position={[0, 1.02, 0.12]} rotation={[-0.5, 0, 0]}>
           <B s={[0.5, 0.06, 0.3]} rad={0.01} m={M.ral7016} />
           <mesh geometry={planeGeo(0.3, 0.18)} material={M.screen} position={[-0.05, 0.031, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-          <mesh geometry={circleGeo(0.015)} material={lampMat('green', working)} position={[0.19, 0.031, -0.08]} rotation={[-Math.PI / 2, 0, 0]} />
+          <mesh geometry={circleGeo(0.015)} material={stateLamp('green', working)} position={[0.19, 0.031, -0.08]} rotation={[-Math.PI / 2, 0, 0]} />
         </group>
         <Hose pts={[[0.2, 0.8, -0.2], [0.3, 1.6, -0.1], [0.0, 2.4, 0.5], [-0.3, 2.3, 1.1]]} rad={0.012} m={M.hoseGrey} tub={30} />
       </group>
