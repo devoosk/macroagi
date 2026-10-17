@@ -47,3 +47,16 @@ def test_migration_stages_lowest_risk_first():
     assert [s["name"] for s in st][-1] == "Robot cells"
     assert set(st[-1]["stations"]) == set(sol.robot_stations)
     assert all(s["stations"] and s["gate"] for s in st)
+
+
+def test_humanoid_whatif_finds_a_crossover():
+    from capability import ROBOTS
+    from optimize.whatif import sweep
+
+    before = dict(ROBOTS["humanoid"])
+    res = sweep(LINE)
+    assert ROBOTS["humanoid"] == before  # overrides are undone
+    today = next(p for p in res["points"] if p["rentFactor"] == 1.0 and p["speedFactor"] == 1.0
+                 and p["humanoidPrecision"] == "medium")
+    assert today["humanoids"] == 0
+    assert res["breakEven"] is not None

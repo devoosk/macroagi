@@ -285,3 +285,32 @@ export interface CapabilityTable {
   /** Per operation and robot type: the baseline (levers: []) plus one row per applicable single lever. */
   operations: CapabilityEstimate[]
 }
+
+// humanoid_sweep.json: written by `python -m optimize.whatif` ("if humanoids got cheaper and faster").
+
+export interface HumanoidSweepPoint {
+  /** x today's humanoid rent and time (lower time is faster). */
+  rentFactor: number
+  speedFactor: number
+  humanoidRentPerMonth: number
+  humanoidTimeScale: number
+  humanoidPrecision: Part['tolerance']
+  /** Best mixed-fleet design at this point. */
+  humanoids: number
+  otherRobots: number
+  humanStations: number
+  sharedStations: [string, string][]
+  objective: Sourced & { note: string }
+  rentPerMonth: Sourced
+  fleet: DesignSummary['fleet']
+}
+
+export interface HumanoidSweep {
+  line: string
+  robot: 'humanoid'
+  base: { rentPerMonth: number; timeScale: number; precision: Part['tolerance'] }
+  source: string
+  points: HumanoidSweepPoint[]
+  /** Smallest change at which humanoids outnumber other robots; null if never. */
+  breakEven: Pick<HumanoidSweepPoint, 'rentFactor' | 'speedFactor' | 'humanoidRentPerMonth' | 'humanoidTimeScale' | 'humanoidPrecision'> | null
+}

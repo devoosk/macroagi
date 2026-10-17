@@ -6,7 +6,7 @@ and after a set of design levers. Levers change features, never numbers.
 
 from .features import Features, features_for
 from .levers import LEVER_COSTS, LEVER_TYPES, apply_levers
-from .priors import ROBOTS
+from .priors import ROBOTS, robot_overrides
 from .model import PRIORS, Estimate, applicable_levers, clears, estimate, lever_feature_changes
 
 __all__ = [
@@ -22,4 +22,5 @@ __all__ = [
     "estimate",
     "features_for",
     "lever_feature_changes",
+    "robot_overrides",
 ]
