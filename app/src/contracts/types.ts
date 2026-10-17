@@ -53,6 +53,11 @@ export interface Operation {
   station: string
   /** Probability the operation fails and triggers rework (test ops only). */
   failRate?: Sourced
+  /**
+   * Set in redesigns. For robot ops `time` is the robot time (the simulator reads it); the station's `staff` is 'robot'.
+   * Eliminated ops keep their original `station` for badges but are in no station's `operations`.
+   */
+  mode?: 'human' | 'robot' | 'eliminated'
 }
 
 export interface PrecedenceEdge {
@@ -89,6 +94,10 @@ export interface Station {
   bufferAfter: number
   /** Parallel bays (e.g. split test station). Defaults to 1. */
   bays?: number
+  /** Redesigns: rented robot type (RobotType.id) when staff is 'robot'. */
+  robot?: string
+  /** Redesigns: neighbouring station served by the same mobile robot. */
+  sharedWith?: string
   /** Redesigns: id of the human station that takes units after a robot failure. */
   fallback?: string
   /** True for an off-line fallback station (not part of the serial flow). */
@@ -126,6 +135,24 @@ export interface Line {
   levers: Lever[]
   /** Levers applied in this design (redesigns only). */
   appliedLevers?: string[]
+  /** Summary written by `python -m optimize` (redesigns only). */
+  design?: DesignSummary
+}
+
+export interface DesignSummary {
+  /** Lever bundle the solver was allowed to use (B0 none ... B4 all). */
+  bundle: string
+  /** Migration stages, lowest risk first; copy into results.json. */
+  stages: MigrationStage[]
+  humanStations: number
+  robotStations: number
+  /** Lever costs plus one-off robot integration, EUR. */
+  capex: Sourced
+  /** Robots are rented, so their cost sits next to capex. */
+  rentPerMonth: Sourced
+  fleet: { robot: string; name: string; count: number; rentPerMonth: Sourced }[]
+  /** Solver objective: station costs over 3 years plus lever costs, EUR. */
+  objective: Sourced & { note: string }
 }
 
 export type SimEventType =
@@ -184,4 +211,112 @@ export interface DesignResult {
 
 export interface Results {
   designs: DesignResult[]
+}
+
+// capability.json: written by `python -m capability` (plan step 2).
+
+export interface CapabilityFeatures {
+  verb: VerbClass
+  presentation: Presentation
+  rigidity: Part['rigidity']
+  tolerance: Part['tolerance']
+  mass_kg: number
+  tool: ToolKind
+  variants: number
+  has_parts: boolean
+  eliminated: boolean
+}
+
+export interface CapabilityPrior {
+  verb: VerbClass
+  presentation: Presentation
+  /** Prior mean robot success. */
+  mean: number
+  /** alpha + beta of the prior Beta; lower is wider. */
+  concentration: number
+  /** Robot time / human time. */
+  timeFactor: number
+  source: string
+}
+
+/** Robot success range (Beta) and time for one operation with a set of lever types. */
+export interface CapabilityEstimate {
+  operation: string
+  levers: LeverType[]
+  mean: number
+  p05: number
+  p95: number
+  /** Null when the operation is eliminated. */
+  alpha: number | null
+  beta: number | null
+  timeFactor: { low: number; mean: number; high: number }
+  /** Robot seconds per variant id. */
+  robotTime: Record<string, number>
+  /** Walk or search: eliminate rather than automate. */
+  waste: boolean
+  eliminated: boolean
+  features: CapabilityFeatures
+  reasons: string[]
+  /** Robot type (RobotType.id); null = generic robot. */
+  robot: string | null
+  /** False when this robot type can't do the operation at all (payload, precision, tool). */
+  feasible: boolean
+  source: string
+}
+
+/** A rentable robot type (capability/robots.json, simulated catalogue for the demo). */
+export interface RobotType {
+  id: string
+  name: string
+  class: 'arm' | 'scara' | 'dual_arm' | 'humanoid'
+  payloadKg: number
+  precision: Part['tolerance']
+  mobile: boolean
+  tools: ToolKind[]
+  minPresentation: Presentation
+  presentationLift: number
+  concentration: number
+  timeScale: number
+  failMult: Partial<Record<VerbClass, number>>
+  rentPerMonth: number
+  integration: number
+}
+
+export interface CapabilityTable {
+  line: string
+  version: string
+  priors: CapabilityPrior[]
+  leverCosts: Record<LeverType, Sourced>
+  robots: RobotType[]
+  /** Per operation and robot type: the baseline (levers: []) plus one row per applicable single lever. */
+  operations: CapabilityEstimate[]
+}
+
+// humanoid_sweep.json: written by `python -m optimize.whatif` ("if humanoids got cheaper and faster").
+
+export interface HumanoidSweepPoint {
+  /** x today's humanoid rent and time (lower time is faster). */
+  rentFactor: number
+  speedFactor: number
+  humanoidRentPerMonth: number
+  humanoidTimeScale: number
+  humanoidPrecision: Part['tolerance']
+  /** Best mixed-fleet design at this point. */
+  humanoids: number
+  otherRobots: number
+  humanStations: number
+  sharedStations: [string, string][]
+  objective: Sourced & { note: string }
+  rentPerMonth: Sourced
+  fleet: DesignSummary['fleet']
+}
+
+export interface HumanoidSweep {
+  line: string
+  robot: 'humanoid'
+  base: { rentPerMonth: number; timeScale: number; precision: Part['tolerance'] }
+  source: string
+  points: HumanoidSweepPoint[]
+  /** Smallest change at which humanoids outnumber other robots; null if never. */
+  breakEven: Pick<HumanoidSweepPoint, 'rentFactor' | 'speedFactor' | 'humanoidRentPerMonth' | 'humanoidTimeScale' | 'humanoidPrecision'> | null
 }

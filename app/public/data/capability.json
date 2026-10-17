@@ -1,0 +1,3056 @@
+{
+  "line": "r290_fixture",
+  "version": "v0",
+  "priors": [
+    {
+      "verb": "pick",
+      "presentation": "loose_bin",
+      "mean": 0.8,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "pick",
+      "presentation": "tray",
+      "mean": 0.92,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "pick",
+      "presentation": "kitted",
+      "mean": 0.96,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "pick",
+      "presentation": "fixtured",
+      "mean": 0.985,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "loose_bin",
+      "mean": 0.85,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "tray",
+      "mean": 0.93,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "kitted",
+      "mean": 0.96,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "fixtured",
+      "mean": 0.985,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "loose_bin",
+      "mean": 0.7,
+      "concentration": 12,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "tray",
+      "mean": 0.82,
+      "concentration": 12,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "kitted",
+      "mean": 0.88,
+      "concentration": 12,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "fixtured",
+      "mean": 0.95,
+      "concentration": 12,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "loose_bin",
+      "mean": 0.8,
+      "concentration": 20,
+      "timeFactor": 0.9,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "tray",
+      "mean": 0.9,
+      "concentration": 20,
+      "timeFactor": 0.9,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "kitted",
+      "mean": 0.94,
+      "concentration": 20,
+      "timeFactor": 0.9,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "fixtured",
+      "mean": 0.98,
+      "concentration": 20,
+      "timeFactor": 0.9,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "loose_bin",
+      "mean": 0.6,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "tray",
+      "mean": 0.72,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "kitted",
+      "mean": 0.8,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "fixtured",
+      "mean": 0.88,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "loose_bin",
+      "mean": 0.7,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "tray",
+      "mean": 0.78,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "kitted",
+      "mean": 0.85,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "fixtured",
+      "mean": 0.93,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "loose_bin",
+      "mean": 0.9,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "tray",
+      "mean": 0.93,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "kitted",
+      "mean": 0.95,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "fixtured",
+      "mean": 0.98,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "loose_bin",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "tray",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "kitted",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "fixtured",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "loose_bin",
+      "mean": 0.5,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "tray",
+      "mean": 0.65,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "kitted",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "fixtured",
+      "mean": 0.95,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    }
+  ],
+  "leverCosts": {
+    "eliminate": {
+      "value": 1000,
+      "source": "estimate"
+    },
+    "fixture": {
+      "value": 8000,
+      "source": "estimate"
+    },
+    "kit": {
+      "value": 3000,
+      "source": "estimate"
+    },
+    "goods_to_robot": {
+      "value": 15000,
+      "source": "estimate"
+    },
+    "regroup": {
+      "value": 2000,
+      "source": "estimate"
+    },
+    "decouple": {
+      "value": 5000,
+      "source": "estimate"
+    }
+  },
+  "robots": [
+    {
+      "id": "cobot_arm",
+      "name": "Cobot arm (10 kg)",
+      "class": "arm",
+      "payloadKg": 10,
+      "precision": "medium",
+      "mobile": false,
+      "tools": [
+        "none",
+        "screwdriver",
+        "torque_driver",
+        "scanner",
+        "crimper"
+      ],
+      "minPresentation": "tray",
+      "presentationLift": 0,
+      "concentration": 1.0,
+      "timeScale": 1.0,
+      "failMult": {
+        "screw": 0.8,
+        "connect": 1.3
+      },
+      "rentPerMonth": 1800,
+      "integration": 15000
+    },
+    {
+      "id": "industrial_arm",
+      "name": "Industrial arm (50 kg)",
+      "class": "arm",
+      "payloadKg": 50,
+      "precision": "tight",
+      "mobile": false,
+      "tools": [
+        "none",
+        "torque_driver",
+        "torch",
+        "hose",
+        "strapper",
+        "scanner"
+      ],
+      "minPresentation": "tray",
+      "presentationLift": 0,
+      "concentration": 1.0,
+      "timeScale": 0.7,
+      "failMult": {
+        "braze": 0.8,
+        "connect": 1.2
+      },
+      "rentPerMonth": 3500,
+      "integration": 40000
+    },
+    {
+      "id": "scara",
+      "name": "SCARA (5 kg)",
+      "class": "scara",
+      "payloadKg": 5,
+      "precision": "tight",
+      "mobile": false,
+      "tools": [
+        "none",
+        "screwdriver",
+        "torque_driver"
+      ],
+      "minPresentation": "kitted",
+      "presentationLift": 0,
+      "concentration": 1.1,
+      "timeScale": 0.6,
+      "failMult": {
+        "insert": 0.6,
+        "screw": 0.6,
+        "place": 0.8
+      },
+      "rentPerMonth": 1500,
+      "integration": 12000
+    },
+    {
+      "id": "dual_arm",
+      "name": "Dual-arm (2 x 7 kg)",
+      "class": "dual_arm",
+      "payloadKg": 14,
+      "precision": "tight",
+      "mobile": false,
+      "tools": [
+        "none",
+        "screwdriver",
+        "torque_driver",
+        "crimper",
+        "scanner",
+        "hose"
+      ],
+      "minPresentation": "tray",
+      "presentationLift": 0,
+      "concentration": 0.8,
+      "timeScale": 1.1,
+      "failMult": {
+        "connect": 0.6,
+        "insert": 0.8
+      },
+      "rentPerMonth": 4000,
+      "integration": 20000
+    },
+    {
+      "id": "humanoid",
+      "name": "Humanoid",
+      "class": "humanoid",
+      "payloadKg": 20,
+      "precision": "medium",
+      "mobile": true,
+      "tools": [
+        "none",
+        "screwdriver",
+        "torque_driver",
+        "scanner",
+        "crimper",
+        "hose",
+        "strapper"
+      ],
+      "minPresentation": "loose_bin",
+      "presentationLift": 1,
+      "concentration": 0.6,
+      "timeScale": 1.3,
+      "failMult": {
+        "connect": 1.2
+      },
+      "rentPerMonth": 6000,
+      "integration": 5000
+    }
+  ],
+  "operations": [
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.9328,
+      "p05": 0.8039,
+      "p95": 0.9966,
+      "alpha": 13.479,
+      "beta": 0.971,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from tray: 0.930",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9263,
+      "p95": 1.0,
+      "alpha": 14.242,
+      "beta": 0.208,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9616,
+      "p05": 0.8606,
+      "p95": 0.9997,
+      "alpha": 13.895,
+      "beta": 0.555,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from kitted: 0.960",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.9328,
+      "p05": 0.8039,
+      "p95": 0.9966,
+      "alpha": 13.479,
+      "beta": 0.971,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from tray: 0.930",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "cobot_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9263,
+      "p95": 1.0,
+      "alpha": 14.242,
+      "beta": 0.208,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "cobot_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9616,
+      "p05": 0.8606,
+      "p95": 0.9997,
+      "alpha": 13.895,
+      "beta": 0.555,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from kitted: 0.960",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "cobot_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.9328,
+      "p05": 0.8039,
+      "p95": 0.9966,
+      "alpha": 13.479,
+      "beta": 0.971,
+      "timeFactor": {
+        "low": 0.56,
+        "mean": 0.7,
+        "high": 0.91
+      },
+      "robotTime": {
+        "V6": 9.33,
+        "V9": 14.0,
+        "V12": 18.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from tray: 0.930",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9263,
+      "p95": 1.0,
+      "alpha": 14.242,
+      "beta": 0.208,
+      "timeFactor": {
+        "low": 0.56,
+        "mean": 0.7,
+        "high": 0.91
+      },
+      "robotTime": {
+        "V6": 9.33,
+        "V9": 14.0,
+        "V12": 18.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9616,
+      "p05": 0.8606,
+      "p95": 0.9997,
+      "alpha": 13.895,
+      "beta": 0.555,
+      "timeFactor": {
+        "low": 0.56,
+        "mean": 0.7,
+        "high": 0.91
+      },
+      "robotTime": {
+        "V6": 9.33,
+        "V9": 14.0,
+        "V12": 18.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from kitted: 0.960",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: 6 kg over 5 kg payload",
+        "SCARA (5 kg) can't: needs parts kitted or better, has tray"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: 6 kg over 5 kg payload"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: 6 kg over 5 kg payload"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.9328,
+      "p05": 0.7878,
+      "p95": 0.9982,
+      "alpha": 10.783,
+      "beta": 0.777,
+      "timeFactor": {
+        "low": 0.88,
+        "mean": 1.1,
+        "high": 1.43
+      },
+      "robotTime": {
+        "V6": 14.67,
+        "V9": 22.0,
+        "V12": 29.33
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from tray: 0.930",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9216,
+      "p95": 1.0,
+      "alpha": 11.394,
+      "beta": 0.166,
+      "timeFactor": {
+        "low": 0.88,
+        "mean": 1.1,
+        "high": 1.43
+      },
+      "robotTime": {
+        "V6": 14.67,
+        "V9": 22.0,
+        "V12": 29.33
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9616,
+      "p05": 0.8487,
+      "p95": 0.9999,
+      "alpha": 11.116,
+      "beta": 0.444,
+      "timeFactor": {
+        "low": 0.88,
+        "mean": 1.1,
+        "high": 1.43
+      },
+      "robotTime": {
+        "V6": 14.67,
+        "V9": 22.0,
+        "V12": 29.33
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from kitted: 0.960",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.9616,
+      "p05": 0.8322,
+      "p95": 1.0,
+      "alpha": 8.337,
+      "beta": 0.333,
+      "timeFactor": {
+        "low": 1.04,
+        "mean": 1.3,
+        "high": 1.69
+      },
+      "robotTime": {
+        "V6": 17.33,
+        "V9": 26.0,
+        "V12": 34.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from kitted: 0.960",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9164,
+      "p95": 1.0,
+      "alpha": 8.545,
+      "beta": 0.125,
+      "timeFactor": {
+        "low": 1.04,
+        "mean": 1.3,
+        "high": 1.69
+      },
+      "robotTime": {
+        "V6": 17.33,
+        "V9": 26.0,
+        "V12": 34.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9164,
+      "p95": 1.0,
+      "alpha": 8.545,
+      "beta": 0.125,
+      "timeFactor": {
+        "low": 1.04,
+        "mean": 1.3,
+        "high": 1.69
+      },
+      "robotTime": {
+        "V6": 17.33,
+        "V9": 26.0,
+        "V12": 34.67
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.76,
+      "p05": 0.5778,
+      "p95": 0.9066,
+      "alpha": 12.92,
+      "beta": 4.08,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from loose_bin: 0.800",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.976,
+      "p05": 0.9019,
+      "p95": 1.0,
+      "alpha": 16.592,
+      "beta": 0.408,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.928,
+      "p05": 0.8065,
+      "p95": 0.9938,
+      "alpha": 15.776,
+      "beta": 1.224,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.88,
+      "p05": 0.7327,
+      "p95": 0.9763,
+      "alpha": 14.96,
+      "beta": 2.04,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from tray: 0.900",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Cobot arm (10 kg) can't: needs parts tray or better, has loose_bin"
+      ],
+      "robot": "cobot_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9808,
+      "p05": 0.9101,
+      "p95": 1.0,
+      "alpha": 14.173,
+      "beta": 0.277,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2",
+        "Cobot arm (10 kg) screw skill: failure x0.8"
+      ],
+      "robot": "cobot_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9424,
+      "p05": 0.8215,
+      "p95": 0.9981,
+      "alpha": 13.618,
+      "beta": 0.832,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2",
+        "Cobot arm (10 kg) screw skill: failure x0.8"
+      ],
+      "robot": "cobot_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.904,
+      "p05": 0.7558,
+      "p95": 0.9893,
+      "alpha": 13.063,
+      "beta": 1.387,
+      "timeFactor": {
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
+      },
+      "robotTime": {
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from tray: 0.900",
+        "3 variants: failure x1.2",
+        "Cobot arm (10 kg) screw skill: failure x0.8"
+      ],
+      "robot": "cobot_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Industrial arm (50 kg) can't: needs parts tray or better, has loose_bin"
+      ],
+      "robot": "industrial_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.976,
+      "p05": 0.9019,
+      "p95": 1.0,
+      "alpha": 16.592,
+      "beta": 0.408,
+      "timeFactor": {
+        "low": 0.504,
+        "mean": 0.63,
+        "high": 0.819
+      },
+      "robotTime": {
+        "V6": 12.6,
+        "V9": 18.9,
+        "V12": 25.2
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.928,
+      "p05": 0.8065,
+      "p95": 0.9938,
+      "alpha": 15.776,
+      "beta": 1.224,
+      "timeFactor": {
+        "low": 0.504,
+        "mean": 0.63,
+        "high": 0.819
+      },
+      "robotTime": {
+        "V6": 12.6,
+        "V9": 18.9,
+        "V12": 25.2
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.88,
+      "p05": 0.7327,
+      "p95": 0.9763,
+      "alpha": 14.96,
+      "beta": 2.04,
+      "timeFactor": {
+        "low": 0.504,
+        "mean": 0.63,
+        "high": 0.819
+      },
+      "robotTime": {
+        "V6": 12.6,
+        "V9": 18.9,
+        "V12": 25.2
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from tray: 0.900",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: needs parts kitted or better, has loose_bin"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9283,
+      "p95": 1.0,
+      "alpha": 15.666,
+      "beta": 0.229,
+      "timeFactor": {
+        "low": 0.432,
+        "mean": 0.54,
+        "high": 0.702
+      },
+      "robotTime": {
+        "V6": 10.8,
+        "V9": 16.2,
+        "V12": 21.6
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2",
+        "SCARA (5 kg) screw skill: failure x0.6"
+      ],
+      "robot": "scara",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9568,
+      "p05": 0.8553,
+      "p95": 0.9993,
+      "alpha": 15.208,
+      "beta": 0.687,
+      "timeFactor": {
+        "low": 0.432,
+        "mean": 0.54,
+        "high": 0.702
+      },
+      "robotTime": {
+        "V6": 10.8,
+        "V9": 16.2,
+        "V12": 21.6
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2",
+        "SCARA (5 kg) screw skill: failure x0.6"
+      ],
+      "robot": "scara",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: needs parts kitted or better, has tray"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Dual-arm (2 x 7 kg) can't: needs parts tray or better, has loose_bin"
+      ],
+      "robot": "dual_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.976,
+      "p05": 0.8938,
+      "p95": 1.0,
+      "alpha": 13.274,
+      "beta": 0.326,
+      "timeFactor": {
+        "low": 0.792,
+        "mean": 0.99,
+        "high": 1.287
+      },
+      "robotTime": {
+        "V6": 19.8,
+        "V9": 29.7,
+        "V12": 39.6
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.928,
+      "p05": 0.7911,
+      "p95": 0.9962,
+      "alpha": 12.621,
+      "beta": 0.979,
+      "timeFactor": {
+        "low": 0.792,
+        "mean": 0.99,
+        "high": 1.287
+      },
+      "robotTime": {
+        "V6": 19.8,
+        "V9": 29.7,
+        "V12": 39.6
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.88,
+      "p05": 0.714,
+      "p95": 0.9823,
+      "alpha": 11.968,
+      "beta": 1.632,
+      "timeFactor": {
+        "low": 0.792,
+        "mean": 0.99,
+        "high": 1.287
+      },
+      "robotTime": {
+        "V6": 19.8,
+        "V9": 29.7,
+        "V12": 39.6
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from tray: 0.900",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.88,
+      "p05": 0.6865,
+      "p95": 0.9892,
+      "alpha": 8.976,
+      "beta": 1.224,
+      "timeFactor": {
+        "low": 0.936,
+        "mean": 1.17,
+        "high": 1.521
+      },
+      "robotTime": {
+        "V6": 23.4,
+        "V9": 35.1,
+        "V12": 46.8
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from tray: 0.900",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.976,
+      "p05": 0.883,
+      "p95": 1.0,
+      "alpha": 9.955,
+      "beta": 0.245,
+      "timeFactor": {
+        "low": 0.936,
+        "mean": 1.17,
+        "high": 1.521
+      },
+      "robotTime": {
+        "V6": 23.4,
+        "V9": 35.1,
+        "V12": 46.8
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.976,
+      "p05": 0.883,
+      "p95": 1.0,
+      "alpha": 9.955,
+      "beta": 0.245,
+      "timeFactor": {
+        "low": 0.936,
+        "mean": 1.17,
+        "high": 1.521
+      },
+      "robotTime": {
+        "V6": 23.4,
+        "V9": 35.1,
+        "V12": 46.8
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.928,
+      "p05": 0.7687,
+      "p95": 0.9984,
+      "alpha": 9.466,
+      "beta": 0.734,
+      "timeFactor": {
+        "low": 0.936,
+        "mean": 1.17,
+        "high": 1.521
+      },
+      "robotTime": {
+        "V6": 23.4,
+        "V9": 35.1,
+        "V12": 46.8
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.4384,
+      "p05": 0.1478,
+      "p95": 0.7529,
+      "alpha": 2.746,
+      "beta": 3.518,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 30.0,
+        "V9": 45.0,
+        "V12": 60.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior braze from kitted: 0.850",
+        "semi part: failure x1.5",
+        "tight tolerance: failure x1.6",
+        "tool torch: failure x1.3",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.7379,
+      "p05": 0.4292,
+      "p95": 0.9559,
+      "alpha": 4.622,
+      "beta": 1.642,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 30.0,
+        "V9": 45.0,
+        "V12": 60.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior braze from fixtured: 0.930",
+        "semi part: failure x1.5",
+        "tight tolerance: failure x1.6",
+        "tool torch: failure x1.3",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Cobot arm (10 kg) can't: tight tolerance beyond medium precision",
+        "Cobot arm (10 kg) can't: no torch tool"
+      ],
+      "robot": "cobot_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Cobot arm (10 kg) can't: tight tolerance beyond medium precision",
+        "Cobot arm (10 kg) can't: no torch tool"
+      ],
+      "robot": "cobot_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.5507,
+      "p05": 0.2146,
+      "p95": 0.8635,
+      "alpha": 2.932,
+      "beta": 2.392,
+      "timeFactor": {
+        "low": 0.56,
+        "mean": 0.7,
+        "high": 0.91
+      },
+      "robotTime": {
+        "V6": 21.0,
+        "V9": 31.5,
+        "V12": 42.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior braze from kitted: 0.850",
+        "semi part: failure x1.5",
+        "tight tolerance: failure x1.6",
+        "tool torch: failure x1.3",
+        "3 variants: failure x1.2",
+        "Industrial arm (50 kg) braze skill: failure x0.8"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.7903,
+      "p05": 0.4699,
+      "p95": 0.9827,
+      "alpha": 4.208,
+      "beta": 1.116,
+      "timeFactor": {
+        "low": 0.56,
+        "mean": 0.7,
+        "high": 0.91
+      },
+      "robotTime": {
+        "V6": 21.0,
+        "V9": 31.5,
+        "V12": 42.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior braze from fixtured: 0.930",
+        "semi part: failure x1.5",
+        "tight tolerance: failure x1.6",
+        "tool torch: failure x1.3",
+        "3 variants: failure x1.2",
+        "Industrial arm (50 kg) braze skill: failure x0.8"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: no torch tool"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: no torch tool"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Dual-arm (2 x 7 kg) can't: no torch tool"
+      ],
+      "robot": "dual_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Dual-arm (2 x 7 kg) can't: no torch tool"
+      ],
+      "robot": "dual_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Humanoid can't: tight tolerance beyond medium precision",
+        "Humanoid can't: no torch tool"
+      ],
+      "robot": "humanoid",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "Humanoid can't: tight tolerance beyond medium precision",
+        "Humanoid can't: no torch tool"
+      ],
+      "robot": "humanoid",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.8992,
+      "p05": 0.7483,
+      "p95": 0.9878,
+      "alpha": 12.993,
+      "beta": 1.457,
+      "timeFactor": {
+        "low": 0.64,
+        "mean": 0.8,
+        "high": 1.04
+      },
+      "robotTime": {
+        "V6": 32.0,
+        "V9": 48.0,
+        "V12": 64.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from tray: 0.930",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9712,
+      "p05": 0.8833,
+      "p95": 1.0,
+      "alpha": 14.034,
+      "beta": 0.416,
+      "timeFactor": {
+        "low": 0.64,
+        "mean": 0.8,
+        "high": 1.04
+      },
+      "robotTime": {
+        "V6": 32.0,
+        "V9": 48.0,
+        "V12": 64.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from fixtured: 0.980",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": null,
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "Cobot arm (10 kg) can't: no hose tool"
+      ],
+      "robot": "cobot_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "Cobot arm (10 kg) can't: no hose tool"
+      ],
+      "robot": "cobot_arm",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.8992,
+      "p05": 0.7483,
+      "p95": 0.9878,
+      "alpha": 12.993,
+      "beta": 1.457,
+      "timeFactor": {
+        "low": 0.448,
+        "mean": 0.56,
+        "high": 0.728
+      },
+      "robotTime": {
+        "V6": 22.4,
+        "V9": 33.6,
+        "V12": 44.8
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from tray: 0.930",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9712,
+      "p05": 0.8833,
+      "p95": 1.0,
+      "alpha": 14.034,
+      "beta": 0.416,
+      "timeFactor": {
+        "low": 0.448,
+        "mean": 0.56,
+        "high": 0.728
+      },
+      "robotTime": {
+        "V6": 22.4,
+        "V9": 33.6,
+        "V12": 44.8
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from fixtured: 0.980",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "industrial_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: no hose tool"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "alpha": null,
+      "beta": null,
+      "timeFactor": {
+        "low": 0.0,
+        "mean": 0.0,
+        "high": 0.0
+      },
+      "robotTime": {},
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "SCARA (5 kg) can't: no hose tool"
+      ],
+      "robot": "scara",
+      "feasible": false,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.8992,
+      "p05": 0.7291,
+      "p95": 0.9919,
+      "alpha": 10.395,
+      "beta": 1.165,
+      "timeFactor": {
+        "low": 0.704,
+        "mean": 0.88,
+        "high": 1.144
+      },
+      "robotTime": {
+        "V6": 35.2,
+        "V9": 52.8,
+        "V12": 70.4
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from tray: 0.930",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9712,
+      "p05": 0.8737,
+      "p95": 1.0,
+      "alpha": 11.227,
+      "beta": 0.333,
+      "timeFactor": {
+        "low": 0.704,
+        "mean": 0.88,
+        "high": 1.144
+      },
+      "robotTime": {
+        "V6": 35.2,
+        "V9": 52.8,
+        "V12": 70.4
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from fixtured: 0.980",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "dual_arm",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.928,
+      "p05": 0.7546,
+      "p95": 0.9991,
+      "alpha": 8.046,
+      "beta": 0.624,
+      "timeFactor": {
+        "low": 0.832,
+        "mean": 1.04,
+        "high": 1.352
+      },
+      "robotTime": {
+        "V6": 41.6,
+        "V9": 62.4,
+        "V12": 83.2
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from kitted: 0.950",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9712,
+      "p05": 0.8606,
+      "p95": 1.0,
+      "alpha": 8.42,
+      "beta": 0.25,
+      "timeFactor": {
+        "low": 0.832,
+        "mean": 1.04,
+        "high": 1.352
+      },
+      "robotTime": {
+        "V6": 41.6,
+        "V9": 62.4,
+        "V12": 83.2
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from fixtured: 0.980",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "robot": "humanoid",
+      "feasible": true,
+      "source": "estimate"
+    }
+  ]
+}
