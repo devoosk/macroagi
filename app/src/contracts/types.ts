@@ -89,6 +89,10 @@ export interface Station {
   bufferAfter: number
   /** Parallel bays (e.g. split test station). Defaults to 1. */
   bays?: number
+  /** Redesigns: id of the human station that takes units after a robot failure. */
+  fallback?: string
+  /** True for an off-line fallback station (not part of the serial flow). */
+  offline?: boolean
 }
 
 export interface Variant {
@@ -158,6 +162,8 @@ export interface EventLog {
 export interface SweepPoint {
   reliability: number
   throughput: Sourced
+  /** 95% confidence interval of the mean throughput, units/h. */
+  ci95?: [number, number]
 }
 
 export interface MigrationStage {

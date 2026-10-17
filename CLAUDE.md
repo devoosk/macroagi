@@ -34,3 +34,9 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
 - `npm run typecheck`, `npm run build`, `npm test` (vitest)
 - `npm run gen`: regenerate dummy `line.json` and event logs
 - `npm run export -- --cam cctv:S05 --from 0 --to 120`: export frames at 1 fps of sim time to `capture/frames/`
+
+## Simulation (run from the repo root)
+- Setup: `python3 -m venv simulate/.venv && simulate/.venv/bin/pip install -r simulate/requirements.txt`
+- `simulate/.venv/bin/python -m simulate --sweep`: write `events_current.json` and merge the current line's sweep into `results.json` (`--design redesign` for a redesign; `--shifts N` to shorten the sweep)
+- `simulate/.venv/bin/python -m pytest tests/simulate`
+- Event semantics are documented at the top of `simulate/simulate.py` and match `tools/gen/simulate.ts`. Robot parameters missing from `line.json` live in `simulate/params.py`.
