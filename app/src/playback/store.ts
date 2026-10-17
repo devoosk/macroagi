@@ -1,29 +1,11 @@
 import { create } from 'zustand'
-import type { EventLog, Line, SimEvent, Station } from '../contracts/types'
+import type { EventLog, Line } from '../contracts/types'
+import { getIndex } from './index'
 
-export type StationState = 'idle' | 'working' | 'blocked' | 'starved' | 'failed'
-
-export interface WorkerActivity {
-  station: string
-  operation?: string
-  /** 0..1 progress through the current operation. */
-  phase: number
-}
-
-export interface UnitPosition {
-  unit: string
-  variant: string
-  /** Station the unit is at or moving toward. */
-  station: string
-  /** 0 = at station, (0,1) = travelling from previous station. */
-  travel: number
-}
-
-export interface SceneState {
-  stations: Record<string, StationState>
-  workers: Record<string, WorkerActivity>
-  units: UnitPosition[]
-}
+// Types live in ./types; re-exported here because other modules import them from the store.
+export type { SceneState, StationState, UnitMotion, UnitPosition, WorkerActivity, WorkerVerb } from './types'
+/** Indexed implementation (binary search, memoised by log identity). Same signature as the original stub. */
+export { selectStateAt } from './index'
 
 export type DesignKey = 'current' | 'redesign'
 
@@ -37,54 +19,63 @@ export interface PlaybackStore {
   setSpeed: (s: number) => void
   setPlaying: (p: boolean) => void
   load: (design: DesignKey, line: Line, log: EventLog) => void
+  // --- additive extensions ---
+  /** Longest loaded log duration (seconds). The clock wraps or stops here. */
+  duration: number
+  /** Loop back to 0 at the end (true) or stop (false). */
+  loop: boolean
+  setLoop: (loop: boolean) => void
+  togglePlaying: () => void
+  /** Advance by dt seconds of sim time, honouring loop/stop at `duration`. */
+  advance: (dt: number) => void
 }
 
-export const usePlayback = create<PlaybackStore>((set) => ({
+export const usePlayback = create<PlaybackStore>((set, get) => ({
   simTime: 0,
   speed: 10,
   playing: false,
   lines: {},
   logs: {},
+  duration: 0,
+  loop: true,
   setTime: (t) => set({ simTime: Math.max(0, t) }),
   setSpeed: (speed) => set({ speed }),
   setPlaying: (playing) => set({ playing }),
+  setLoop: (loop) => set({ loop }),
+  togglePlaying: () => {
+    const s = get()
+    // Pressing play at the end restarts.
+    if (!s.playing && s.duration > 0 && s.simTime >= s.duration) set({ simTime: 0, playing: true })
+    else set({ playing: !s.playing })
+  },
+  advance: (dt) => {
+    const s = get()
+    const d = s.duration
+    let t = s.simTime + dt
+    if (d > 0 && t >= d) {
+      if (s.loop) t = t % d
+      else return set({ simTime: d, playing: false })
+    }
+    set({ simTime: Math.max(0, t) })
+  },
   load: (design, line, log) =>
-    set((s) => ({ lines: { ...s.lines, [design]: line }, logs: { ...s.logs, [design]: log } })),
+    set((s) => {
+      const logs = { ...s.logs, [design]: log }
+      const lines = { ...s.lines, [design]: line }
+      let duration = 0
+      for (const k of Object.keys(logs) as DesignKey[]) {
+        const l = logs[k]
+        const ln = lines[k]
+        if (l && ln) duration = Math.max(duration, getIndex(ln, l).duration)
+      }
+      return { lines, logs, duration }
+    }),
 }))
 
-/**
- * Pure: scene state at time t. Stub implementation (linear scan); the playback
- * workstream replaces this with an indexed version with the same signature.
- */
-export function selectStateAt(line: Line, log: EventLog, t: number): SceneState {
-  const stations: Record<string, StationState> = {}
-  const workers: Record<string, WorkerActivity> = {}
-  const lastAt = new Map<string, SimEvent>()
-  const opAt = new Map<string, { ev: SimEvent; end?: number }>()
-  const unitAt = new Map<string, SimEvent>()
-
-  for (const s of line.stations) stations[s.id] = 'idle'
-  for (const ev of log.events) {
-    if (ev.time > t) break
-    if (ev.event === 'op_start') opAt.set(ev.station, { ev })
-    else if (ev.event === 'op_end') opAt.delete(ev.station)
-    else lastAt.set(ev.station, ev)
-    if (ev.event === 'start') unitAt.set(ev.unit, ev)
-    if (ev.event === 'end' && ev.station === line.stations[line.stations.length - 1]?.id) unitAt.delete(ev.unit)
-  }
-  for (const [sid, ev] of lastAt) {
-    stations[sid] =
-      ev.event === 'start' ? 'working' : ev.event === 'blocked' ? 'blocked' : ev.event === 'starved' ? 'starved' : ev.event === 'failed' ? 'failed' : 'idle'
-  }
-  for (const s of line.stations as Station[]) {
-    const op = opAt.get(s.id)
-    let phase = 0
-    if (op) {
-      const end = log.events.find((e) => e.event === 'op_end' && e.station === s.id && e.operation === op.ev.operation && e.time >= op.ev.time)
-      phase = end ? Math.min(1, (t - op.ev.time) / Math.max(1e-6, end.time - op.ev.time)) : 0
-    }
-    workers[s.id] = { station: s.id, operation: op?.ev.operation, phase }
-  }
-  const units: UnitPosition[] = [...unitAt.values()].map((ev) => ({ unit: ev.unit, variant: ev.variant, station: ev.station, travel: 0 }))
-  return { stations, workers, units }
+/** Memoised index for a loaded design (undefined until loaded). */
+export function indexFor(design: DesignKey) {
+  const s = usePlayback.getState()
+  const line = s.lines[design]
+  const log = s.logs[design]
+  return line && log ? getIndex(line, log) : undefined
 }
