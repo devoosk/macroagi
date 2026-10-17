@@ -1,0 +1,180 @@
+{
+  "verbs": [
+    {
+      "id": "pick",
+      "description": "Worker takes parts from a rack, shelf or bin and puts them into a kit tray or onto the unit, hand closing on each part; may scan parts with a handheld scanner while picking. The parts move."
+    },
+    {
+      "id": "place",
+      "description": "Worker lowers a held part onto the unit or fixture and releases it."
+    },
+    {
+      "id": "insert",
+      "description": "Worker pushes a part into a hole, slot or socket on the unit, aligning it with both hands."
+    },
+    {
+      "id": "screw",
+      "description": "Worker drives a fastener with a handheld screwdriver or torque driver held against the unit."
+    },
+    {
+      "id": "connect",
+      "description": "Worker joins a cable, plug, hose or connector to a mating part; includes crimping and wiring."
+    },
+    {
+      "id": "braze",
+      "description": "Worker holds a gas torch with a visible flame against a pipe joint."
+    },
+    {
+      "id": "inspect",
+      "description": "Worker checks the assembled unit in front of them: looks closely at it, points a handheld scanner at its label, or watches a test rig connected to it. Hands mostly still; no parts move."
+    },
+    {
+      "id": "walk",
+      "description": "Worker walks across the floor away from the unit, empty-handed or carrying a part or box. In the first-person view the floor and aisle markings fill the frame. In the station camera, the worker walking out of view counts as walk."
+    },
+    {
+      "id": "search",
+      "description": "Worker looks through bins or shelves for the right part, hands moving between containers without a clear pick."
+    }
+  ],
+  "parts": [
+    {
+      "id": "P_base_pan",
+      "name": "Galvanised base pan",
+      "hint": "large flat galvanised sheet-metal tray, the unit's floor; everything is built on it"
+    },
+    {
+      "id": "P_compressor",
+      "name": "Inverter rotary compressor (R290)",
+      "hint": "black upright cylinder about 35 cm tall with pipe stubs on top"
+    },
+    {
+      "id": "P_4way_valve",
+      "name": "4-way reversing valve",
+      "hint": "small brass valve body with four copper pipe stubs and a coil on the side"
+    },
+    {
+      "id": "P_eev",
+      "name": "Electronic expansion valve",
+      "hint": "small valve with a cylindrical motor head and two thin copper pipes"
+    },
+    {
+      "id": "P_phe",
+      "name": "Brazed plate heat exchanger",
+      "hint": "rectangular stack of thin stainless plates with four round ports"
+    },
+    {
+      "id": "P_coil",
+      "name": "Finned evaporator coil",
+      "hint": "large flat block of thin aluminium fins with copper tube ends at the sides"
+    },
+    {
+      "id": "P_fan_motor",
+      "name": "EC fan motor",
+      "hint": "compact round black motor with a mounting bracket; often carried in its small cardboard box"
+    },
+    {
+      "id": "P_fan_blade",
+      "name": "Axial fan blade 550 mm",
+      "hint": "large black plastic propeller, about half a metre across"
+    },
+    {
+      "id": "P_pcb",
+      "name": "Inverter PCB in e-box",
+      "hint": "grey or black electronics box with a circuit board and connectors"
+    },
+    {
+      "id": "P_harness",
+      "name": "Wiring harness (variant-specific)",
+      "hint": "bundle of coloured wires with plastic connectors at the ends"
+    },
+    {
+      "id": "P_side_panel",
+      "name": "Powder-coated side panel",
+      "hint": "large flat painted metal panel, nearly as tall as the unit"
+    },
+    {
+      "id": "P_top_cover",
+      "name": "Top cover",
+      "hint": "large flat painted metal lid covering the top of the unit"
+    },
+    {
+      "id": "P_grille",
+      "name": "Fan guard grille",
+      "hint": "round or square wire-mesh guard over the fan opening"
+    },
+    {
+      "id": "P_screw_m6",
+      "name": "Screw M6x12 self-tapping",
+      "hint": "small screws, usually only visible as a screwdriver driving into sheet metal"
+    },
+    {
+      "id": "P_screw_m8",
+      "name": "Screw M8x20 with nut",
+      "hint": "bolts with nuts, driven with a torque driver into the base or brackets"
+    },
+    {
+      "id": "P_braze_ring",
+      "name": "Silver brazing ring (15% Ag)",
+      "hint": "tiny silver ring slipped onto a copper pipe end before brazing"
+    },
+    {
+      "id": "P_r290",
+      "name": "R290 refrigerant charge",
+      "hint": "refrigerant: not visible itself; a charging hose connected to a service port on the unit"
+    },
+    {
+      "id": "P_carton",
+      "name": "Carton and corner pads",
+      "hint": "large brown cardboard box that encloses the whole finished unit, with foam corner pads, at the packing station"
+    }
+  ],
+  "tools": [
+    {
+      "id": "none",
+      "description": "bare hands"
+    },
+    {
+      "id": "screwdriver",
+      "description": "handheld electric screwdriver, pistol grip"
+    },
+    {
+      "id": "torque_driver",
+      "description": "larger torque driver or nutrunner, often on a hanging balancer cable"
+    },
+    {
+      "id": "torch",
+      "description": "brazing torch with a visible flame and gas hoses"
+    },
+    {
+      "id": "crimper",
+      "description": "hand crimping pliers for wire terminals"
+    },
+    {
+      "id": "scanner",
+      "description": "handheld barcode scanner or test probe"
+    },
+    {
+      "id": "hose",
+      "description": "service hose or test line connected to the unit"
+    },
+    {
+      "id": "strapper",
+      "description": "strapping tool or tape for packing"
+    }
+  ],
+  "unitSizes": [
+    {
+      "id": "small",
+      "description": "unit about 1.0 m wide and 0.75 m tall"
+    },
+    {
+      "id": "medium",
+      "description": "unit about 1.1 m wide and 0.85 m tall"
+    },
+    {
+      "id": "large",
+      "description": "unit about 1.25 m wide and 0.95 m tall"
+    }
+  ]
+}

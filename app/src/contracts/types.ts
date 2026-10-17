@@ -98,6 +98,10 @@ export interface Station {
   robot?: string
   /** Redesigns: neighbouring station served by the same mobile robot. */
   sharedWith?: string
+  /** Redesigns: id of the human station that takes units after a robot failure. */
+  fallback?: string
+  /** True for an off-line fallback station (not part of the serial flow). */
+  offline?: boolean
 }
 
 export interface Variant {
@@ -185,6 +189,8 @@ export interface EventLog {
 export interface SweepPoint {
   reliability: number
   throughput: Sourced
+  /** 95% confidence interval of the mean throughput, units/h. */
+  ci95?: [number, number]
 }
 
 export interface MigrationStage {
@@ -192,6 +198,8 @@ export interface MigrationStage {
   name: string
   stations: string[]
   gate: string
+  /** optimize.compare: simulated throughput of the line after stages 1..this one. */
+  throughput?: Sourced
 }
 
 export interface DesignResult {
@@ -201,10 +209,49 @@ export interface DesignResult {
   requiredReliability: Sourced
   sweep: SweepPoint[]
   stages: MigrationStage[]
+  /** optimize.compare: robots are rented, so rent sits next to capex. */
+  rentPerMonth?: Sourced
+  /** optimize.compare: people + robot rent + integration + levers over 3 years, EUR. */
+  cost3y?: Sourced
+  /** optimize.compare: 1 = best (throughput, then 3-year cost, then required reliability). */
+  rank?: number
 }
 
 export interface Results {
   designs: DesignResult[]
+}
+
+/** One labelled span from capture/ (VLM output). Seconds; end is exclusive. */
+export interface Segment {
+  /** Camera id (`cctv:S01`), or `cctv:S01+fp:S01` for a fused station stream. */
+  cam: string
+  station: string
+  start: number
+  end: number
+  verb: VerbClass
+  parts: string[]
+  confidence: number
+  /** Bay index, for per-bay streams at multi-bay stations. */
+  bay?: number
+  /** One unit at one stream, e.g. `cctv:S01+fp:S01#3`. */
+  visit?: string
+  unit_size?: 'small' | 'medium' | 'large'
+  tool?: ToolKind
+}
+
+export interface SegmentLog {
+  /** Provenance tag for times derived from these segments. */
+  source: string
+  fps: number
+  model: string
+  promptVersion: string
+  framesDir: string
+  /** Per station: [from, to, step] seconds of footage that was labelled. */
+  coverage: Record<string, [number, number, number]>
+  /** Fused per station. */
+  segments: Segment[]
+  /** Per camera, before fusion. */
+  cameraSegments: Segment[]
 }
 
 // capability.json: written by `python -m capability` (plan step 2).

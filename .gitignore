@@ -10,5 +10,8 @@ __pycache__/
 .claude/settings.local.json
 .claude/worktrees/
 capture/ground_truth/
+capture/.cache/
+capture/out/
 .env
 .env.*
+capture/export.log

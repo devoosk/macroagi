@@ -1,0 +1,410 @@
+{
+  "which": "segments",
+  "iouThreshold": 0.5,
+  "overall": {
+    "slots": 6600,
+    "slotVerbAccuracy": 0.548030303030303,
+    "activeVerbAccuracy": 0.315690488984417,
+    "parts": {
+      "precision": 0.5062706270627063,
+      "recall": 0.34073745002221234,
+      "f1": 0.40732873074880516
+    },
+    "segments": {
+      "precision": 0.0330188679245283,
+      "recall": 0.08536585365853659,
+      "f1": 0.047619047619047616,
+      "predicted": 212,
+      "truth": 82
+    },
+    "unitSizeAccuracy": 0.3333333333333333,
+    "toolAccuracy": 1.0,
+    "meanBoundaryError": 5.6460714285714335,
+    "operationRecovery": 0.12,
+    "operationsSeen": [
+      "O01",
+      "O02",
+      "O03",
+      "O04",
+      "O05",
+      "O06",
+      "O07",
+      "O08",
+      "O09",
+      "O10",
+      "O11",
+      "O12",
+      "O13",
+      "O14",
+      "O15",
+      "O16",
+      "O17",
+      "O18",
+      "O19",
+      "O20",
+      "O21",
+      "O22",
+      "O23",
+      "O24",
+      "O25"
+    ],
+    "operationsRecovered": [
+      "O01",
+      "O10",
+      "O24"
+    ],
+    "confusion": {
+      "braze": {
+        "braze": 342,
+        "idle": 13
+      },
+      "connect": {
+        "braze": 4,
+        "connect": 155,
+        "idle": 429,
+        "screw": 2
+      },
+      "idle": {
+        "idle": 2442,
+        "walk": 436
+      },
+      "insert": {
+        "idle": 134,
+        "insert": 7,
+        "place": 48,
+        "walk": 5
+      },
+      "inspect": {
+        "idle": 636,
+        "inspect": 507,
+        "screw": 19
+      },
+      "pick": {
+        "idle": 38,
+        "pick": 10,
+        "search": 4,
+        "walk": 80
+      },
+      "place": {
+        "connect": 12,
+        "idle": 565,
+        "place": 22,
+        "search": 13,
+        "walk": 17
+      },
+      "screw": {
+        "idle": 336,
+        "place": 12,
+        "screw": 48,
+        "search": 7
+      },
+      "search": {
+        "idle": 15,
+        "search": 2,
+        "walk": 80
+      },
+      "walk": {
+        "idle": 77,
+        "search": 1,
+        "walk": 82
+      }
+    }
+  },
+  "streams": {
+    "S01/cctv:S01+fp:S01": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.44666666666666666,
+      "activeVerbAccuracy": 0.20485175202156333,
+      "parts": {
+        "precision": 0.27419354838709675,
+        "recall": 0.07925407925407925,
+        "f1": 0.12296564195298372
+      },
+      "segments": {
+        "precision": 0.02631578947368421,
+        "recall": 0.09090909090909091,
+        "f1": 0.04081632653061224,
+        "predicted": 38,
+        "truth": 11
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": 1.0,
+      "meanBoundaryError": 3.0130000000000337,
+      "operationRecovery": 0.3333333333333333,
+      "operationsSeen": [
+        "O01",
+        "O02",
+        "O03"
+      ],
+      "operationsRecovered": [
+        "O01"
+      ]
+    },
+    "S02/cctv:S02+fp:S02": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.4816666666666667,
+      "activeVerbAccuracy": 0.02491103202846975,
+      "parts": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 16,
+        "truth": 10
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O04",
+        "O05",
+        "O06"
+      ],
+      "operationsRecovered": []
+    },
+    "S03/cctv:S03+fp:S03": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.33,
+      "activeVerbAccuracy": 0.06451612903225806,
+      "parts": {
+        "precision": 0.4117647058823529,
+        "recall": 0.3333333333333333,
+        "f1": 0.36842105263157887
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 22,
+        "truth": 11
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O07",
+        "O08",
+        "O09"
+      ],
+      "operationsRecovered": []
+    },
+    "S04/cctv:S04+fp:S04": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.855,
+      "activeVerbAccuracy": 0.9633802816901409,
+      "parts": {
+        "precision": 0.7631205673758865,
+        "recall": 0.4658008658008658,
+        "f1": 0.578494623655914
+      },
+      "segments": {
+        "precision": 0.023255813953488372,
+        "recall": 0.14285714285714285,
+        "f1": 0.04,
+        "predicted": 43,
+        "truth": 7
+      },
+      "unitSizeAccuracy": 0.0,
+      "toolAccuracy": 1.0,
+      "meanBoundaryError": 22.61450000000002,
+      "operationRecovery": 0.5,
+      "operationsSeen": [
+        "O10",
+        "O11"
+      ],
+      "operationsRecovered": [
+        "O10"
+      ]
+    },
+    "S05/cctv:S05+fp:S05": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.03333333333333333,
+      "activeVerbAccuracy": 0.03333333333333333,
+      "parts": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 7,
+        "truth": 7
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O12",
+        "O13"
+      ],
+      "operationsRecovered": []
+    },
+    "S06/cctv:S06+fp:S06": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.6816666666666666,
+      "activeVerbAccuracy": 0.3146067415730337,
+      "parts": {
+        "precision": 0.9130434782608695,
+        "recall": 0.9545454545454546,
+        "f1": 0.9333333333333332
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 10,
+        "truth": 4
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O14"
+      ],
+      "operationsRecovered": []
+    },
+    "S07/cctv:S07+fp:S07": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.3983333333333333,
+      "activeVerbAccuracy": 0.09836065573770492,
+      "parts": {
+        "precision": 0.8,
+        "recall": 0.4444444444444444,
+        "f1": 0.5714285714285714
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 10,
+        "truth": 11
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O15",
+        "O16",
+        "O17"
+      ],
+      "operationsRecovered": []
+    },
+    "S08/cctv:S08+fp:S08": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.5883333333333334,
+      "activeVerbAccuracy": 0.1453287197231834,
+      "parts": {
+        "precision": 0.45161290322580644,
+        "recall": 0.23430962343096234,
+        "f1": 0.3085399449035813
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 13,
+        "truth": 9
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O18",
+        "O19",
+        "O20"
+      ],
+      "operationsRecovered": []
+    },
+    "S09/cctv:S09+fp:S09": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.7783333333333333,
+      "activeVerbAccuracy": 0.7783333333333333,
+      "parts": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "segments": {
+        "precision": 0.07142857142857142,
+        "recall": 0.4,
+        "f1": 0.12121212121212122,
+        "predicted": 28,
+        "truth": 5
+      },
+      "unitSizeAccuracy": 0.5,
+      "toolAccuracy": 1.0,
+      "meanBoundaryError": 3.8600000000000136,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O21",
+        "O22"
+      ],
+      "operationsRecovered": []
+    },
+    "S10/cctv:S10+fp:S10": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.7683333333333333,
+      "activeVerbAccuracy": 0.875,
+      "parts": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "segments": {
+        "precision": 0.15789473684210525,
+        "recall": 0.75,
+        "f1": 0.2608695652173913,
+        "predicted": 19,
+        "truth": 4
+      },
+      "unitSizeAccuracy": 0.3333333333333333,
+      "toolAccuracy": 1.0,
+      "meanBoundaryError": 2.058333333333318,
+      "operationRecovery": 0.5,
+      "operationsSeen": [
+        "O23",
+        "O24"
+      ],
+      "operationsRecovered": [
+        "O24"
+      ]
+    },
+    "S11/cctv:S11+fp:S11": {
+      "slots": 600,
+      "slotVerbAccuracy": 0.6666666666666666,
+      "activeVerbAccuracy": 0.012195121951219513,
+      "parts": {
+        "precision": 0.25,
+        "recall": 0.25,
+        "f1": 0.25
+      },
+      "segments": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "predicted": 6,
+        "truth": 3
+      },
+      "unitSizeAccuracy": null,
+      "toolAccuracy": null,
+      "meanBoundaryError": null,
+      "operationRecovery": 0.0,
+      "operationsSeen": [
+        "O25"
+      ],
+      "operationsRecovered": []
+    }
+  }
+}

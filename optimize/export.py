@@ -55,6 +55,7 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
                 raise ValueError(f"{st['id']}: {a} after {b} breaks a hard edge")
     for v in out["variants"]:
         v["operations"] = [o for o in v["operations"] if o not in gone]
+    add_fallback(out)
 
     levers = used_levers(c, sol.choice, [lid for lid in sol.used if lid in c.moves.values()])
     # Keep the line's lever catalogue; add any generated levers this design uses.
@@ -111,3 +112,25 @@ def stages(line: dict, c: Candidates, sol: Solution) -> list[dict]:
     ]
     return [{"id": f"M{i}", "name": n, "stations": st, "gate": g}
             for i, (n, st, g) in enumerate([x for x in out if x[1]], start=1)]
+
+
+FALLBACK_ID = "FB"
+
+
+def add_fallback(line: dict) -> None:
+    """One off-line human fallback station shared by all robot cells: a unit whose robot op
+    fails is finished there by a person and rejoins the line (plan step 4)."""
+    line["stations"] = [s for s in line["stations"] if s["id"] != FALLBACK_ID]
+    robots = [s for s in line["stations"] if s["staff"] == "robot"]
+    for s in line["stations"]:
+        s.pop("fallback", None)
+    if not robots:
+        return
+    for s in robots:
+        s["fallback"] = FALLBACK_ID
+    xs = sorted(s["x"] for s in robots)
+    line["stations"].append({
+        "id": FALLBACK_ID, "name": "Robot fallback", "kind": robots[0]["kind"], "operations": [],
+        "staff": "human", "x": xs[len(xs) // 2], "y": -4.0, "rot": 0, "bufferBefore": 2, "bufferAfter": 0, "bays": 1,
+        "offline": True,
+    })

@@ -4,9 +4,12 @@ version = "0.0.0"
 description = "MacroAGI v0 Python modules: capture, graph, capability, optimize, simulate"
 requires-python = ">=3.11"
 dependencies = [
+    "anthropic>=0.125",
     "networkx>=3.6.1",
     "ortools>=9.15.6755",
+    "pillow>=10",
     "scipy>=1.13",
+    "simpy>=4.1",
 ]
 
 [dependency-groups]
