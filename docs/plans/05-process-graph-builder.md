@@ -1,6 +1,6 @@
 # Item 5: Process-graph builder (`graph/`) — implementation plan
 
-Status: draft. Item 3 has not defined `segments.json` yet, so the input shape below is a proposal to reconcile with item 3. The builder works from pixels only: `line.json` and `events_*.json` are read only by `graph/score.py` (scoring) and `graph/synth.py` (test input), never by the builder.
+Status: built (v0) against synthetic segments. Pairs seen fewer than 5 times stay hard (the plan's risks table) and are counted in `graph_evidence.json` `lowDataEdges` and flagged `review: true`. Variant fallback without `unit_size` is pooled times, not k-means. Item 3 has not defined `segments.json` yet, so the input shape below is a proposal to reconcile with item 3. The builder works from pixels only: `line.json` and `events_*.json` are read only by `graph/score.py` (scoring) and `graph/synth.py` (test input), never by the builder.
 
 ## Inputs
 
