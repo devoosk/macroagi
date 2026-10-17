@@ -7,10 +7,10 @@ from .conftest import write_camera
 
 def test_discover_and_list(tmp_path):
     write_camera(tmp_path, "cctv_S01", "cctv", "S01", range(10))
-    write_camera(tmp_path, "fpv_S01", "fpv", "S01", range(10))
+    write_camera(tmp_path, "fp_S01", "fpv", "S01", range(10))
     cams = discover(tmp_path)
-    assert [c.id for c in cams] == ["cctv_S01", "fpv_S01"]
-    assert [c.id for c in discover(tmp_path, ["fpv_S01"])] == ["fpv_S01"]
+    assert [c.id for c in cams] == ["cctv_S01", "fp_S01"]
+    assert [c.id for c in discover(tmp_path, ["fp_S01"])] == ["fp_S01"]
     frames = list_frames(cams[0], t_from=2, t_to=5)
     assert [f.t for f in frames] == [2, 3, 4]
 
@@ -21,12 +21,21 @@ def test_discover_missing_camera(tmp_path):
         discover(tmp_path, ["cctv_S99"])
 
 
-def test_frame_time_uses_fps(tmp_path):
-    write_camera(tmp_path, "cctv_S01", "cctv", "S01", [0, 1, 2], fps=2)
+@pytest.mark.parametrize("listed", [True, False])
+def test_fractional_times(tmp_path, listed):
+    write_camera(tmp_path, "cctv_S01", "cctv", "S01", [0, 0.5, 1.0, 1.5], fps=2, listed=listed)
     cam = discover(tmp_path)[0]
     frames = list_frames(cam)
-    assert [f.path.stem for f in frames] == ["000000", "000002", "000004"]
-    assert [f.t for f in frames] == [0, 1, 2]
+    assert [f.path.name for f in frames] == ["000000.jpg", "000000-500.jpg", "000001.jpg", "000001-500.jpg"]
+    assert [f.t for f in frames] == [0, 0.5, 1.0, 1.5]
+    assert cam.step == 0.5
+
+
+def test_exporter_ids_and_types(tmp_path):
+    write_camera(tmp_path, "fp_S02", "fpv", "S02", range(2))
+    write_camera(tmp_path, "cctv_S05#1", "cctv", "S05", range(2))
+    cams = discover(tmp_path, ["cctv:S05#1", "fp_S02"])
+    assert [(c.id, c.kind, c.station) for c in cams] == [("cctv_S05#1", "cctv", "S05"), ("fp_S02", "fpv", "S02")]
 
 
 @pytest.mark.parametrize("n,size,overlap", [(20, 8, 2), (8, 8, 2), (5, 8, 2), (100, 8, 0), (31, 6, 3)])

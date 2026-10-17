@@ -61,7 +61,7 @@ def test_slotmap_inverse():
 
 def test_fuse_weights(tmp_path):
     write_camera(tmp_path, "cctv_S01", "cctv", "S01", range(3))
-    write_camera(tmp_path, "fpv_S01", "fpv", "S01", range(3))
+    write_camera(tmp_path, "fp_S01", "fpv", "S01", range(3))
     cctv, fpv = discover(tmp_path)
     screw, place = ("screw", ("P_screw",)), ("place", ("P_base",))
     fused = fuse_station(

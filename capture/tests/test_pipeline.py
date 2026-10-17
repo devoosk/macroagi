@@ -9,14 +9,20 @@ from capture.frames import discover, list_frames, make_windows
 from capture.label import label_footage
 from capture.score import score
 from capture.vlm import CachedLabeller, ClaudeLabeller, FakeLabeller, LabelError, sanitize
-from capture.vocab import load_vocab
+from capture.vocab import Vocab, load_vocab
 
-from .conftest import truth_answer
+from .conftest import LINE, truth_answer
+
+
+def fixture_vocab() -> Vocab:
+    """Real verbs, parts from the frozen fixture line (so tests don't follow vocab.json edits)."""
+    parts = json.loads(LINE.read_text())["parts"]
+    return Vocab(verbs=load_vocab().verbs, parts=tuple((p["id"], p["name"], "") for p in parts))
 
 
 def test_end_to_end_with_perfect_labeller(footage, gts):
     log = label_footage(footage, FakeLabeller(truth_answer(gts)), workers=4, gap_tol=0, min_dur=0)
-    assert {s["cam"] for s in log["segments"]} == {f"cctv_{st}+fpv_{st}" for st in log["coverage"]}
+    assert {s["cam"] for s in log["segments"]} == {f"cctv_{st}+fp_{st}" for st in log["coverage"]}
     r = score(log, gts)["overall"]
     assert r["slotVerbAccuracy"] == 1
     assert r["operationRecovery"] == 1
@@ -59,7 +65,7 @@ def test_sanitize_clamps_and_filters(tmp_path):
 
     write_camera(tmp_path, "c", "cctv", "S01", range(10, 18))
     w = make_windows(list_frames(discover(tmp_path)[0]))[0]
-    vocab = load_vocab()
+    vocab = fixture_vocab()
     out = sanitize(
         [
             {"start_t": 5, "end_t": 12, "verb": "screw", "parts": ["P_screw", "P_bogus"], "confidence": 1.4},
@@ -86,7 +92,7 @@ class FakeClient:
 def window(tmp_path):
     from .conftest import write_camera
 
-    write_camera(tmp_path, "fpv_S02", "fpv", "S02", range(4))
+    write_camera(tmp_path, "fp_S02", "fpv", "S02", range(4))
     return make_windows(list_frames(discover(tmp_path)[0]), 4, 0)[0]
 
 
@@ -94,7 +100,7 @@ def test_claude_request_and_parse(tmp_path):
     w = window(tmp_path)
     body = {"segments": [{"start_t": 1, "end_t": 2, "verb": "braze", "parts": ["P_pipe"], "confidence": 0.8}]}
     client = FakeClient(SimpleNamespace(stop_reason="end_turn", stop_details=None, content=[SimpleNamespace(type="text", text=json.dumps(body))]))
-    labeller = ClaudeLabeller(load_vocab(), client=client)
+    labeller = ClaudeLabeller(fixture_vocab(), client=client)
     assert labeller.label(w) == [{"start_t": 1, "end_t": 2, "verb": "braze", "parts": ["P_pipe"], "confidence": 0.8}]
 
     kw = client.kwargs
@@ -110,4 +116,4 @@ def test_claude_request_and_parse(tmp_path):
 def test_claude_refusal_raises(tmp_path):
     client = FakeClient(SimpleNamespace(stop_reason="refusal", stop_details={"category": None}, content=[]))
     with pytest.raises(LabelError):
-        ClaudeLabeller(load_vocab(), client=client).label(window(tmp_path))
+        ClaudeLabeller(fixture_vocab(), client=client).label(window(tmp_path))

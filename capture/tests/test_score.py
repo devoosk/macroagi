@@ -2,10 +2,11 @@ import copy
 
 import pytest
 
+from capture.groundtruth import load_ground_truth
 from capture.oracle import oracle_log
 from capture.score import iou, score
 
-from .conftest import EVENTS, LINE
+from .conftest import APP_DATA, EVENTS, LINE
 
 
 def run(log, gts):
@@ -26,6 +27,14 @@ def test_oracle_scores_perfect(gts):
     assert r["segments"]["f1"] == 1
     assert r["operationRecovery"] == 1
     assert r["meanBoundaryError"] == pytest.approx(0, abs=1e-3)  # to_json rounds to ms
+
+
+def test_oracle_on_live_line():
+    events, line = APP_DATA / "events_current.json", APP_DATA / "line.json"
+    r = run(oracle_log(events, line), load_ground_truth(events, line))
+    assert r["activeVerbAccuracy"] == 1
+    assert r["segments"]["f1"] == 1
+    assert r["operationRecovery"] == 1
 
 
 def test_shifted_boundaries_degrade(gts):

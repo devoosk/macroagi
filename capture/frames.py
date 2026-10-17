@@ -1,8 +1,9 @@
 """Frame discovery and batching.
 
-Frame contract (see CLAUDE.md): `<frames_dir>/<camId>/<t>.png`, where t is the integer
-sim second zero-padded to 6 digits, plus `<camId>/manifest.json` with
-`{cam, kind, station, fps, from, to, width, height}`.
+Frame contract (see CLAUDE.md), as written by app/scripts/export-frames.ts:
+`<frames_dir>/<camDir>/<t>.jpg` plus `<camDir>/manifest.json` with
+`{camera, type: "cctv"|"fp", station, fps, from, to, width, height, frames: [{t, file}]}`.
+The manifest's frame list is authoritative; without one, file stems are read as sim seconds.
 """
 from __future__ import annotations
 
@@ -10,6 +11,7 @@ import io
 import json
 from dataclasses import dataclass
 from pathlib import Path
+import re
 from typing import List, Optional, Sequence, Tuple
 
 from PIL import Image
@@ -22,6 +24,8 @@ class Camera:
     station: str
     fps: float
     dir: Path
+    # (t, file name) from the manifest; empty means scan the directory.
+    listed: Tuple[Tuple[float, str], ...] = ()
 
     @property
     def step(self) -> float:
@@ -55,41 +59,65 @@ class Window:
         return (self.t0 + self.t1) / 2
 
 
+KINDS = {"cctv": "cctv", "fp": "fpv", "fpv": "fpv"}
+
+
+def cam_dir_name(cam_id: str) -> str:
+    return cam_id.replace(":", "_")
+
+
 def discover(frames_dir: Path, cams: Optional[Sequence[str]] = None) -> List[Camera]:
-    """All cameras under frames_dir that have a manifest, optionally filtered by id."""
+    """All cameras under frames_dir that have a manifest, optionally filtered by id.
+
+    Ids are directory names (`cctv_S05`, `fp_S05`, `cctv_S05#1`); `cams` may use either
+    that form or the app's `cctv:S05` form.
+    """
+    wanted = None if cams is None else {cam_dir_name(c) for c in cams}
     out = []
     for manifest in sorted(Path(frames_dir).glob("*/manifest.json")):
         m = json.loads(manifest.read_text())
+        kind = m.get("type", m.get("kind"))
+        if kind not in KINDS:
+            raise ValueError(f"{manifest}: unknown camera type {kind!r}")
         cam = Camera(
-            id=m.get("cam", manifest.parent.name).replace(":", "_"),
-            kind=m["kind"],
+            id=cam_dir_name(m.get("camera", m.get("cam", manifest.parent.name))),
+            kind=KINDS[kind],
             station=m["station"],
             fps=float(m.get("fps", 1)),
             dir=manifest.parent,
+            listed=tuple((float(f["t"]), f["file"]) for f in m.get("frames", [])),
         )
-        if cams is None or cam.id in cams:
+        if wanted is None or cam.id in wanted:
             out.append(cam)
-    if cams is not None:
-        missing = set(cams) - {c.id for c in out}
+    if wanted is not None:
+        missing = wanted - {c.id for c in out}
         if missing:
             raise FileNotFoundError(f"no manifest for cameras: {sorted(missing)} in {frames_dir}")
     return out
 
 
-def frame_time(path: Path, fps: float) -> float:
-    """File stem is the integer frame index at the camera's fps (sim seconds at 1 fps)."""
-    return int(path.stem) / fps
+FRAME_NAME = re.compile(r"^(\d{6,})(?:-(\d{3}))?$")
+
+
+def frame_time(path: Path) -> Optional[float]:
+    """Stem `000120` or `000120-500` -> sim seconds (120.0, 120.5); None if not a frame."""
+    m = FRAME_NAME.match(path.stem)
+    if not m:
+        return None
+    return int(m.group(1)) + (int(m.group(2)) / 1000 if m.group(2) else 0.0)
 
 
 def list_frames(cam: Camera, t_from: Optional[float] = None, t_to: Optional[float] = None) -> List[Frame]:
-    frames = []
-    for p in sorted(cam.dir.glob("*.png")):
-        if not p.stem.isdigit():
-            continue
-        t = frame_time(p, cam.fps)
-        if (t_from is None or t >= t_from) and (t_to is None or t < t_to):
-            frames.append(Frame(cam, t, p))
-    return frames
+    if cam.listed:
+        pairs = [(t, cam.dir / f) for t, f in cam.listed]
+    else:
+        files = [p for p in cam.dir.iterdir() if p.suffix.lower() in (".jpg", ".jpeg", ".png")]
+        pairs = [(frame_time(p), p) for p in files if frame_time(p) is not None]
+    return [
+        Frame(cam, t, p)
+        for t, p in sorted(pairs)
+        if (t_from is None or t >= t_from) and (t_to is None or t < t_to)
+    ]
 
 
 def make_windows(frames: Sequence[Frame], size: int = 8, overlap: int = 2) -> List[Window]:

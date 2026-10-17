@@ -1,18 +1,132 @@
 {
   "verbs": [
-    {"id": "pick", "description": "Worker reaches into a bin, tray or rack and lifts a part out, hand closing on it."},
-    {"id": "place", "description": "Worker lowers a held part onto the unit or fixture and releases it."},
-    {"id": "insert", "description": "Worker pushes a part into a hole, slot or socket on the unit, aligning it with both hands."},
-    {"id": "screw", "description": "Worker drives a fastener with a handheld screwdriver or torque driver held against the unit."},
-    {"id": "connect", "description": "Worker joins a cable, plug, hose or connector to a mating part; includes crimping and wiring."},
-    {"id": "braze", "description": "Worker holds a gas torch with a visible flame against a pipe joint."},
-    {"id": "inspect", "description": "Worker looks closely at the unit, scans it with a handheld scanner, or watches a test rig while the unit is connected; hands mostly still."},
-    {"id": "walk", "description": "Worker walks away from the unit, e.g. to fetch something, with no part being worked on."},
-    {"id": "search", "description": "Worker looks through bins or shelves for a part, hands moving between containers without a clear pick."}
+    {
+      "id": "pick",
+      "description": "Worker reaches into a bin, tray or rack and lifts a part out, hand closing on it."
+    },
+    {
+      "id": "place",
+      "description": "Worker lowers a held part onto the unit or fixture and releases it."
+    },
+    {
+      "id": "insert",
+      "description": "Worker pushes a part into a hole, slot or socket on the unit, aligning it with both hands."
+    },
+    {
+      "id": "screw",
+      "description": "Worker drives a fastener with a handheld screwdriver or torque driver held against the unit."
+    },
+    {
+      "id": "connect",
+      "description": "Worker joins a cable, plug, hose or connector to a mating part; includes crimping and wiring."
+    },
+    {
+      "id": "braze",
+      "description": "Worker holds a gas torch with a visible flame against a pipe joint."
+    },
+    {
+      "id": "inspect",
+      "description": "Worker looks closely at the unit, scans it with a handheld scanner, or watches a test rig while the unit is connected; hands mostly still."
+    },
+    {
+      "id": "walk",
+      "description": "Worker walks away from the unit, e.g. to fetch something, with no part being worked on."
+    },
+    {
+      "id": "search",
+      "description": "Worker looks through bins or shelves for a part, hands moving between containers without a clear pick."
+    }
   ],
   "parts": [
-    {"id": "P_base", "name": "Base pan", "hint": "large flat sheet-metal tray the unit is built on"},
-    {"id": "P_screw", "name": "Screw", "hint": "small fasteners, usually only visible with a screwdriver"},
-    {"id": "P_pipe", "name": "Refrigerant pipe", "hint": "thin copper tube, bent"}
+    {
+      "id": "P_base_pan",
+      "name": "Galvanised base pan",
+      "hint": "large flat galvanised sheet-metal tray, the unit's floor; everything is built on it"
+    },
+    {
+      "id": "P_compressor",
+      "name": "Inverter rotary compressor (R290)",
+      "hint": "black upright cylinder about 35 cm tall with pipe stubs on top"
+    },
+    {
+      "id": "P_4way_valve",
+      "name": "4-way reversing valve",
+      "hint": "small brass valve body with four copper pipe stubs and a coil on the side"
+    },
+    {
+      "id": "P_eev",
+      "name": "Electronic expansion valve",
+      "hint": "small valve with a cylindrical motor head and two thin copper pipes"
+    },
+    {
+      "id": "P_phe",
+      "name": "Brazed plate heat exchanger",
+      "hint": "rectangular stack of thin stainless plates with four round ports"
+    },
+    {
+      "id": "P_coil",
+      "name": "Finned evaporator coil",
+      "hint": "large flat block of thin aluminium fins with copper tube ends at the sides"
+    },
+    {
+      "id": "P_fan_motor",
+      "name": "EC fan motor",
+      "hint": "compact round black motor with a mounting bracket"
+    },
+    {
+      "id": "P_fan_blade",
+      "name": "Axial fan blade 550 mm",
+      "hint": "large black plastic propeller, about half a metre across"
+    },
+    {
+      "id": "P_pcb",
+      "name": "Inverter PCB in e-box",
+      "hint": "grey or black electronics box with a circuit board and connectors"
+    },
+    {
+      "id": "P_harness",
+      "name": "Wiring harness (variant-specific)",
+      "hint": "bundle of coloured wires with plastic connectors at the ends"
+    },
+    {
+      "id": "P_side_panel",
+      "name": "Powder-coated side panel",
+      "hint": "large flat painted metal panel, nearly as tall as the unit"
+    },
+    {
+      "id": "P_top_cover",
+      "name": "Top cover",
+      "hint": "large flat painted metal lid covering the top of the unit"
+    },
+    {
+      "id": "P_grille",
+      "name": "Fan guard grille",
+      "hint": "round or square wire-mesh guard over the fan opening"
+    },
+    {
+      "id": "P_screw_m6",
+      "name": "Screw M6x12 self-tapping",
+      "hint": "small screws, usually only visible as a screwdriver driving into sheet metal"
+    },
+    {
+      "id": "P_screw_m8",
+      "name": "Screw M8x20 with nut",
+      "hint": "bolts with nuts, driven with a torque driver into the base or brackets"
+    },
+    {
+      "id": "P_braze_ring",
+      "name": "Silver brazing ring (15% Ag)",
+      "hint": "tiny silver ring slipped onto a copper pipe end before brazing"
+    },
+    {
+      "id": "P_r290",
+      "name": "R290 refrigerant charge",
+      "hint": "refrigerant: not visible itself; a charging hose connected to a service port on the unit"
+    },
+    {
+      "id": "P_carton",
+      "name": "Carton and corner pads",
+      "hint": "large brown cardboard box and foam corner pads around the finished unit"
+    }
   ]
 }

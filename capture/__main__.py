@@ -11,6 +11,33 @@ DATA = REPO / "app" / "public" / "data"
 OUT = REPO / "capture" / "out"
 
 
+def load_dotenv() -> None:
+    """Load KEY=VALUE lines from the repo's .env (or the main checkout's, from a git worktree).
+
+    Variables already set in the environment win. Values are never printed.
+    """
+    import os
+    import subprocess
+
+    candidates = [REPO / ".env"]
+    try:
+        common = subprocess.run(
+            ["git", "-C", str(REPO), "rev-parse", "--path-format=absolute", "--git-common-dir"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        candidates.append(Path(common).parent / ".env")
+    except (OSError, subprocess.CalledProcessError):
+        pass
+    for path in candidates:
+        if path.is_file():
+            for line in path.read_text().splitlines():
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, value = line.removeprefix("export ").split("=", 1)
+                    os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+            return
+
+
 def cmd_make_vocab(a) -> None:
     from .vocab import make_vocab
 
@@ -24,6 +51,7 @@ def cmd_label(a) -> None:
     from .vlm import build_labeller
     from .vocab import load_vocab
 
+    load_dotenv()
     labeller = build_labeller(load_vocab(a.vocab), a.model, a.effort, a.max_width, None if a.no_cache else a.cache_dir)
     log = label_footage(
         a.frames_dir,
