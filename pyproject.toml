@@ -1,0 +1,20 @@
+[project]
+name = "macroagi"
+version = "0.0.0"
+description = "MacroAGI v0 Python modules: capture, graph, capability, optimize, simulate"
+requires-python = ">=3.11"
+dependencies = [
+    "scipy>=1.13",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

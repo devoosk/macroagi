@@ -1,6 +1,6 @@
 # Item 2: Robot-capability model v0 — implementation plan
 
-Status: draft for review by Oskari. Nothing is built yet.
+Status: built (v0). Decisions: direct pushes to main; uv at the repo root; capability/ owns lever-type rules and item 6 creates lever instances; robot candidate = p05 clears the floor.
 
 ## What it does
 

@@ -1,0 +1,754 @@
+{
+  "line": "r290_fixture",
+  "version": "v0",
+  "priors": [
+    {
+      "verb": "pick",
+      "presentation": "loose_bin",
+      "mean": 0.8,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "pick",
+      "presentation": "tray",
+      "mean": 0.92,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "pick",
+      "presentation": "kitted",
+      "mean": 0.96,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "pick",
+      "presentation": "fixtured",
+      "mean": 0.985,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "loose_bin",
+      "mean": 0.85,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "tray",
+      "mean": 0.93,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "kitted",
+      "mean": 0.96,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "place",
+      "presentation": "fixtured",
+      "mean": 0.985,
+      "concentration": 20,
+      "timeFactor": 1.2,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "loose_bin",
+      "mean": 0.7,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "tray",
+      "mean": 0.82,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "kitted",
+      "mean": 0.88,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "insert",
+      "presentation": "fixtured",
+      "mean": 0.95,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "loose_bin",
+      "mean": 0.8,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "tray",
+      "mean": 0.9,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "kitted",
+      "mean": 0.94,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "screw",
+      "presentation": "fixtured",
+      "mean": 0.98,
+      "concentration": 20,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "loose_bin",
+      "mean": 0.6,
+      "concentration": 12,
+      "timeFactor": 1.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "tray",
+      "mean": 0.72,
+      "concentration": 12,
+      "timeFactor": 1.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "kitted",
+      "mean": 0.8,
+      "concentration": 12,
+      "timeFactor": 1.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "connect",
+      "presentation": "fixtured",
+      "mean": 0.88,
+      "concentration": 12,
+      "timeFactor": 1.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "loose_bin",
+      "mean": 0.7,
+      "concentration": 12,
+      "timeFactor": 1.1,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "tray",
+      "mean": 0.78,
+      "concentration": 12,
+      "timeFactor": 1.1,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "kitted",
+      "mean": 0.85,
+      "concentration": 12,
+      "timeFactor": 1.1,
+      "source": "estimate"
+    },
+    {
+      "verb": "braze",
+      "presentation": "fixtured",
+      "mean": 0.93,
+      "concentration": 12,
+      "timeFactor": 1.1,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "loose_bin",
+      "mean": 0.9,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "tray",
+      "mean": 0.93,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "kitted",
+      "mean": 0.95,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "inspect",
+      "presentation": "fixtured",
+      "mean": 0.98,
+      "concentration": 20,
+      "timeFactor": 0.8,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "loose_bin",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "tray",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "kitted",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "walk",
+      "presentation": "fixtured",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.0,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "loose_bin",
+      "mean": 0.5,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "tray",
+      "mean": 0.65,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "kitted",
+      "mean": 0.9,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    },
+    {
+      "verb": "search",
+      "presentation": "fixtured",
+      "mean": 0.95,
+      "concentration": 12,
+      "timeFactor": 1.5,
+      "source": "estimate"
+    }
+  ],
+  "leverCosts": {
+    "eliminate": {
+      "value": 1000,
+      "source": "estimate"
+    },
+    "fixture": {
+      "value": 8000,
+      "source": "estimate"
+    },
+    "kit": {
+      "value": 3000,
+      "source": "estimate"
+    },
+    "goods_to_robot": {
+      "value": 15000,
+      "source": "estimate"
+    },
+    "regroup": {
+      "value": 2000,
+      "source": "estimate"
+    },
+    "decouple": {
+      "value": 5000,
+      "source": "estimate"
+    }
+  },
+  "operations": [
+    {
+      "operation": "O1",
+      "levers": [],
+      "mean": 0.9328,
+      "p05": 0.8039,
+      "p95": 0.9966,
+      "alpha": 13.479,
+      "beta": 0.971,
+      "timeFactor": {
+        "low": 0.96,
+        "mean": 1.2,
+        "high": 1.56
+      },
+      "robotTime": {
+        "V6": 16.0,
+        "V9": 24.0,
+        "V12": 32.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from tray: 0.930",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9856,
+      "p05": 0.9263,
+      "p95": 1.0,
+      "alpha": 14.242,
+      "beta": 0.208,
+      "timeFactor": {
+        "low": 0.96,
+        "mean": 1.2,
+        "high": 1.56
+      },
+      "robotTime": {
+        "V6": 16.0,
+        "V9": 24.0,
+        "V12": 32.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from fixtured: 0.985",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O1",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.9616,
+      "p05": 0.8606,
+      "p95": 0.9997,
+      "alpha": 13.895,
+      "beta": 0.555,
+      "timeFactor": {
+        "low": 0.96,
+        "mean": 1.2,
+        "high": 1.56
+      },
+      "robotTime": {
+        "V6": 16.0,
+        "V9": 24.0,
+        "V12": 32.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "place",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "loose",
+        "mass_kg": 6,
+        "tool": "none",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior place from kitted: 0.960",
+        "loose tolerance: failure x0.8",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [],
+      "mean": 0.76,
+      "p05": 0.5778,
+      "p95": 0.9066,
+      "alpha": 12.92,
+      "beta": 4.08,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 20.0,
+        "V9": 30.0,
+        "V12": 40.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "loose_bin",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from loose_bin: 0.800",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.976,
+      "p05": 0.9019,
+      "p95": 1.0,
+      "alpha": 16.592,
+      "beta": 0.408,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 20.0,
+        "V9": 30.0,
+        "V12": 40.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from fixtured: 0.980",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "kit"
+      ],
+      "mean": 0.928,
+      "p05": 0.8065,
+      "p95": 0.9938,
+      "alpha": 15.776,
+      "beta": 1.224,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 20.0,
+        "V9": 30.0,
+        "V12": 40.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "kitted",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from kitted: 0.940",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O2",
+      "levers": [
+        "goods_to_robot"
+      ],
+      "mean": 0.88,
+      "p05": 0.7327,
+      "p95": 0.9763,
+      "alpha": 14.96,
+      "beta": 2.04,
+      "timeFactor": {
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
+      },
+      "robotTime": {
+        "V6": 20.0,
+        "V9": 30.0,
+        "V12": 40.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "screw",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.01,
+        "tool": "torque_driver",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior screw from tray: 0.900",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [],
+      "mean": 0.4384,
+      "p05": 0.1478,
+      "p95": 0.7529,
+      "alpha": 2.746,
+      "beta": 3.518,
+      "timeFactor": {
+        "low": 0.88,
+        "mean": 1.1,
+        "high": 1.43
+      },
+      "robotTime": {
+        "V6": 33.0,
+        "V9": 49.5,
+        "V12": 66.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "kitted",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior braze from kitted: 0.850",
+        "semi part: failure x1.5",
+        "tight tolerance: failure x1.6",
+        "tool torch: failure x1.3",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O3",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.7379,
+      "p05": 0.4292,
+      "p95": 0.9559,
+      "alpha": 4.622,
+      "beta": 1.642,
+      "timeFactor": {
+        "low": 0.88,
+        "mean": 1.1,
+        "high": 1.43
+      },
+      "robotTime": {
+        "V6": 33.0,
+        "V9": 49.5,
+        "V12": 66.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "braze",
+        "presentation": "fixtured",
+        "rigidity": "semi",
+        "tolerance": "tight",
+        "mass_kg": 0.3,
+        "tool": "torch",
+        "variants": 3,
+        "has_parts": true,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior braze from fixtured: 0.930",
+        "semi part: failure x1.5",
+        "tight tolerance: failure x1.6",
+        "tool torch: failure x1.3",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [],
+      "mean": 0.8992,
+      "p05": 0.7483,
+      "p95": 0.9878,
+      "alpha": 12.993,
+      "beta": 1.457,
+      "timeFactor": {
+        "low": 0.64,
+        "mean": 0.8,
+        "high": 1.04
+      },
+      "robotTime": {
+        "V6": 32.0,
+        "V9": 48.0,
+        "V12": 64.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "tray",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from tray: 0.930",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    },
+    {
+      "operation": "O4",
+      "levers": [
+        "fixture"
+      ],
+      "mean": 0.9712,
+      "p05": 0.8833,
+      "p95": 1.0,
+      "alpha": 14.034,
+      "beta": 0.416,
+      "timeFactor": {
+        "low": 0.64,
+        "mean": 0.8,
+        "high": 1.04
+      },
+      "robotTime": {
+        "V6": 32.0,
+        "V9": 48.0,
+        "V12": 64.0
+      },
+      "waste": false,
+      "eliminated": false,
+      "features": {
+        "verb": "inspect",
+        "presentation": "fixtured",
+        "rigidity": "rigid",
+        "tolerance": "medium",
+        "mass_kg": 0.0,
+        "tool": "hose",
+        "variants": 3,
+        "has_parts": false,
+        "eliminated": false
+      },
+      "reasons": [
+        "prior inspect from fixtured: 0.980",
+        "tool hose: failure x1.2",
+        "3 variants: failure x1.2"
+      ],
+      "source": "estimate"
+    }
+  ]
+}

@@ -179,3 +179,59 @@ export interface DesignResult {
 export interface Results {
   designs: DesignResult[]
 }
+
+// capability.json: written by `python -m capability` (plan step 2).
+
+export interface CapabilityFeatures {
+  verb: VerbClass
+  presentation: Presentation
+  rigidity: Part['rigidity']
+  tolerance: Part['tolerance']
+  mass_kg: number
+  tool: ToolKind
+  variants: number
+  has_parts: boolean
+  eliminated: boolean
+}
+
+export interface CapabilityPrior {
+  verb: VerbClass
+  presentation: Presentation
+  /** Prior mean robot success. */
+  mean: number
+  /** alpha + beta of the prior Beta; lower is wider. */
+  concentration: number
+  /** Robot time / human time. */
+  timeFactor: number
+  source: string
+}
+
+/** Robot success range (Beta) and time for one operation with a set of lever types. */
+export interface CapabilityEstimate {
+  operation: string
+  levers: LeverType[]
+  mean: number
+  p05: number
+  p95: number
+  /** Null when the operation is eliminated. */
+  alpha: number | null
+  beta: number | null
+  timeFactor: { low: number; mean: number; high: number }
+  /** Robot seconds per variant id. */
+  robotTime: Record<string, number>
+  /** Walk or search: eliminate rather than automate. */
+  waste: boolean
+  eliminated: boolean
+  features: CapabilityFeatures
+  reasons: string[]
+  source: string
+}
+
+export interface CapabilityTable {
+  line: string
+  version: string
+  priors: CapabilityPrior[]
+  leverCosts: Record<LeverType, Sourced>
+  /** Per operation: the baseline (levers: []) plus one row per applicable single lever. */
+  operations: CapabilityEstimate[]
+}
