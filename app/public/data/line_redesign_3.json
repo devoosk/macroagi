@@ -369,6 +369,16 @@
     "L_kit_O2"
   ],
   "design": {
+    "stages": [
+      {
+        "id": "M1",
+        "name": "Robot cells",
+        "stations": [
+          "S01"
+        ],
+        "gate": "Each robot cell holds the required reliability from the sweep for one week, with human fallback"
+      }
+    ],
     "bundle": "B4",
     "humanStations": 2,
     "robotStations": 1,

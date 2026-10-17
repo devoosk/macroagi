@@ -57,6 +57,7 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
     capex = sum(lv["cost"]["value"] for lv in levers) + sum(
         ROBOT_CELL_COST["value"] * c.bays[s] for s in sol.robot_stations)
     out["design"] = {
+        "stages": stages(line, c, sol),
         "bundle": sol.bundle,
         "humanStations": len(sol.human_stations),
         "robotStations": len(sol.robot_stations),
@@ -66,3 +67,23 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
                               f"{ROBOT_CELL_COST['value']} per bay, plus lever costs, EUR over 3 years"},
     }
     return out
+
+
+def stages(line: dict, c: Candidates, sol: Solution) -> list[dict]:
+    """Migration stages (types.ts MigrationStage), lowest risk first: remove waste,
+    then split test stations, then robot cells. Each ends at a gate to pass first."""
+    home = {o["id"]: o["station"] for o in line["operations"]}
+    waste = sorted({home[o] for o, opt in sol.choice.items() if opt.mode == "eliminated"}
+                   | {home[o] for o, st in sol.station.items() if st and st != home[o]}
+                   | {st for o, st in sol.station.items() if st and st != home[o]})
+    units_h = round(3600 / line["takt"]["value"], 1)
+    out = [
+        ("Remove walk and search", waste,
+         "No walk or search seen at these stations for one week; kit accuracy at least 99.5%"),
+        ("Parallel test bays with decoupling buffers", sorted(c.decouple),
+         f"Split test stations hold {units_h} units/h for one shift"),
+        ("Robot cells", list(sol.robot_stations),
+         "Each robot cell holds the required reliability from the sweep for one week, with human fallback"),
+    ]
+    return [{"id": f"M{i}", "name": n, "stations": st, "gate": g}
+            for i, (n, st, g) in enumerate([x for x in out if x[1]], start=1)]

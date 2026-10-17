@@ -39,3 +39,11 @@ def test_graph_rebuilt_from_noisy_video():
     assert s["operationRecall"] == 1.0
     assert s["trueHardPredictedSoft"] == 0
     assert s["edgeRecall"] >= 0.9
+
+
+def test_migration_stages_lowest_risk_first():
+    c, sol = best_designs(LINE, 0.90)[0]
+    st = export(LINE, c, sol, 1)["design"]["stages"]
+    assert [s["name"] for s in st][-1] == "Robot cells"
+    assert set(st[-1]["stations"]) == set(sol.robot_stations)
+    assert all(s["stations"] and s["gate"] for s in st)

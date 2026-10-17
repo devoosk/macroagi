@@ -134,6 +134,8 @@ export interface Line {
 export interface DesignSummary {
   /** Lever bundle the solver was allowed to use (B0 none ... B4 all). */
   bundle: string
+  /** Migration stages, lowest risk first; copy into results.json. */
+  stages: MigrationStage[]
   humanStations: number
   robotStations: number
   /** Robot cells plus lever costs, EUR. */

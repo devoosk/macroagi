@@ -352,6 +352,16 @@
   "levers": [],
   "appliedLevers": [],
   "design": {
+    "stages": [
+      {
+        "id": "M1",
+        "name": "Robot cells",
+        "stations": [
+          "S03"
+        ],
+        "gate": "Each robot cell holds the required reliability from the sweep for one week, with human fallback"
+      }
+    ],
     "bundle": "B0",
     "humanStations": 2,
     "robotStations": 1,
