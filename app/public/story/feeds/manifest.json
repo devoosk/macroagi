@@ -1,0 +1,95 @@
+{
+  "cams": [
+    {
+      "id": "cctv:S01",
+      "station": "S01",
+      "fp": false,
+      "frames": [
+        "cctv_S01_0.jpg"
+      ]
+    },
+    {
+      "id": "cctv:S02",
+      "station": "S02",
+      "fp": false,
+      "frames": [
+        "cctv_S02_0.jpg"
+      ]
+    },
+    {
+      "id": "cctv:S03",
+      "station": "S03",
+      "fp": false,
+      "frames": [
+        "cctv_S03_0.jpg",
+        "cctv_S03_1.jpg"
+      ]
+    },
+    {
+      "id": "cctv:S04",
+      "station": "S04",
+      "fp": false,
+      "frames": [
+        "cctv_S04_0.jpg"
+      ]
+    },
+    {
+      "id": "cctv:S05",
+      "station": "S05",
+      "fp": false,
+      "frames": [
+        "cctv_S05_0.jpg"
+      ]
+    },
+    {
+      "id": "cctv:S06",
+      "station": "S06",
+      "fp": false,
+      "frames": [
+        "cctv_S06_0.jpg"
+      ]
+    },
+    {
+      "id": "fp:S01",
+      "station": "S01",
+      "fp": true,
+      "frames": [
+        "fp_S01_0.jpg"
+      ]
+    },
+    {
+      "id": "fp:S02",
+      "station": "S02",
+      "fp": true,
+      "frames": [
+        "fp_S02_0.jpg",
+        "fp_S02_1.jpg"
+      ]
+    },
+    {
+      "id": "fp:S03",
+      "station": "S03",
+      "fp": true,
+      "frames": [
+        "fp_S03_0.jpg",
+        "fp_S03_1.jpg"
+      ]
+    },
+    {
+      "id": "fp:S04",
+      "station": "S04",
+      "fp": true,
+      "frames": [
+        "fp_S04_0.jpg"
+      ]
+    },
+    {
+      "id": "fp:S05",
+      "station": "S05",
+      "fp": true,
+      "frames": [
+        "fp_S05_0.jpg"
+      ]
+    }
+  ]
+}

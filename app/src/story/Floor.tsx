@@ -60,7 +60,7 @@ function floorLook(t: number) {
 /** Old station i folds away toward the new station that replaces it. */
 const foldK = (t: number, i: number) => ease(seg(t, M + 0.2 + i * 0.1, M + 1.5 + i * 0.1))
 /** New station j rises in its place. */
-const riseK = (t: number, j: number) => ease(seg(t, M + 1.4 + j * 0.16, M + 2.6 + j * 0.16))
+const riseK = (t: number, j: number) => ease(seg(t, M + 0.9 + j * 0.16, M + 2.1 + j * 0.16))
 
 function OldStation({ s, i, wave, target, t, bottleneck }: { s: Station; i: number; wave?: Station; target?: number; t: number; bottleneck: boolean }) {
   const l = floorLook(t)

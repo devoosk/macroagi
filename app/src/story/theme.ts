@@ -44,7 +44,7 @@ export function hash(n: number): number {
 export function night(t: number): number {
   const up = seg(t, T.feeds[0] - 0.8, T.feeds[0] + 0.4)
   const down = seg(t, T.morph[0] - 0.6, T.morph[0] + 0.6)
-  const end = seg(t, T.world[0], T.world[0] + 1.2)
+  const end = seg(t, T.world[0], T.world[0] + 0.6)
   return Math.max(up * (1 - down), end)
 }
 

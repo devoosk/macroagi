@@ -92,7 +92,7 @@ export function Swarm({ story }: { story: StoryData }) {
       if (p.win < 0) b *= 1 - 0.7 * winK
       b *= 1 - out
       if (p.win >= 0) s = 0 // drawn as a big glowing winner instead
-      o3.position.set(p.x + (hash(i) - 0.5) * 0.5, lerp(UPPER_Y + 5, UPPER_Y, land), p.z + (hash(i * 2) - 0.5) * 0.3)
+      o3.position.set(p.x + (hash(i) - 0.5) * 2.6, lerp(UPPER_Y + 5, UPPER_Y, land), p.z + (hash(i * 2) - 0.5) * 0.3)
       o3.scale.setScalar(s * (1 - out))
       o3.updateMatrix()
       m.setMatrixAt(i, o3.matrix)

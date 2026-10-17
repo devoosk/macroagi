@@ -89,12 +89,14 @@ export function Feeds({ line }: { line: Line }) {
       })
   }, [])
   const cams = useMemo(() => {
-    if (man?.cams.length) return man.cams
-    // No exported frames: grain-only tiles keep the beat working.
-    return line.stations.flatMap((s) => [
-      { id: `cctv:${s.id}`, station: s.id, fp: false, frames: [] },
-      { id: `fp:${s.id}`, station: s.id, fp: true, frames: [] },
-    ])
+    // Every station gets a CCTV and a headset tile; tiles without an exported frame show grain only.
+    const have = new Map((man?.cams ?? []).map((c) => [c.id, c]))
+    return line.stations.flatMap((s) =>
+      [false, true].map((fp) => {
+        const id = `${fp ? 'fp' : 'cctv'}:${s.id}`
+        return have.get(id) ?? { id, station: s.id, fp, frames: [] as string[] }
+      }),
+    )
   }, [man, line])
   const mid = line.stations.length / 2
   return (
