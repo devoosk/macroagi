@@ -65,9 +65,9 @@ def test_builder_never_reads_ground_truth():
         assert banned not in src.split('"""', 2)[2], banned
 
 
-def test_runs_on_dummy_event_log():
-    truth = json.loads((ROOT / "app/public/data/line.json").read_text())
-    events = json.loads((ROOT / "app/public/data/events_current.json").read_text())
+def test_runs_on_toy_event_log():
+    truth = json.loads((ROOT / "tests/fixtures/toy_line.json").read_text())
+    events = json.loads((ROOT / "tests/fixtures/toy_events_current.json").read_text())
     line, _ = build(synth_segments(events, truth, 1, False), catalogue_from_line(truth))
     assert values(score(line, truth))["operationRecall"] == 1.0
 
