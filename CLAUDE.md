@@ -22,6 +22,7 @@ The hackathon reference line is an R290 monobloc heat-pump outdoor unit: 11 stat
 | `line.json` | Process graph (operations, hard/soft precedence edges, parts, stations with x/y/rot/kind, variants, levers). Every number has a `source`. |
 | `events_<line>.json` | One row per event: unit, variant, station, event (`start`, `end`, `blocked`, `starved`, `failed`, `rework`, plus `op_start`/`op_end` with `operation`), time in seconds. |
 | `capability.json` | Robot success range (Beta, p05/p95) and robot time per operation, baseline and per single lever, plus the prior table and lever costs. Written by `uv run python -m capability app/public/data/line.json`. |
+| `line_redesign_<n>.json` | Up to three redesigns (1 = cheapest) in the `line.json` schema, plus `operations[].mode` and a `design` summary. Written by `uv run python -m optimize app/public/data/line.json`. |
 | `results.json` | Per design: throughput, capex, required robot reliability, sweep curve, migration stages. |
 
 ## Hard rules

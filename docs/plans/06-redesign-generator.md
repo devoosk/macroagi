@@ -1,6 +1,6 @@
 # Item 6: Redesign generator + CP-SAT — implementation plan
 
-Status: draft. Builds on `capability/` (item 2): `estimate`, `applicable_levers`, `clears`, `lever_feature_changes`, `LEVER_COSTS`.
+Status: built (v0). Oskari approved the defaults below on 2026-10-17. Changes while building: torch and hose ops are pinned like test ops (fixed equipment); waste ops are always eliminated once a lever allows it; the tie-breaker minimises moved operations; designs identical to the current line are skipped. Builds on `capability/` (item 2): `estimate`, `applicable_levers`, `clears`, `lever_feature_changes`, `LEVER_COSTS`.
 
 ## What it does
 

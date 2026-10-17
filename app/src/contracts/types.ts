@@ -53,6 +53,8 @@ export interface Operation {
   station: string
   /** Probability the operation fails and triggers rework (test ops only). */
   failRate?: Sourced
+  /** Set in redesigns. `time` stays the human time; robot time comes from capability.json. */
+  mode?: 'human' | 'robot' | 'eliminated'
 }
 
 export interface PrecedenceEdge {
@@ -122,6 +124,19 @@ export interface Line {
   levers: Lever[]
   /** Levers applied in this design (redesigns only). */
   appliedLevers?: string[]
+  /** Summary written by `python -m optimize` (redesigns only). */
+  design?: DesignSummary
+}
+
+export interface DesignSummary {
+  /** Lever bundle the solver was allowed to use (B0 none ... B4 all). */
+  bundle: string
+  humanStations: number
+  robotStations: number
+  /** Robot cells plus lever costs, EUR. */
+  capex: Sourced
+  /** Solver objective: station costs over 3 years plus lever costs, EUR. */
+  objective: Sourced & { note: string }
 }
 
 export type SimEventType =
