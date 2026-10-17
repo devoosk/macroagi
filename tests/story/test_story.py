@@ -36,9 +36,13 @@ def test_schema_keys(story):
 
 def test_solver_designs_ok_and_cheapest(story):
     sw = story["swarm"]
-    assert len(sw["winners"]) == 3
+    assert len(sw["winners"]) == 4
+    assert sw["winners"][0]["file"] == "line_rebuild_1.json"
+    assert [w["file"] for w in sw["winners"][1:]] == [f"line_solver_{i}.json" for i in (1, 2, 3)]
     for w in sw["winners"]:
-        assert w["cost"] == w["solverObjective"]  # same objective as optimize/model.py
+        assert w["cost"] == w["solverObjective"]  # same objective as optimize/model.py and rebuild.py
+    assert sorted(p["winner"] for p in sw["points"] if "winner" in p) == [0, 1, 2, 3]
+    assert sum(p["near"] == 4 for p in sw["points"]) > 100
     best = min(w["cost"] for w in sw["winners"])
     ok = [p for p in sw["points"] if p["ok"] and "winner" not in p]
     assert ok and sum(p["cost"] < best for p in ok) <= 0.01 * len(ok)

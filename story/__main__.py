@@ -28,7 +28,9 @@ def build_story(data: Path) -> tuple[dict, list[str]]:
 
     stations = build_stations(line, events, t0)
     graph, sparks, meta = build_graph(events, line, t0, GRAPH_SEED)
-    swarm, log = build_swarm(line, solvers, FLOOR["value"], seed=SWARM_SEED)
+    rb_path = data / "line_rebuild_1.json"
+    rebuild = (rb_path.name, json.loads(rb_path.read_text())) if rb_path.exists() else None
+    swarm, log = build_swarm(line, solvers, FLOOR["value"], seed=SWARM_SEED, rebuild=rebuild)
     sim = {d["design"]: d for d in results["designs"]}
     for w in swarm["winners"]:
         if w["design"] in sim and "throughput" in sim[w["design"]]:
@@ -56,10 +58,15 @@ def build_story(data: Path) -> tuple[dict, list[str]]:
                        "redundant = within-station pairs seen in order that the builder dropped as implied",
         "graph.score": "graph.score against the hidden line.json",
         "swarm.points": f"story/swarm.py sampler (seed {SWARM_SEED}): random designs on optimize.generator "
-                        f"candidates(line, 'B4', floor {FLOOR['value']}) plus 1-4-step mutations of line_solver_1..3",
+                        f"candidates(line, 'B4', floor {FLOOR['value']}) plus 1-4-step mutations of line_solver_1..3 "
+                        "(near 1-3); near 4 = rebuild space (optimize/rebuild.py rules: open station count and "
+                        "order, 1-3 bays, fixed equipment alone): random layouts and mutations of line_rebuild_1",
+        "swarm.winners": "winner 0 = line_rebuild_1.json (optimize.rebuild), 1-3 = line_solver_1..3.json "
+                         "(optimize rebalance); cost re-scored here and equal to each design's objective",
         "swarm.cost": f"solver objective, EUR over 3 years: {HUMAN_STATION_COST['value']} per human bay "
                       f"({HUMAN_STATION_COST['source']}) + robot rent x {HORIZON_MONTHS} months + integration "
-                      "(capability/robots.json, estimate) per bay + lever costs once (line.json levers, estimate)",
+                      "(capability/robots.json, estimate) per bay + lever costs once (line.json levers, estimate); "
+                      "rebuild-space designs pay optimize.rebuild BAY_COST per extra bay instead of decouple/regroup",
         "swarm.rate": RATE_NOTE,
         "swarm.people": "human bays in used stations",
         "swarm.ok": f"optimize/model.py rules: hard precedence (transitive), one staffing per station, mixed-model "
