@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from ortools.sat.python import cp_model
 
-from .costs import HUMAN_STATION_COST, ROBOT_CELL_COST
+from .costs import HUMAN_STATION_COST, PEAK_TOLERANCE, ROBOT_CELL_COST
 from .generator import Candidates, Option
 
 TIME_SCALE = 10  # 0.1 s
@@ -20,6 +20,7 @@ class Solution:
     choice: dict[str, Option]
     robot_stations: list[str]
     human_stations: list[str]
+    used: list[str]  # lever ids the solution pays for
 
 
 def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | None:
@@ -59,12 +60,33 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
             big = len(c.stations)
             m.add(pos[a] <= pos[b] + big * (gone[a] + gone[b]))
 
+    # Mixed-model takt: the mix-weighted load fits takt and no variant exceeds takt x peak tolerance.
     takt = round(line["takt"]["value"] * TIME_SCALE)
+    peak = round(line["takt"]["value"] * PEAK_TOLERANCE["value"] * TIME_SCALE)
+    mix = {v["id"]: round(v["mix"]["value"] * 1000) for v in line["variants"]}
     for s in c.stations:
+        weighted = []
         for var in line["variants"]:
             load = [round(c.options[o][k].time.get(var["id"], 0) * TIME_SCALE) * v
                     for (o, ss, k), v in z.items() if ss == s and o in var["operations"]]
-            m.add(sum(load) <= takt * c.bays[s])
+            m.add(sum(load) <= peak * c.bays[s])
+            weighted += [mix[var["id"]] * x for x in load]
+        m.add(sum(weighted) <= takt * c.bays[s] * sum(mix.values()))
+
+    # A lever instance is paid once, however many operations use it.
+    use = {lid: m.new_bool_var(f"use_{lid}") for lid in c.levers}
+    for (o, s, k), v in z.items():
+        for lid in c.options[o][k].levers:
+            m.add_implication(v, use[lid])
+    for (o, k), v in e.items():
+        for lid in c.options[o][k].levers:
+            m.add_implication(v, use[lid])
+    for lid in c.decouple.values():
+        m.add(use[lid] == 1)
+    home = {o["id"]: o["station"] for o in line["operations"]}
+    for (o, s, k), v in z.items():
+        if s != home[o] and o in c.moves:
+            m.add_implication(v, use[c.moves[o]])
 
     for prev in forbid:
         # At least one station must change robot/human status.
@@ -77,10 +99,8 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
         h = m.new_bool_var(f"h_{s}")
         m.add(h >= u[s] - r[s])
         obj += [round(human_cost * c.bays[s]) * h, round(robot_cost * c.bays[s]) * r[s]]
-    obj += [round(c.options[o][k].cost) * v for (o, _, k), v in z.items()]
-    obj += [round(c.options[o][k].cost) * v for (o, k), v in e.items()]
+    obj += [round(c.levers[lid].cost) * u for lid, u in use.items()]
     # Tie-breaker: move as few operations as possible from their current station.
-    home = {o["id"]: o["station"] for o in line["operations"]}
     tie = sum(v for (o, s, _), v in z.items() if s != home[o])
     m.minimize(sum(obj) * 1000 + tie)
 
@@ -109,4 +129,5 @@ def solve(line: dict, c: Candidates, forbid: list[set[str]] = ()) -> Solution | 
         choice=choice,
         robot_stations=[s for s in c.stations if solver.value(r[s])],
         human_stations=[s for s in c.stations if solver.value(u[s]) and not solver.value(r[s])],
+        used=[lid for lid, x in use.items() if solver.value(x)],
     )

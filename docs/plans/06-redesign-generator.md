@@ -1,6 +1,6 @@
 # Item 6: Redesign generator + CP-SAT — implementation plan
 
-Status: built (v0). Oskari approved the defaults below on 2026-10-17. Changes while building: torch and hose ops are pinned like test ops (fixed equipment); waste ops are always eliminated once a lever allows it; the tie-breaker minimises moved operations; designs identical to the current line are skipped. Builds on `capability/` (item 2): `estimate`, `applicable_levers`, `clears`, `lever_feature_changes`, `LEVER_COSTS`.
+Status: built (v0). Oskari approved the defaults below on 2026-10-17. Changes while building: torch and hose ops are pinned like test ops (fixed equipment); waste ops are always eliminated once a lever allows it; the tie-breaker minimises moved operations; designs identical to the current line are skipped. After testing on the real R290 line (25 ops): the line's own levers are used when it has any (each paid once, however many ops it covers), and ops then move station only under a regroup lever; takt is mixed-model (mix-weighted load ≤ takt, any single variant ≤ takt × 1.10); robot candidates use the median of the success range, not p05 (v0 ranges are too wide for p05); robot cell cost is 85 kEUR, as in tools/gen; robot ops carry the robot time in `time` because the simulator reads it. Builds on `capability/` (item 2): `estimate`, `applicable_levers`, `clears`, `lever_feature_changes`, `LEVER_COSTS`.
 
 ## What it does
 

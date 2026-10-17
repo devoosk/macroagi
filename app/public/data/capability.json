@@ -7,7 +7,7 @@
       "presentation": "loose_bin",
       "mean": 0.8,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -15,7 +15,7 @@
       "presentation": "tray",
       "mean": 0.92,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -23,7 +23,7 @@
       "presentation": "kitted",
       "mean": 0.96,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -31,7 +31,7 @@
       "presentation": "fixtured",
       "mean": 0.985,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -39,7 +39,7 @@
       "presentation": "loose_bin",
       "mean": 0.85,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -47,7 +47,7 @@
       "presentation": "tray",
       "mean": 0.93,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -55,7 +55,7 @@
       "presentation": "kitted",
       "mean": 0.96,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -63,7 +63,7 @@
       "presentation": "fixtured",
       "mean": 0.985,
       "concentration": 20,
-      "timeFactor": 1.2,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -71,7 +71,7 @@
       "presentation": "loose_bin",
       "mean": 0.7,
       "concentration": 12,
-      "timeFactor": 1.5,
+      "timeFactor": 1.2,
       "source": "estimate"
     },
     {
@@ -79,7 +79,7 @@
       "presentation": "tray",
       "mean": 0.82,
       "concentration": 12,
-      "timeFactor": 1.5,
+      "timeFactor": 1.2,
       "source": "estimate"
     },
     {
@@ -87,7 +87,7 @@
       "presentation": "kitted",
       "mean": 0.88,
       "concentration": 12,
-      "timeFactor": 1.5,
+      "timeFactor": 1.2,
       "source": "estimate"
     },
     {
@@ -95,7 +95,7 @@
       "presentation": "fixtured",
       "mean": 0.95,
       "concentration": 12,
-      "timeFactor": 1.5,
+      "timeFactor": 1.2,
       "source": "estimate"
     },
     {
@@ -103,7 +103,7 @@
       "presentation": "loose_bin",
       "mean": 0.8,
       "concentration": 20,
-      "timeFactor": 1.0,
+      "timeFactor": 0.9,
       "source": "estimate"
     },
     {
@@ -111,7 +111,7 @@
       "presentation": "tray",
       "mean": 0.9,
       "concentration": 20,
-      "timeFactor": 1.0,
+      "timeFactor": 0.9,
       "source": "estimate"
     },
     {
@@ -119,7 +119,7 @@
       "presentation": "kitted",
       "mean": 0.94,
       "concentration": 20,
-      "timeFactor": 1.0,
+      "timeFactor": 0.9,
       "source": "estimate"
     },
     {
@@ -127,7 +127,7 @@
       "presentation": "fixtured",
       "mean": 0.98,
       "concentration": 20,
-      "timeFactor": 1.0,
+      "timeFactor": 0.9,
       "source": "estimate"
     },
     {
@@ -135,7 +135,7 @@
       "presentation": "loose_bin",
       "mean": 0.6,
       "concentration": 12,
-      "timeFactor": 1.8,
+      "timeFactor": 1.5,
       "source": "estimate"
     },
     {
@@ -143,7 +143,7 @@
       "presentation": "tray",
       "mean": 0.72,
       "concentration": 12,
-      "timeFactor": 1.8,
+      "timeFactor": 1.5,
       "source": "estimate"
     },
     {
@@ -151,7 +151,7 @@
       "presentation": "kitted",
       "mean": 0.8,
       "concentration": 12,
-      "timeFactor": 1.8,
+      "timeFactor": 1.5,
       "source": "estimate"
     },
     {
@@ -159,7 +159,7 @@
       "presentation": "fixtured",
       "mean": 0.88,
       "concentration": 12,
-      "timeFactor": 1.8,
+      "timeFactor": 1.5,
       "source": "estimate"
     },
     {
@@ -167,7 +167,7 @@
       "presentation": "loose_bin",
       "mean": 0.7,
       "concentration": 12,
-      "timeFactor": 1.1,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -175,7 +175,7 @@
       "presentation": "tray",
       "mean": 0.78,
       "concentration": 12,
-      "timeFactor": 1.1,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -183,7 +183,7 @@
       "presentation": "kitted",
       "mean": 0.85,
       "concentration": 12,
-      "timeFactor": 1.1,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -191,7 +191,7 @@
       "presentation": "fixtured",
       "mean": 0.93,
       "concentration": 12,
-      "timeFactor": 1.1,
+      "timeFactor": 1.0,
       "source": "estimate"
     },
     {
@@ -327,14 +327,14 @@
       "alpha": 13.479,
       "beta": 0.971,
       "timeFactor": {
-        "low": 0.96,
-        "mean": 1.2,
-        "high": 1.56
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
       },
       "robotTime": {
-        "V6": 16.0,
-        "V9": 24.0,
-        "V12": 32.0
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
       },
       "waste": false,
       "eliminated": false,
@@ -367,14 +367,14 @@
       "alpha": 14.242,
       "beta": 0.208,
       "timeFactor": {
-        "low": 0.96,
-        "mean": 1.2,
-        "high": 1.56
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
       },
       "robotTime": {
-        "V6": 16.0,
-        "V9": 24.0,
-        "V12": 32.0
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
       },
       "waste": false,
       "eliminated": false,
@@ -407,14 +407,14 @@
       "alpha": 13.895,
       "beta": 0.555,
       "timeFactor": {
-        "low": 0.96,
-        "mean": 1.2,
-        "high": 1.56
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
       },
       "robotTime": {
-        "V6": 16.0,
-        "V9": 24.0,
-        "V12": 32.0
+        "V6": 13.33,
+        "V9": 20.0,
+        "V12": 26.67
       },
       "waste": false,
       "eliminated": false,
@@ -445,14 +445,14 @@
       "alpha": 12.92,
       "beta": 4.08,
       "timeFactor": {
-        "low": 0.8,
-        "mean": 1.0,
-        "high": 1.3
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
       },
       "robotTime": {
-        "V6": 20.0,
-        "V9": 30.0,
-        "V12": 40.0
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
       },
       "waste": false,
       "eliminated": false,
@@ -484,14 +484,14 @@
       "alpha": 16.592,
       "beta": 0.408,
       "timeFactor": {
-        "low": 0.8,
-        "mean": 1.0,
-        "high": 1.3
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
       },
       "robotTime": {
-        "V6": 20.0,
-        "V9": 30.0,
-        "V12": 40.0
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
       },
       "waste": false,
       "eliminated": false,
@@ -523,14 +523,14 @@
       "alpha": 15.776,
       "beta": 1.224,
       "timeFactor": {
-        "low": 0.8,
-        "mean": 1.0,
-        "high": 1.3
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
       },
       "robotTime": {
-        "V6": 20.0,
-        "V9": 30.0,
-        "V12": 40.0
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
       },
       "waste": false,
       "eliminated": false,
@@ -562,14 +562,14 @@
       "alpha": 14.96,
       "beta": 2.04,
       "timeFactor": {
-        "low": 0.8,
-        "mean": 1.0,
-        "high": 1.3
+        "low": 0.72,
+        "mean": 0.9,
+        "high": 1.17
       },
       "robotTime": {
-        "V6": 20.0,
-        "V9": 30.0,
-        "V12": 40.0
+        "V6": 18.0,
+        "V9": 27.0,
+        "V12": 36.0
       },
       "waste": false,
       "eliminated": false,
@@ -599,14 +599,14 @@
       "alpha": 2.746,
       "beta": 3.518,
       "timeFactor": {
-        "low": 0.88,
-        "mean": 1.1,
-        "high": 1.43
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
       },
       "robotTime": {
-        "V6": 33.0,
-        "V9": 49.5,
-        "V12": 66.0
+        "V6": 30.0,
+        "V9": 45.0,
+        "V12": 60.0
       },
       "waste": false,
       "eliminated": false,
@@ -641,14 +641,14 @@
       "alpha": 4.622,
       "beta": 1.642,
       "timeFactor": {
-        "low": 0.88,
-        "mean": 1.1,
-        "high": 1.43
+        "low": 0.8,
+        "mean": 1.0,
+        "high": 1.3
       },
       "robotTime": {
-        "V6": 33.0,
-        "V9": 49.5,
-        "V12": 66.0
+        "V6": 30.0,
+        "V9": 45.0,
+        "V12": 60.0
       },
       "waste": false,
       "eliminated": false,

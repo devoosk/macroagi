@@ -65,8 +65,18 @@ def score(inferred: dict, truth: dict) -> dict:
             got = gi.edges[back[a], back[b]]["type"]
             type_hits += got == e["type"]
             hard_as_soft += e["type"] == "hard" and got == "soft"
-    precise = sum(1 for e in inferred["edges"]
-                  if e["from"] in m and e["to"] in m and ct.has_edge(m[e["from"]], m[e["to"]]))
+    hard_t = nx.transitive_closure(nx.DiGraph([(e["from"], e["to"]) for e in truth["edges"] if e["type"] == "hard"]))
+
+    def correct(e):
+        a, b = m.get(e["from"]), m.get(e["to"])
+        if a is None or b is None:
+            return False
+        if ct.has_edge(a, b):
+            return True
+        # A soft edge only says "reorderable": right whenever the truth doesn't fix the order.
+        return e["type"] == "soft" and not hard_t.has_edge(a, b) and not hard_t.has_edge(b, a)
+
+    precise = sum(1 for e in inferred["edges"] if correct(e))
 
     errs = []
     for i, t in m.items():

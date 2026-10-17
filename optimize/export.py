@@ -3,8 +3,10 @@ import copy
 import networkx as nx
 
 from .costs import HUMAN_STATION_COST, ROBOT_CELL_COST
-from .generator import Candidates, lever_instances
+from .generator import Candidates, used_levers
 from .model import Solution
+
+ROBOT_SD_FACTOR = 0.4  # robots repeat more tightly than people (estimate, as in tools/gen)
 
 
 def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
@@ -25,12 +27,17 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
         op["mode"] = opt.mode
         if opt.mode != "eliminated":
             op["station"] = sol.station[op["id"]]
+        if opt.mode == "robot":
+            # The simulator reads op times, so robot ops carry the robot time.
+            for v, t in op["time"].items():
+                t["mean"] = {"value": round(opt.time[v], 2), "source": "capability: human mean x robot time factor"}
+                t["sd"] = {"value": round(t["sd"]["value"] * ROBOT_SD_FACTOR, 2), "source": "estimate"}
     for st in out["stations"]:
         sid = st["id"]
         st["operations"] = [o for o in order if sol.station.get(o) == sid]
         st["staff"] = "robot" if sid in sol.robot_stations else "human" if sid in sol.human_stations else "empty"
         st["bays"] = c.bays[sid]
-        if sid in c.decoupled:
+        if sid in c.decouple:
             st["bufferBefore"] = max(st["bufferBefore"], 2)
             st["bufferAfter"] = max(st["bufferAfter"], 2)
     hard = [(e["from"], e["to"]) for e in line["edges"] if e["type"] == "hard"]
@@ -42,8 +49,10 @@ def export(line: dict, c: Candidates, sol: Solution, rank: int) -> dict:
     for v in out["variants"]:
         v["operations"] = [o for o in v["operations"] if o not in gone]
 
-    levers = lever_instances(line, c, sol.choice)
-    out["levers"] = levers
+    levers = used_levers(c, sol.choice, [lid for lid in sol.used if lid in c.moves.values()])
+    # Keep the line's lever catalogue; add any generated levers this design uses.
+    known = {lv["id"] for lv in line.get("levers", [])}
+    out["levers"] = list(line.get("levers", [])) + [lv for lv in levers if lv["id"] not in known]
     out["appliedLevers"] = [lv["id"] for lv in levers]
     capex = sum(lv["cost"]["value"] for lv in levers) + sum(
         ROBOT_CELL_COST["value"] * c.bays[s] for s in sol.robot_stations)

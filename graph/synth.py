@@ -36,6 +36,8 @@ def synth_segments(events: dict, line: dict, seed: int = 1, noise: bool = True) 
     out = []
     for s in segs:
         s.pop("_op")
+        if "end" not in s:
+            continue  # still running when the log ends
         if noise:
             if rng.random() < 0.05:
                 continue
