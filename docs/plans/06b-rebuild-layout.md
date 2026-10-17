@@ -9,7 +9,7 @@ It follows plan step 6: a station and a mode per operation, hard precedence, tak
 - An operation moves at most one station, and only under a regroup lever.
 - Soft edges are ignored rather than exploited across the line.
 
-Oskari's four points ask for a **rebuild**: the station count, order and shape are open. Both modes are useful in the demo: "keep your line, add robots" versus "rebuild the line for robots".
+Oskari's four points ask for a **rebuild**: the station count, order and shape are open. Both modes are useful in the demo, and they map onto the pitch: the rebalance is "wave one" (MicroAGI puts robots where humans were), and the rebuild is MacroAGI (redesign the whole production for robots). The rebalance results are the baseline the rebuild is compared against, so the rebuild is the heart of the demo.
 
 ## Proposal
 
