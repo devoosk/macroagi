@@ -13,8 +13,6 @@ def S(value, source: str = EST) -> dict:
 LOG_SEED = 42
 WARMUP = 1800
 LOG_DURATION = WARMUP + 7200
-#: Robot reliability used for the recorded event logs.
-LOG_RELIABILITY = 0.98
 
 SHIFT = S(8 * 3600, 'estimate (one 8 h shift)')
 SWEEP_SHIFTS = 200

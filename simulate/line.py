@@ -37,6 +37,10 @@ class Station:
     buffer_before: int
     buffer_after: int
     bays: int = 1
+    #: Redesigns: rented robot type (capability/robots.json id) when staff is 'robot'.
+    robot: str | None = None
+    #: Redesigns: neighbouring station served by the same mobile robot (not modelled yet).
+    shared_with: str | None = None
     #: Redesigns: id of the human station that takes units after a robot failure.
     fallback: str | None = None
     #: Off-line fallback station, not part of the serial flow.
@@ -92,6 +96,8 @@ def from_dict(d: dict) -> Line:
             buffer_before=s['bufferBefore'],
             buffer_after=s['bufferAfter'],
             bays=max(1, s.get('bays') or 1),
+            robot=s.get('robot'),
+            shared_with=s.get('sharedWith'),
             fallback=s.get('fallback'),
             offline=bool(s.get('offline', False)),
         )

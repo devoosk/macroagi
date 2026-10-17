@@ -10,6 +10,7 @@ from pathlib import Path
 from . import params as P
 from .line import load
 from .output import upsert_design, write_event_log
+from .reliability import describe, op_reliability
 from .simulate import SimOptions, SimResult, simulate
 from .sweep import required_reliability, sweep
 from .validate import validate
@@ -46,7 +47,8 @@ def main() -> None:
     args = ap.parse_args()
 
     current = args.design == 'current'
-    line = load(args.line or DATA / ('line.json' if current else 'line_redesign_1.json'))
+    line_path = args.line or DATA / ('line.json' if current else 'line_redesign_1.json')
+    line = load(line_path)
     if current:
         robot = {
             'robot_stations': P.NAIVE_ROBOT['robot_stations'],
@@ -66,11 +68,21 @@ def main() -> None:
             'recovery': P.REDESIGN_ROBOT['recovery']['value'],
             'human_ops': base.operations,
         }
-        robot_note = f"fixtured parts, human fallback station ({robot['recovery']:g} s robot reset)"
+        robots = [st for st in line.chain if st.staff == 'robot']
+        if all(st.fallback for st in robots):
+            robot_note = f"human fallback station per robot cell ({robot['recovery']:g} s robot reset)"
+        else:
+            missing = '/'.join(st.id for st in robots if not st.fallback)
+            robot_note = f"no fallback station at {missing}: the cell stops {robot['recovery']:g} s per failure"
+            print(f'warning: {robot_note}')
+        shared = [f'{st.id}+{st.shared_with}' for st in robots if st.shared_with]
+        if shared:
+            print(f"warning: shared mobile robots ({', '.join(shared)}) are simulated as one robot per station")
+        predicted = op_reliability(line)
         log_opts = SimOptions(
-            seed=args.seed, duration=P.LOG_DURATION, warmup=P.WARMUP, robot_reliability=P.LOG_RELIABILITY, **robot
+            seed=args.seed, duration=P.LOG_DURATION, warmup=P.WARMUP, op_reliability=predicted, **robot
         )
-        events_name = args.events or 'events_redesign_1.json'
+        events_name = args.events or line_path.name.replace('line_', 'events_', 1)
 
     r = simulate(line, log_opts)
     problems = validate(r.log, line)
@@ -99,8 +111,10 @@ def main() -> None:
         f'{P.SWEEP_SEED0}-{P.SWEEP_SEED0 + args.shifts - 1}, {robot_note}',
     )
     if not current:
-        mid = next(p for p in points if p['reliability'] == P.LOG_RELIABILITY)
-        tp = {'value': mid['throughput']['value'], 'source': mid['throughput']['source'] + f', r = {P.LOG_RELIABILITY}'}
+        # Throughput at the success rates the capability model predicts for each robot op.
+        pred = sweep(line, replace(shift, op_reliability=predicted, **robot), [1.0], args.shifts, processes=args.processes)[0]
+        tp = pred['throughput']
+        tp['source'] = tp['source'] + f', {robot_note}, {describe(line)}'
     req = required_reliability(points)
     print(f'\nreliability sweep ({args.shifts} shifts x {len(points)} points, {time.time() - t0:.1f}s)')
     print('  r        throughput   95% CI')

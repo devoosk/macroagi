@@ -47,7 +47,7 @@ class SimOptions:
     recovery: float = 30.0
     #: Override which stations are robot-staffed (used for naive automation of the current line).
     robot_stations: list[str] | None = None
-    #: Per-operation robot success rate; falls back to robot_reliability (see capability_stub).
+    #: Per-operation robot success rate; falls back to robot_reliability (see simulate/reliability.py).
     op_reliability: dict[str, float] | None = None
     #: Human versions of robot ops, for fallback stations. Defaults to the op itself.
     human_ops: dict[str, Operation] | None = None

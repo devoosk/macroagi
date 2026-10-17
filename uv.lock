@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
@@ -59,6 +59,7 @@ dependencies = [
     { name = "ortools" },
     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "simpy" },
 ]
 
 [package.dev-dependencies]
@@ -71,6 +72,7 @@ requires-dist = [
     { name = "networkx", specifier = ">=3.6.1" },
     { name = "ortools", specifier = ">=9.15.6755" },
     { name = "scipy", specifier = ">=1.13" },
+    { name = "simpy", specifier = ">=4.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -606,6 +608,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/cf/d9/135be205d9de8783193aff9cc3bf483a03a38e4b29432c954e8cb66ac14e/scipy-1.18.1-cp315-cp315t-musllinux_1_2_x86_64.whl", hash = "sha256:179ce34a8d0fe273d8883ba59e17e052247d08973dfcb743ca52bb1cce2d60b0", size = 37521946, upload-time = "2026-08-21T23:28:35.245Z" },
     { url = "https://files.pythonhosted.org/packages/5c/a2/5b7d5270621ab7cfa3f7766067bf95dc360b5efb6394694e8143b4156e2b/scipy-1.18.1-cp315-cp315t-win_amd64.whl", hash = "sha256:5632e3ae3d09197c446310cd5187de63e28448ce22f0f67b2b93d97503c0c230", size = 37408295, upload-time = "2026-08-21T23:28:40.724Z" },
     { url = "https://files.pythonhosted.org/packages/63/ad/741c19fcb66755ff953daf9243af8480e4bf3d7fbe57583c178c7d2b6b51/scipy-1.18.1-cp315-cp315t-win_arm64.whl", hash = "sha256:eda632a7981f69730d6281f451db9c1c370993a2c0d7ddb43e2a809a2862b83a", size = 25319710, upload-time = "2026-08-21T23:28:45.713Z" },
+]
+
+[[package]]
+name = "simpy"
+version = "4.1.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4a/38/fb393d1a5c2f35b65609e8d3c39d1508ada6a767c7e624ffa16ed3e84ffd/simpy-4.1.2.tar.gz", hash = "sha256:76ef36b71e0436ba94e55febc001c78879e493a323f045bbcfbb0b216e9b1fbc", size = 410129, upload-time = "2026-05-24T04:37:12.834Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ee/ed/07a1e054922c16b2c18ca3598771936c344d52337b8aaf0f1e3ed8b223dc/simpy-4.1.2-py3-none-any.whl", hash = "sha256:43071f84b6512c9b4fcb33ef057f240ccb1d1f3b263f9b4f9229d072e310b372", size = 27375, upload-time = "2026-05-24T04:37:11.74Z" },
 ]
 
 [[package]]

@@ -2,15 +2,13 @@ from __future__ import annotations
 
 import copy
 import json
-import sys
 from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT))
+from simulate.line import from_dict, load
 
-from simulate.line import from_dict, load  # noqa: E402
+ROOT = Path(__file__).resolve().parents[2]
 
 DATA = ROOT / 'app' / 'public' / 'data'
 

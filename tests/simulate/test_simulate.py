@@ -256,3 +256,30 @@ def test_parity_with_ts_reference(line):
     assert abs(tp - ts['throughput']) / ts['throughput'] < 0.05
     for sid, u in util.items():
         assert abs(u - ts['util'][sid]) < 0.05, f'{sid}: py {u:.3f} vs ts {ts["util"][sid]:.3f}'
+
+
+# --- Capability model ----------------------------------------------------------------------------
+
+
+def test_op_reliability_from_capability(redesign, redesign_dict):
+    from simulate.reliability import op_lever_types, op_reliability
+
+    rel = op_reliability(redesign)
+    robot_ops = {o for s in redesign.chain if s.staff == 'robot' for o in s.operations}
+    assert set(rel) == robot_ops
+    assert all(0.0 <= p <= 1.0 for p in rel.values())
+    # Applied levers raise the predicted success of the ops they touch.
+    no_levers = from_dict({**redesign_dict, 'appliedLevers': []})
+    bare = op_reliability(no_levers)
+    touched = [o for o in robot_ops if op_lever_types(redesign_dict, o)]
+    assert touched
+    assert all(rel[o] >= bare[o] for o in touched)
+    assert any(rel[o] > bare[o] for o in touched)
+
+
+def test_redesign_runs_on_predicted_reliability(redesign, base_ops):
+    from simulate.reliability import op_reliability
+
+    r = simulate(redesign, _redesign_opts(base_ops, seed=42, op_reliability=op_reliability(redesign)))
+    assert validate(r.log, redesign) == []
+    assert r.throughput_per_hour > 0
